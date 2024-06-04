@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DoYouKnow</title>
+</head>
+<body>
+    <h1>Board Write 페이지</h1>
+
+    <form method="post">
+        <!-- 사용자 정보 세션에서 가져옴 writeDeptSeq(작성부서-실질적으로 작성자로써 출력될 정보) -->
+        <!-- 사용자 정보 세션에서 가져옴 writeMemberSeq(작성계정 가입자명-유지보수 식별용) -->
+        <input type="hidden" id="writerDeptSeq" name="writerDeptSeq" value="1">
+        <input type="hidden" id="writerMemberSeq" name="writerMemberSeq" value="2">
+
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title">
+        <br>
+
+        <label for="applyStart">신청일</label>
+        <input type="datetime-local" id="applyStart" name="applyStart">
+        <label for="applyEnd"> ~ </label>
+        <input type="datetime-local" id="applyEnd" name="applyEnd">
+        <br>
+
+        <label for="eventStart">행사일</label>
+        <input type="datetime-local" id="eventStart" name="eventStart">
+        <label for="eventEnd"> ~ </label>
+        <input type="datetime-local" id="eventEnd" name="eventEnd">
+        <br>
+
+        <label for="loc">장소</label>
+        <input type="text" id="loc" name="loc">
+        <br>
+
+        <label for="content">상세설명</label>
+        <textarea id="content" name="content" rows="10" style="resize: none;"></textarea>
+        <br>
+
+        <label for="calendarColor">캘린더 색상</label>
+        <input type="color" id="calendarColor" name="calendarColor" value="#0000FF">
+        <br>
+
+        <button type="submit">작성</button>
+    </form>
+</body>
+</html>
