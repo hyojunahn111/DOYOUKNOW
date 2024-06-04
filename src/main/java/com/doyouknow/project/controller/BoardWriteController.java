@@ -18,6 +18,16 @@ public class BoardWriteController {
         this.boardService = boardService;
     }
 
+    @GetMapping("list")
+    public String list() {
+        return "board/list";
+    }
+
+    @GetMapping("intro")
+    public String intro() {
+        return "board/intro";
+    }
+
     @GetMapping("scholarship")
     public String scholarship() {
 
