@@ -2,12 +2,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 50px 0;
 }
 
 #map {
     border-radius: 10px;
     width: 70%;
     height: 600px;
+    border: 6px solid;
+    border-color: #063170;
 }
 
 

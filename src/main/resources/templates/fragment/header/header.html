@@ -6,13 +6,13 @@
     <link rel="stylesheet" href="/css/header/header.css">
 </head>
 <body>
-<header>
-    <div class="header-left" onclick="location.href='/main'">
+<header th:fragment="headerFragment">
+    <div class="header-left" onclick="location.href='/map'">
         <h1>DOYOUKNOW</h1>
     </div>
     <div class="header-right">
         <p>취업</p>
-        <p>장학</p>
+        <p onclick="location.href='http://localhost:8080/board/scholarship'">장학</p>
         <div class="dropdown">
             <p>학과</p>
             <div class="dropdown-content">
