@@ -99,7 +99,7 @@ button{    width: 70px;
     display: flex;
     align-items: center;
     justify-content: center;}
-img{width: 95%;
+.listImg{width: 95%;
     background: gray;
     height: 250px;
     border-radius: 20px;

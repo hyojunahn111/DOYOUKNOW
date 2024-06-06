@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <title>DoYouKnow</title>
     <link rel="stylesheet" href="/css/board/board.css">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
 </head>
 <body>
-    <header>헤더</header>
+    <header th:replace="~{/fragment/header/header :: headerFragment}">
+    </header>
     <content>
         <div class="contentBody">
             <div class="mainImg">
@@ -24,6 +27,7 @@
             </div>
         </div>
     </content>
-    <footer>푸터</footer>
+    <footer th:replace="~{/fragment/footer/footer :: footerFragment}">
+    </footer>
 </body>
 </html>
