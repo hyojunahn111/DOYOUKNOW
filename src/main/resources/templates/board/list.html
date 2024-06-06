@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DoYouKnow</title>
+    <link rel="stylesheet" href="/css/board/board.css">
+</head>
+<body>
+    <header>헤더</header>
+    <content>
+        <div class="contentBody">
+            <div class="mainImg">
+                메인사진
+            </div>
+            <div class="content-wrap">
+                <div class="sideBar">
+                    사이드바 영역
+                </div>
+                <div class="mainContent">
+                    <div class="calendar-wrap">
+                        캘린더 영역
+                    </div>
+                    <div class="card-list">
+                        <div class="listSearch">
+                            <button type="submit" class="writeBtn">글쓰기</button>
+                            <div>
+
+                            <select name="order1">
+                                <option value="all" selected>전체</option>
+                                <option value="type1">장학</option>
+                                <option value="type2">행사</option>
+                                <option value="type3">취업</option>
+                                <option value="type4">공지</option>
+                            </select>
+                            <select name="order2">
+                                <option value="" selected>정렬기준</option>
+                                <option value="type5">조회순</option>
+                                <option value="type6">마감순</option>
+                                <option value="type7">등록순</option>
+                                <option value="type8">시작순</option>
+                            </select>
+                            <input type="text" name="search" placeholder="텍스트 검색">
+                            <button type="submit">검색</button>
+                            </div>
+                        </div>
+                        <div class="fixListItems">
+                            <div class="listItem">
+                                <div class="imgflex">
+                                    <img src="" alt="행사 이미지" class="listImg"/>
+                                </div>
+                                <div class="flex">
+                                    <h2 th:text="${board.title}" class="maginX">제목</h2>
+                                    <h2 th:text="${board.writerDeptSeq}" id="typeContent" class="maginX">부서이름</h2>
+                                </div>
+                                <p th:text="${board.content}" class="maginX">간단한 설명</p>
+                                <h1 class="maginX">D-?</h1>
+                            </div>
+                        </div>
+                        <div class="listItems">
+                            <div class="listItem">
+                                <div class="imgflex">
+                                    <img src="" alt="행사 이미지" class="listImg"/>
+                                </div>
+                                <div class="flex">
+                                    <h2 th:text="${board.title}" class="maginX">제목</h2>
+                                    <h2 th:text="${board.writerDeptSeq}" id="typeContent1" class="maginX">부서이름</h2>
+                                </div>
+                                <p th:text="${board.content}" class="maginX">간단한 설명</p>
+                                <h1 class="maginX">D-?</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </content>
+    <footer>푸터</footer>
+</body>
+</html>

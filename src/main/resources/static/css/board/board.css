@@ -1,0 +1,123 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+header {
+    border: 1px solid black;
+}
+content {
+    border: 1px solid black;
+    justify-content: center;
+    display: flex;
+}
+footer {
+    border: 1px solid black;
+}
+.contentBody{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    flex-direction: column;
+}
+.content-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.mainImg {
+    margin: 10px 0 30px 0;
+    width: 100%;
+    background-color: gray;
+    height: 20vh;
+}
+
+.mainContent {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.sideBar {
+    width: 20%;
+    border: 1px solid black;
+    margin-right: 20px;
+}
+
+.calendar-wrap{
+    width: 100%;
+    border: 1px solid black;
+    height: 60vh;
+}
+
+/* 카드 리스트 시작 */
+.card-list {
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.listSearch{display: flex;
+    justify-content: space-between;}
+.writeBtn{background: #C2D9FF;
+    color: black;}
+select{  border-radius: 30px;
+    padding: 10px;
+    margin-right: 5px;}
+input{padding: 10px;
+    border-radius: 30px;
+    border: solid 0.5px gray;}
+button{    width: 70px;
+    border-radius: 30px;
+    border: 0px;
+    padding: 10px;
+    background: #4D90FF;
+    color: white;}
+.fixListItems{}
+.listItems{}
+.listItem{border-radius: 20px;
+    width: 30%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 22%), 0 3px 5px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);}
+.listItem:hover{
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.imgflex{    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;}
+img{width: 95%;
+    background: gray;
+    height: 250px;
+    border-radius: 20px;
+    margin-top: 5px;}
+.flex{     display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    align-items: center;
+    margin-top: 10px;}
+.maginX{margin: 0px;}
+#typeContent{border-radius: 30px;
+    background: gray;
+    padding: 10px;
+    font-size: 14px;
+background: #D9D9D9;}
+#typeContent1{border-radius: 30px;
+    background: gray;
+    padding: 10px;
+    font-size: 14px;
+    background: #D9D9D9;}
+
