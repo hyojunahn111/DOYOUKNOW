@@ -1,0 +1,104 @@
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h3 {
+  color: grey;
+}
+
+.info, .event-details, .contact-box, .buttons {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tags {
+  text-align: right;
+}
+
+hr {
+  margin-top: 20px;
+}
+
+.event-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-image, .text-area {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.event-image {
+  width: 1200px;
+  height: 1200px;
+  object-fit: cover;
+}
+
+.contact-box {
+  background-color: grey;
+  color: white;
+  padding: 10px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  margin: 0 auto; /* 중앙 정렬 */
+  border-radius: 15px;
+}
+
+.contact-box div {
+  margin-right: 20px;
+}
+
+.buttons button {
+  border-radius: 30px;
+  padding: 10px 20px;
+  margin: 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.edit {
+  background-color: #007bff;
+}
+
+.delete {
+  background-color: #0056b3;
+}
+
+.list {
+  background-color: #00395d;
+}
+
+.fas.fa-share-alt {
+  font-size: 24px;
+  color: #000;
+}
+
+.buttons {
+  display: flex;
+}
+
+.list-wrapper {
+  margin-left: auto; /* 이것은 "글목록"을 오른쪽으로 밀어냅니다. */
+}
+
+

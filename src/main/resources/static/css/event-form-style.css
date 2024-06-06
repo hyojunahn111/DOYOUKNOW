@@ -1,0 +1,98 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0 5%;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: left;
+  margin-bottom: 30px;
+  color: #395D9F;
+}
+
+h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.dropdown-section {
+  float: right;
+  display: flex;
+  justify-content: start;
+  margin-bottom: 20px;
+}
+
+.dropdown {
+  margin-right: 10px;
+  font-size: 0.9rem;
+  padding: 10px;
+}
+
+input[type="text"], input[type="file"], input[type="color"], textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.date-section {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.date-section label {
+  margin: 0 10px;
+}
+
+.date-section input[type="date"],
+.date-section input[type="time"] {
+  margin: 0 10px;
+  padding: 15px;
+}
+
+textarea {
+  height: 150px;
+}
+
+.submit-btn, .cancel-btn {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin: 0 5px 20px auto;
+}
+
+.submit-btn {
+  background-color: #C2D9FF;
+}
+
+.cancel-btn {
+  background-color: #91E0E7;
+}
+
+.button-section {
+  text-align: right;
+  margin-bottom: 30px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="color"],
+textarea {
+  border-radius: 30px;
+}
+
+select.dropdown {
+  border-radius: 15px;
+}
