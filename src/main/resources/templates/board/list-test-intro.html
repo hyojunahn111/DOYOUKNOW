@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DoYouKnow</title>
+    <!--/* 부트스트랩 라이브러리 fragment로 주입 */-->
+    <th:block th:replace="~{fragment/bootstrap::dependency}"></th:block>
+    <link rel="stylesheet" href="/css/board/test-sidebar2.css">
+    <style>
+    </style>
+    <script>
+        window.onload = () => {
+            /* 사이드바 높이 변환 이벤트 */
+            const sidebar = document.getElementById('sideBarFloat');
+
+            function updateSidebarPosition() {
+                let windowHeight = window.innerHeight;
+                let sidebarHeight = sidebar.offsetHeight;
+                let topPosition = (windowHeight / 2) - (sidebarHeight / 2);
+                sidebar.style.top = `${topPosition}px`;
+            }
+
+            window.addEventListener('resize', updateSidebarPosition);
+            window.addEventListener('load', updateSidebarPosition);
+            window.addEventListener('scroll', updateSidebarPosition);
+
+            // 페이지 로드 시 한 번 실행
+            updateSidebarPosition();
+        }
+    </script>
+</head>
+<body>
+    <header>헤더</header>
+    <content>
+        <div class="contentBody">
+            <div class="mainImg">
+                <div class="titleBox">
+                    <div class="title">
+                        삼육대학교
+                        <span class="title-dept">컴퓨터공학부</span>
+                    </div>
+                </div>
+            </div>
+            <div class="content-wrap">
+                <div class="sideBar">
+                    <div id="sideBarFloat" class="sideBarFloat">
+                        <div class="card card-top">
+                            <div class="card-header">
+                                학과
+                            </div>
+                            <div class="card-body">
+                                <div class="dropdown dropend">
+                                    <div class="dropdown-caption" data-bs-toggle="dropdown">
+                                        미래융합대학
+                                    </div>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-item">test1</li>
+                                        <hr class="divider">
+                                        <li class="dropdown-item">test2</li>
+                                        <hr class="divider">
+                                        <li class="dropdown-item">test3</li>
+                                    </ul>
+                                </div>
+                                <hr class="divider">
+
+                                <div class="dropdown dropend">
+                                    <div class="dropdown-caption" data-bs-toggle="dropdown">
+                                        미래융합대학
+                                    </div>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-item">test1</li>
+                                        <hr class="divider">
+                                        <li class="dropdown-item">test2</li>
+                                        <hr class="divider">
+                                        <li class="dropdown-item">test3</li>
+                                    </ul>
+                                </div>
+                                <hr class="divider">
+
+                                <div class="dropdown dropend">
+                                    <div class="dropdown-caption" data-bs-toggle="dropdown">
+                                        미래융합대학
+                                    </div>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-item">test1</li>
+                                        <hr class="divider">
+                                        <li class="dropdown-item">test2</li>
+                                        <hr class="divider">
+                                        <li class="dropdown-item">test3</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card card-bottom">
+                            <div class="card-header">
+                                정보&nbsp;
+                                <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainContent">
+                    <!--<div class="calendar-wrap">
+                        캘린더 영역
+                    </div>
+                    <div class="card-list">
+                        카드 리스트 영역
+                    </div>-->
+                    <div class="dept-card">
+                        <div class="dept-thumb">
+                            <img src="/img/board/dept-computer-intro.jpg" alt="dept-computer-intro">
+                        </div>
+                        <div class="dept-content">
+                            <div class="dept-title">컴퓨터공학부</div>
+                            <div class="dept-text">컴퓨터공학부(컴퓨터공학전공, 소프트웨어전공)는 소프트웨어 개발 및 융합 역량 강화를 위한 체계적인 교육과 함께 4차 산업혁명의 핵심 기술인 인공지능, 사물인터넷, 빅 데이터 및 모바일 컴퓨팅 기술 등 최신 기술에 대한 수요 지향 교육을 진행하고 있으며, 산업체와 연계된 프로젝트 중심 교육을 통해 이론과 현장 실무 능력을 겸비한 ICT 인재를 양성하고 있습니다.</div>
+                            <div class="dept-info">
+                                <dl>
+                                    <dt>위치</dt>
+                                    <dd>제1실습관 401호</dd>
+                                </dl>
+                                <dl>
+                                    <dt>전화번호</dt>
+                                    <dd>02-3399-1790</dd>
+                                </dl>
+                                <dl>
+                                    <dt>팩스</dt>
+                                    <dd>02-3399-1791</dd>
+                                </dl>
+                                <dl>
+                                    <dt>이메일</dt>
+                                    <dd>comp@syu.ac.kr</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </content>
+    <footer>푸터</footer>
+</body>
+</html>
