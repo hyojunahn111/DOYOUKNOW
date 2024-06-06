@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("board")
 public class BoardWriteController {
@@ -23,6 +25,7 @@ public class BoardWriteController {
     @GetMapping("list")
     public String list(Model model) {
         BoardDTO boardDTO = new BoardDTO();
+//        List<BoardDTO> boardDTO = boardService.getBoardList(false);
         model.addAttribute("board",boardDTO);
         return "board/list";
     }
