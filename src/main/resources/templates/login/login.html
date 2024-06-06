@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/login/login.css}" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+</head>
+<body>
+<h2>관리자 로그인</h2>
+<div class="container" id="container">
+    <div class="form-container sign-in-container">
+        <form action="#">
+            <h1>로그인</h1>
+            <div class="social-container">
+                <a href="#" class="social">
+                    <img src=/images/login/kakao_icon.png>
+                </a>
+            </div>
+            <span>아이디와 비밀번호를 입력해주세요</span>
+            <br>
+            <input type="text" placeholder="아이디를 입력해주세요" />
+            <input type="password" placeholder="비밀번호를 입력해주세요" />
+            <br>
+            <span>
+                <a onclick="location.href='/searchid'">아이디 찾기&emsp;</a>
+                <a onclick="location.href='searchpwd'">비밀번호 찾기</a>
+            </span>
+            <br>
+            <button>로그인</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>회원이 아니신가요?</h1>
+                <p>회원 가입 후 서비스를 이용하십시오</p>
+                <button class="ghost" id="signUp" onclick="location.href='signup'">회원가입</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

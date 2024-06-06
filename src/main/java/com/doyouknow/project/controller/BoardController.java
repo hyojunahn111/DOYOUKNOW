@@ -3,6 +3,7 @@ package com.doyouknow.project.controller;
 import com.doyouknow.project.dto.BoardDTO;
 import com.doyouknow.project.service.BoardService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("board")
 public class BoardController {
 
+
     private BoardService boardService;
 
     public BoardController(BoardService boardService) {
@@ -20,7 +22,9 @@ public class BoardController {
 
     // 게시글 목록 페이지
     @GetMapping("list")
-    public String list() {
+    public String list(Model model) {
+        BoardDTO boardDTO = new BoardDTO();
+        model.addAttribute("board",boardDTO);
         return "board/list";
     }
 
