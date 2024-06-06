@@ -22,7 +22,7 @@ public class BoardService {
     }
 
     @Transactional
-    public void registerMenu(BoardDTO newBoard) {
+    public void registerBoard(BoardDTO newBoard) {
         System.out.println("[BoardDTO] : " + newBoard);
         Board newBoardEntity = modelMapper.map(newBoard, Board.class);
         System.out.println("[Board] : " + newBoardEntity);
