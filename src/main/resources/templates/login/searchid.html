@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/login/login.css}" />
+</head>
+<body>
+<h2>관리자 로그인</h2>
+<div class="container" id="container">
+    <div class="form-container sign-in-container">
+        <form action="#">
+            <h1>아이디 찾기</h1>
+            <div class="social-container">
+                <a href="#" class="social"><img src=/images/login/kakao_icon.png>
+            </div>
+            <span>이름과 이메일을 입력해주세요</span>
+            <br>
+            <input type="text" placeholder="이름을 입력해주세요" />
+            <input type="email" placeholder="이메일을 입력해주세요" />
+
+            <a onclick="location.href='login'">로그인으로 돌아가기</a>
+            <button>아이디 찾기</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>회원이 아니신가요?</h1>
+                <p>회원 가입 후 서비스를 이용하십시오</p>
+                <button class="ghost" id="signUp" onclick="location.href='signup'">회원가입</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
