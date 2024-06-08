@@ -6,28 +6,43 @@
     <link rel="stylesheet" href="/css/board/board.css">
     <link rel="stylesheet" href="/css/header/header.css">
     <link rel="stylesheet" href="/css/footer/footer.css">
+    <script>
+        function truncateText(selector, maxLength) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                const text = element.textContent;
+                if (text.length > maxLength) {
+                    element.textContent = text.substring(0, maxLength) + '...';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            truncateText('.truncate-title', 33);
+            truncateText('.truncate-content', 30);
+        });
+    </script>
 </head>
 <body>
-    <header th:replace="~{/fragment/header/header :: headerFragment}">
-    </header>
-    <content>
-        <div class="contentBody">
-            <div class="mainImg">
-                메인사진
+<header th:replace="~{/fragment/header/header :: headerFragment}">
+</header>
+<content>
+    <div class="contentBody">
+        <div class="mainImg">
+            메인사진
+        </div>
+        <div class="content-wrap">
+            <div class="sideBar">
+                사이드바 영역
             </div>
-            <div class="content-wrap">
-                <div class="sideBar">
-                    사이드바 영역
+            <div class="mainContent">
+                <div class="calendar-wrap">
+                    캘린더 영역
                 </div>
-                <div class="mainContent">
-                    <div class="calendar-wrap">
-                        캘린더 영역
-                    </div>
-                    <div class="card-list">
-                        <div class="listSearch">
-                            <button type="submit" class="writeBtn">글쓰기</button>
-                            <div>
-
+                <div class="card-list">
+                    <div class="listSearch">
+                        <button type="submit" class="writeBtn">글쓰기</button>
+                        <div>
                             <select name="order1">
                                 <option value="all" selected>전체</option>
                                 <option value="type1">장학</option>
@@ -44,40 +59,28 @@
                             </select>
                             <input type="text" name="search" placeholder="텍스트 검색">
                             <button type="submit">검색</button>
-                            </div>
                         </div>
-                        <div class="fixListItems">
-                            <div class="listItem">
-                                <div class="imgflex">
-                                    <img src="" alt="행사 이미지" class="listImg"/>
-                                </div>
-                                <div class="flex">
-                                    <h2 th:text="${board.title}" class="maginX">제목</h2>
-                                    <h2 th:text="${board.writerDeptSeq}" id="typeContent" class="maginX">부서이름</h2>
-                                </div>
-                                <p th:text="${board.content}" class="maginX">간단한 설명</p>
-                                <h1 class="maginX">D-?</h1>
+                    </div>
+
+                    <div class="listItems">
+                        <div class="listItem" th:each="board : ${board}">
+                            <div class="imgflex">
+                                <img th:src="@{/img/board/img.jpg}" alt="행사 이미지" class="listImg"/>
                             </div>
-                        </div>
-                        <div class="listItems">
-                            <div class="listItem">
-                                <div class="imgflex">
-                                    <img src="" alt="행사 이미지" class="listImg"/>
-                                </div>
-                                <div class="flex">
-                                    <h2 th:text="${board.title}" class="maginX">제목</h2>
-                                    <h2 th:text="${board.writerDeptSeq}" id="typeContent1" class="maginX">부서이름</h2>
-                                </div>
-                                <p th:text="${board.content}" class="maginX">간단한 설명</p>
-                                <h1 class="maginX">D-?</h1>
+                            <h2 th:text="${board.title}" class="truncate-title maginX">제목</h2>
+                            <p th:text="${board.content}" class="truncate-content maginX">간단한 설명</p>
+                            <div class="flex">
+                                <h1 class="maginX dday" th:text="'D-' + ${board.dday}"></h1>
+                                <h3 th:text="${board.writerDeptSeq}" id="typeContent1" class="maginX">부서이름</h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </content>
-    <footer th:replace="~{/fragment/footer/footer :: footerFragment}">
-    </footer>
+    </div>
+</content>
+<footer th:replace="~{/fragment/footer/footer :: footerFragment}">
+</footer>
 </body>
 </html>

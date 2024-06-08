@@ -2,6 +2,7 @@ package com.doyouknow.project.controller;
 
 import com.doyouknow.project.dto.BoardDTO;
 import com.doyouknow.project.service.BoardService;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Controller
@@ -25,9 +27,11 @@ public class BoardController {
     // 게시글 목록 페이지
     @GetMapping("list")
     public String list(Model model) {
-        BoardDTO boardDTO = new BoardDTO();
-//        List<BoardDTO> boardDTO = boardService.getBoardList(false);
-        model.addAttribute("board",boardDTO);
+        List<BoardDTO> boardList = boardService.BoardList();
+        model.addAttribute("board",boardList);
+        for(BoardDTO board : boardList){
+            System.out.println(board);
+        }
         return "board/list";
     }
 

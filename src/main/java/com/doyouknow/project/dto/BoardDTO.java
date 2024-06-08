@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @NoArgsConstructor
 @Getter
@@ -58,4 +59,10 @@ public class BoardDTO {
         this.writerDeptSeq = writerDeptSeq;
         this.writerMemberSeq = writerMemberSeq;
     }
+
+    /* 마감일 D-day 용*/
+    public long getDday() {
+        return ChronoUnit.DAYS.between(LocalDateTime.now(), this.applyEnd);
+    }
+
 }
