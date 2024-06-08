@@ -1,5 +1,9 @@
-
 body {
+
+}
+
+.bodystyle {
+    margin: 50px 0;
     font-family: "Jua", sans-serif;
     display: flex;
     justify-content: center;

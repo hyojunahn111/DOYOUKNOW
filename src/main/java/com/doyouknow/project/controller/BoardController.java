@@ -49,7 +49,7 @@ public class BoardController {
     public String write(@RequestParam(defaultValue = "0", required = false) int type,
                         @RequestParam(defaultValue = "0", required = false) int type2) {
 
-        return "board/write";
+        return "board/event-form";
     }
 
     // 게시글 작성 처리
@@ -60,6 +60,12 @@ public class BoardController {
         boardService.registerBoard(newBoard);
 
         return "redirect:/board/write";
+    }
+
+    @GetMapping("detail")
+    public String detail(@RequestParam(defaultValue = "0", required = false) int type,
+                         @RequestParam(defaultValue = "0", required = false) int type2){
+        return "board/event-details";
     }
 
     // listMod1 사이드바 테스트 중

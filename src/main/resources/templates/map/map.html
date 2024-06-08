@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <title>Map</title>
     <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
 </head>
 <body>
+    <header th:replace="~{/fragment/header/header :: headerFragment}">
+    </header>
 
     <div class="mapstyle">
         <div id="map"></div>
     </div>
-    <h3>맵 페이지</h3>
+
+    <footer th:replace="~{/fragment/footer/footer :: footerFragment}">
+    </footer>
 
 </body>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ae2f6fbec5a71ccde32259378359fcc"></script>
