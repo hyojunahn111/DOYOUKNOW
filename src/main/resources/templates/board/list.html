@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/board/board.css">
     <link rel="stylesheet" href="/css/header/header.css">
     <link rel="stylesheet" href="/css/footer/footer.css">
+    <script src="https://kit.fontawesome.com/59d34efa84.js" crossorigin="anonymous"></script>
     <script>
         function truncateText(selector, maxLength) {
             const elements = document.querySelectorAll(selector);
@@ -62,6 +63,23 @@
                         </div>
                     </div>
 
+                    <!-- 마감일 고정 목록 -->
+                    <div class="listItems">
+                        <div class="listItem" th:each="board : ${top3}">
+                        <div class="fix" th:text="'D-' + ${board.dday}"></div>
+                            <div class="imgflex">
+                                <img th:src="@{/img/board/img.jpg}" alt="행사 이미지" class="listImg"/>
+                            </div>
+                            <h2 th:text="${board.title}" class="truncate-title maginX">제목</h2>
+                            <p th:text="${board.content}" class="truncate-content maginX">간단한 설명</p>
+                            <div class="flex">
+                                <h1 class="maginX dday" th:text="'D-' + ${board.dday}"></h1>
+                                <h3 th:text="${board.writerDeptSeq}" id="typeContent" class="maginX">부서이름</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 전체 목록 -->
                     <div class="listItems">
                         <div class="listItem" th:each="board : ${board}">
                             <div class="imgflex">
@@ -75,12 +93,44 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- paging -->
+                    <div id="paging">
+                        <!-- 맨앞 페이지로 이동 -->
+                        <button th:onclick="'location.href=\'/board/list?page=' + ${ paging.startPage } + '\''">
+                            <img th:src="@{/img/board/왼쪽화살표.png}" class="arrow">
+                        </button>
+
+                        <!-- 이전 페이지로 이동 -->
+                        <button th:onclick="'location.href=\'/board/list?page=' + ${ paging.currentPage - 1 } + '\''"
+                                th:disabled="${ board.first }">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+
+                        <!-- 숫자 버튼 -->
+                        <th:block th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage) }">
+                            <button th:onclick="'location.href=\'/board/list?page=' + ${ page } + '\''"
+                                    th:text="${ page }"
+                                    th:disabled="${ paging.currentPage eq page }"
+                                    class="numSize">
+                            </button>
+                        </th:block>
+                        <!-- 다음 페이지로 이동 -->
+                        <button th:onclick="'location.href=\'/board/list?page=' + ${ paging.currentPage + 1 } + '\''"
+                                th:disabled="${ board.last }">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <!-- 맨뒤 페이지로 이동 -->
+                        <button th:onclick="'location.href=\'/board/list?page=' + ${ paging.endPage } + '\''">
+                            <img th:src="@{/img/board/오른쪽화살표.png}" class="arrow">
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </content>
-<footer th:replace="~{/fragment/footer/footer :: footerFragment}">
-</footer>
+<footer th:replace="~{/fragment/footer/footer :: footerFragment}"></footer>
 </body>
 </html>

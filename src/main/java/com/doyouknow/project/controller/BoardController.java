@@ -1,7 +1,11 @@
 package com.doyouknow.project.controller;
 
+import com.doyouknow.project.common.Pagenation;
+import com.doyouknow.project.common.PagingButton;
 import com.doyouknow.project.dto.BoardDTO;
 import com.doyouknow.project.service.BoardService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Controller
@@ -26,12 +29,19 @@ public class BoardController {
 
     // 게시글 목록 페이지
     @GetMapping("list")
-    public String list(Model model) {
-        List<BoardDTO> boardList = boardService.BoardList();
+    public String list(Model model, @PageableDefault(size = 6) Pageable pageable) {
+        Page<BoardDTO> boardList = boardService.BoardList(pageable);
+
+        /* Page */
+        PagingButton paging = Pagenation.getPagingButtonInfo(boardList);
+
+        /*마감일 고정 목록*/
+        List<BoardDTO> top3 = boardService.Top3List();
+
         model.addAttribute("board",boardList);
-        for(BoardDTO board : boardList){
-            System.out.println(board);
-        }
+        model.addAttribute("paging",paging);
+        model.addAttribute("top3", top3);
+
         return "board/list";
     }
 
