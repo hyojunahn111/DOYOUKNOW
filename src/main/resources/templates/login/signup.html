@@ -10,19 +10,19 @@
 <div class="signup">
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="#">
+        <form action="/signup" method="post">
             <h1>회원가입</h1>
             <div class="social-container">
                 <a href="#" class="social"><img src=/img/login/kakao_icon.png></a>
             </div>
             <span>회원가입을 위한 정보를 입력해주세요</span>
             <br>
-            <input type="text" placeholder="이름을 입력해주세요" />
-            <input type="text" placeholder="아이디를 입력해주세요" />
-            <input type="password" placeholder="비밀번호를 입력해주세요" />
-            <input type="text" placeholder="전화번호를 입력해주세요 ( - 없이 입력)" />
-            <input type="email" placeholder="이메일을 입력해주세요" />
-            <input type="text" placeholder="소속 부서를 입력해주세요" />
+            <input name="name" type="text" placeholder="이름을 입력해주세요" />
+            <input name="id" type="text" placeholder="아이디를 입력해주세요" />
+            <input name="pwd" type="password" placeholder="비밀번호를 입력해주세요" />
+            <input name="phone" type="text" placeholder="전화번호를 입력해주세요 ( - 없이 입력)" />
+            <input name="email" type="email" placeholder="이메일을 입력해주세요" />
+            <input name="deptName" type="text" placeholder="소속 부서를 입력해주세요" />
             <br>
             <button>회원가입</button>
         </form>

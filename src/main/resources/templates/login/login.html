@@ -12,7 +12,7 @@
 <h2>관리자 로그인</h2>
 <div class="container" id="container">
     <div class="form-container sign-in-container">
-        <form action="#">
+        <form action="/login" method="post">
             <h1>로그인</h1>
             <div class="social-container">
                 <a href="#" class="social">
@@ -21,15 +21,16 @@
             </div>
             <span>아이디와 비밀번호를 입력해주세요</span>
             <br>
-            <input type="text" placeholder="아이디를 입력해주세요" />
-            <input type="password" placeholder="비밀번호를 입력해주세요" />
+            <input name="id" type="text" placeholder="아이디를 입력해주세요" />
+            <input name="pwd" type="password" placeholder="비밀번호를 입력해주세요" />
             <br>
             <span>
-                <a onclick="location.href='/searchid'">아이디 찾기&emsp;</a>
+                <a onclick="location.href='searchid'">아이디 찾기&emsp;</a>
                 <a onclick="location.href='searchpwd'">비밀번호 찾기</a>
             </span>
             <br>
             <button>로그인</button>
+            <pre th:text="${message}"></pre>
         </form>
     </div>
     <div class="overlay-container">
@@ -44,5 +45,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>
