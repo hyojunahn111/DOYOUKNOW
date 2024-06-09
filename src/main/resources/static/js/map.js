@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             '            </div>' +
             '        </div>' +
             '    </div>' +
+            '    <hr class="info_hr">'
             '</div>';
 
         // 커스텀 오버레이 생성
