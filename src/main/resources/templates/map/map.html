@@ -3,20 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Map</title>
-    <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="/css/map/map.css">
     <link rel="stylesheet" href="/css/header/header.css">
     <link rel="stylesheet" href="/css/footer/footer.css">
 </head>
 <body>
-    <header th:replace="~{/fragment/header/header :: headerFragment}">
-    </header>
+<header th:replace="~{/fragment/header/header :: headerFragment}">
+</header>
 
-    <div class="mapstyle">
-        <div id="map"></div>
+<div class="mapstyle">
+    <div id="map">
+        <div id="menu_wrap" class="bg_white">
+            <div class="option">
+                <div>
+                    <form id="searchForm">
+                        키워드 :&nbsp;<input type="text" placeholder="검색해주세요." id="keyword" size="15">
+                        <button type="submit">검색하기</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <ul id="placesList"></ul>
+            <div id="pagination"></div>
+        </div>
     </div>
+</div>
 
-    <footer th:replace="~{/fragment/footer/footer :: footerFragment}">
-    </footer>
+<footer th:replace="~{/fragment/footer/footer :: footerFragment}">
+</footer>
 
 </body>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ae2f6fbec5a71ccde32259378359fcc"></script>

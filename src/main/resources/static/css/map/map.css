@@ -120,3 +120,45 @@
 .info .link {
     color: #5085BB;
 }
+
+#menu_wrap {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    /*width: 200px;*/
+    max-width: 1000px;
+    height: auto;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.bg_white {
+    background:#fff;
+}
+
+#menu_wrap hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #5F5F5F;
+    margin:3px 0;
+}
+
+#menu_wrap .option{
+    text-align: center;
+}
+#menu_wrap .option p {
+    margin:10px 0;
+}
+#menu_wrap .option button {
+    margin-left:5px;
+}
+
+.option form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
