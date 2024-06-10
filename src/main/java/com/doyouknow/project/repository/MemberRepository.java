@@ -14,7 +14,7 @@ public interface MemberRepository extends JpaRepository<Member,Integer> {
     int findDeptSeqByName(String deptName);
 
     @Query(value="select * from member where member.id=? and member.pwd=? ",nativeQuery = true)
-    MemberDTO loginByIdPwd(String id, String pwd);
+    Member loginByIdPwd(String id, String pwd);
 
     @Query(value="select member.id from member where member.name=? and member.email=?",nativeQuery=true)
     String searchId(String name, String email);

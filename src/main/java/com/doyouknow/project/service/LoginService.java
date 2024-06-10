@@ -35,7 +35,7 @@ public class LoginService {
     }
 
     @Transactional
-    public MemberDTO login(String id, String pwd){
+    public Member login(String id, String pwd){
         return memberRepository.loginByIdPwd(id,pwd);
     }
 
