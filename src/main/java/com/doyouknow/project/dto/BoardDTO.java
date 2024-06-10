@@ -20,6 +20,8 @@ public class BoardDTO {
 
     private int type2;
 
+    private String loc;
+
     private String title;
 
     private String content;
@@ -42,11 +44,16 @@ public class BoardDTO {
 
     private int writerMemberSeq;
 
+    private LocalDateTime date;
+
+
     /* AllArgsConstructor */
-    public BoardDTO(int seq, int type, int type2, String title, String content, int hit, LocalDateTime applyStart, LocalDateTime applyEnd, LocalDateTime eventStart, LocalDateTime eventEnd, String filename, String calendarColor, int writerDeptSeq, int writerMemberSeq) {
+
+    public BoardDTO(int seq, int type, int type2, String loc, String title, String content, int hit, LocalDateTime applyStart, LocalDateTime applyEnd, LocalDateTime eventStart, LocalDateTime eventEnd, String filename, String calendarColor, int writerDeptSeq, int writerMemberSeq, LocalDateTime date) {
         this.seq = seq;
         this.type = type;
         this.type2 = type2;
+        this.loc = loc;
         this.title = title;
         this.content = content;
         this.hit = hit;
@@ -58,6 +65,7 @@ public class BoardDTO {
         this.calendarColor = calendarColor;
         this.writerDeptSeq = writerDeptSeq;
         this.writerMemberSeq = writerMemberSeq;
+        this.date = date;
     }
 
     /* 마감일 D-day 용*/
