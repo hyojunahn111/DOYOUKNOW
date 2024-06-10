@@ -8,7 +8,7 @@
 #map {
     border-radius: 10px;
     width: 70%;
-    height: 600px;
+    height: 800px;
     border: 6px solid;
     border-color: #063170;
 }
@@ -201,4 +201,9 @@
     border-top: 1px solid #06316f;
     margin: 0 10px 10px 10px;
     border-radius: 10px;
+}
+
+#placesList p {
+    margin: 1px;
+    font-size: 15px;
 }
