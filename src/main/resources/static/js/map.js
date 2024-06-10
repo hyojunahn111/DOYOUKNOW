@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
 
         var keyword = document.getElementById('keyword').value.trim().toLowerCase();
-        console.log("검색 키워드:", keyword);    //뭐 검색하는지 확인
+        console.log("검색 키워드:", keyword);    // 뭐 검색하는지 확인
 
         if (!keyword) {
             alert('검색하실 학과나 건물을 입력해주세요.');
@@ -118,20 +118,41 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         var found = false;
+        var placesList = document.getElementById('placesList');
+        placesList.innerHTML = '';
+
         for (var i = 0; i < locations.length; i++) {
-            console.log("불러오는 단어 : " + locations[i].name.toLowerCase(), "내가 입력한 단어 : " + keyword);
-            if (locations[i].name.toLowerCase() === keyword) {
+            var buildingMatch = locations[i].name.toLowerCase().includes(keyword);
+
+            if (buildingMatch) {
                 overlays[i].setMap(map);
                 markers[i].setMap(map);
                 map.setCenter(locations[i].latlng);
                 found = true;
 
-                //정보 표시 div
-                var placesList = document.getElementById('placesList');
-                placesList.innerHTML = '';
-
                 for (var j = 0; j < locations[i].departments.length; j++) {
                     placesList.innerHTML += `
+                    <li>
+                        <h3>${locations[i].departments[j].deptName}</h3>
+                        <p class="deptphone">${locations[i].departments[j].deptPhone}</p>
+                        <p class="loc">${locations[i].name}&nbsp${locations[i].departments[j].locDetail}</p>
+                        <p class="intro">${locations[i].departments[j].intro}</p>
+                        <p class="link">${locations[i].departments[j].link}</p>
+                    </li>
+                `;
+                }
+                break;
+            } else {
+                for (var j = 0; j < locations[i].departments.length; j++) {
+                    var deptMatch = locations[i].departments[j].deptName.toLowerCase().includes(keyword);
+
+                    if (deptMatch) {
+                        overlays[i].setMap(map);
+                        markers[i].setMap(map);
+                        map.setCenter(locations[i].latlng);
+                        found = true;
+
+                        placesList.innerHTML += `
                         <li>
                             <h3>${locations[i].departments[j].deptName}</h3>
                             <p class="deptphone">${locations[i].departments[j].deptPhone}</p>
@@ -140,8 +161,12 @@ document.addEventListener("DOMContentLoaded", function () {
                             <p class="link">${locations[i].departments[j].link}</p>
                         </li>
                     `;
+                        break;
+                    }
                 }
+            }
 
+            if (found) {
                 break;
             }
         }
@@ -153,6 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
+
 
     window.closeOverlay = function (index) {
         overlays[index].setMap(null);
