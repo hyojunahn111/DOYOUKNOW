@@ -35,21 +35,29 @@ public class BoardService {
     }
 
     //행사, 공지 목록 보기
-    public Page<BoardDTO> BoardList(Pageable pageable) {
+    /* 부서별 페이지 */
+    public Page<BoardDTO> deptBoard(Pageable pageable, int deptSeq) {
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1,
                 pageable.getPageSize(),
                 Sort.by("seq").descending());
-        Page<Board> boardList = boardRepository.findAll(pageable);
-        System.out.println("BoardList 호출됨. 페이지 정보: " + pageable);
+        Page<Board> boardList = boardRepository.findAllByDept(pageable, deptSeq);
         return boardList.map(board -> modelMapper.map(board, BoardDTO.class));
     }
 
     /* 마감일 고정 목록*/
-    public List<BoardDTO> Top3List(){
-        Pageable topTree = PageRequest.of(0, 3, Sort.by("applyEnd").ascending());
-        Page<Board> boardPage = boardRepository.findAll(topTree);
-        return boardPage.getContent().stream()
-                .map(board -> modelMapper.map(board, BoardDTO.class))
-                .collect(Collectors.toList());
+    public List<BoardDTO> top3List(int deptSeq){
+
+        Pageable pageable = PageRequest.of(0, 3, Sort.by("applyEnd").ascending());
+        List<Board> result = boardRepository.findTop(deptSeq, pageable);
+
+        return result.stream().map(board -> modelMapper.map(board, BoardDTO.class)).toList();
     }
+
+    /* 제목 검색 기능 */
+//    @Transactional
+//    public List<BoardDTO> search(String keyword){
+//        List<BoardDTO> postsList = boardRepository.findTitleContaining(keyword);
+//    }
+
+
 }
