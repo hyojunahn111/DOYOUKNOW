@@ -34,7 +34,6 @@ public class BoardService {
         boardRepository.save(newBoardEntity);
     }
 
-    //행사, 공지 목록 보기
     /* 부서별 페이지 */
     public Page<BoardDTO> deptBoard(Pageable pageable, int deptSeq) {
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1,
@@ -44,7 +43,7 @@ public class BoardService {
         return boardList.map(board -> modelMapper.map(board, BoardDTO.class));
     }
 
-    /* 마감일 고정 목록*/
+    /* 부서별 페이지 마감일 고정 목록*/
     public List<BoardDTO> top3List(int deptSeq){
 
         Pageable pageable = PageRequest.of(0, 3, Sort.by("applyEnd").ascending());

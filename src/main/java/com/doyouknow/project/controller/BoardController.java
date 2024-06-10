@@ -24,7 +24,7 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    // 게시글 목록 페이지
+    // 부서 게시글 목록 페이지
     @GetMapping("dept/{deptSeq}")
     public String list(Model model, @PageableDefault(size = 6) Pageable pageable, @PathVariable int deptSeq) {
         Page<BoardDTO> boardList = boardService.deptBoard(pageable, deptSeq);
@@ -41,6 +41,25 @@ public class BoardController {
 
         return "board/list";
     }
+
+    // 취업, 장학 페이지
+    @GetMapping("public/{type}")
+    public String publiclist(Model model, @PageableDefault(size = 6) Pageable pageable, @PathVariable int deptSeq) {
+        Page<BoardDTO> boardList = boardService.deptBoard(pageable, deptSeq);
+
+        /* Page */
+        PagingButton paging = Pagenation.getPagingButtonInfo(boardList);
+
+        /*마감일 고정 목록*/
+        List<BoardDTO> top3 = boardService.top3List(deptSeq);
+
+        model.addAttribute("board",boardList);
+        model.addAttribute("paging",paging);
+        model.addAttribute("top3", top3);
+
+        return "board/list";
+    }
+
 
     // 소개 페이지
     @GetMapping("intro")
