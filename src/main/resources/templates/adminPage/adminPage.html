@@ -17,52 +17,26 @@
 <header th:replace="~{/fragment/header/header :: headerFragment}">
 </header>
 
+<form action="/adminPage" method="post">
 <div class="bodystyle">
-    <div class="container">
-        <h1>회원가입 승인</h1>
-        <div class="member-list">
-            <div class="info">
-                <p>이름 : 김컴공</p>
-                <p>전화번호 : 010-1234-5678</p>
+    <div th:each="member : ${memberList}">
+        <div class="container">
+            <h1>회원가입 승인</h1>
+            <input type="hidden" name="seq" th:value="${member.seq}">
+            <div class="member-list">
+                    <div class="info">
+                        <p th:text="'이름 : '+${member.name}"></p>
+                        <p th:text="'전화번호 : '+${member.phone}"></p>
 
-            </div>
-            <div class="info">
-                <p>관련 부서: 컴퓨터 공학부</p>
-                <p>Email : abc@naver.com</p>
-            </div>
-            <div class="buttons">
-                <button class="allow">승인</button>
-                <button class="denied">거부</button>
-            </div>
-        </div>
-
-        <div class="member-list">
-            <div class="info">
-                <p>이름 : 이경영</p>
-                <p>전화번호 : 010-8765-4321</p>
-            </div>
-            <div class="info">
-                <p>관련 부서: 경영학과</p>
-                <p>Email : cba@gmail.com</p>
-            </div>
-            <div class="buttons">
-                <button class="allow">승인</button>
-                <button class="denied">거부</button>
-            </div>
-        </div>
-
-        <div class="member-list">
-            <div class="info">
-                <p>이름 : 인지융</p>
-                <p>전화번호 : 010-1234-5678</p>
-            </div>
-            <div class="info">
-                <p>관련 부서: 인공지능 융합 뭐시기 부</p>
-                <p>Email : TTT@naver.com</p>
-            </div>
-            <div class="buttons">
-                <button class="allow">승인</button>
-                <button class="denied">거부</button>
+                    </div>
+                    <div class="info">
+                        <p th:text="'담당부서 : '+${member.deptName}"></p>
+                        <p th:text="'이메일 : '+${member.email}"></p>
+                    </div>
+                    <div class="buttons">
+                        <button value="allow" name="action" type="submit" class="allow">승인</button>
+                        <button value="denied" name="action" type="submit" class="denied">거부</button>
+                    </div>
             </div>
         </div>
     </div>
@@ -70,6 +44,6 @@
 
 <footer th:replace="~{/fragment/footer/footer :: footerFragment}">
 </footer>
-
+</form>
 </body>
 </html>

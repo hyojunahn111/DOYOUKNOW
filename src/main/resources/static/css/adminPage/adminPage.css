@@ -5,7 +5,7 @@ body {
 .bodystyle {
     margin: 50px 0;
     font-family: "Jua", sans-serif;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
 }
@@ -14,8 +14,9 @@ body {
     background-color: white;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     font-size: 1.5em;
+    margin: 50px 500px;
 }
 
 h1 {

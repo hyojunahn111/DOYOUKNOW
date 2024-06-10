@@ -1,5 +1,6 @@
 package com.doyouknow.project.service;
 
+import com.doyouknow.project.dto.MemberDTO;
 import com.doyouknow.project.entity.Member;
 import com.doyouknow.project.repository.MemberRepository;
 import jakarta.transaction.Transactional;
@@ -34,7 +35,7 @@ public class LoginService {
     }
 
     @Transactional
-    public Integer login(String id, String pwd){
+    public MemberDTO login(String id, String pwd){
         return memberRepository.loginByIdPwd(id,pwd);
     }
 

@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/login/signup.css}" />
+
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
 </head>
 <body>
 <h2>관리자 로그인</h2>
@@ -40,5 +43,8 @@
     </div>
 </div>
 </div>
+
+<footer th:replace="~{/fragment/footer/footer :: footerFragment}">
+</footer>
 </body>
 </html>

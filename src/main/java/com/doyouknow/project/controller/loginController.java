@@ -1,5 +1,7 @@
 package com.doyouknow.project.controller;
 
+import com.doyouknow.project.dto.MemberDTO;
+import com.doyouknow.project.entity.Member;
 import com.doyouknow.project.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,16 +30,20 @@ public class loginController {
                           @RequestParam("pwd") String pwd,
                           Model model,
                           RedirectAttributes rttr){
-        if(loginService.login(id,pwd)==null){
+        if(loginService.login(id, pwd)==null){
             rttr.addFlashAttribute("message","없는 회원이거나 입력정보가 일치하지 않습니다.");
             return "redirect:/login";
-        }else {
+        }else if(loginService.login(id, pwd).getStatus()==1||loginService.login(id, pwd).getStatus()==0) {
+            rttr.addFlashAttribute("message","아직 회원가입 승인되지 않았거나 거부된 계정입니다.");
+            return "redirect:/login";
+        }else{
             return "login/sucess";
         }
     }
 
     @GetMapping("/signup")
     public String signup(){return "login/signup";}
+
     @PostMapping("/signup")
     public String signupOk(@RequestParam("name") String name,
                          @RequestParam("id") String id,
