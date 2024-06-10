@@ -1,26 +1,28 @@
 package com.doyouknow.project.controller;
 
-import com.doyouknow.project.dto.MemberDTO;
 import com.doyouknow.project.entity.Member;
 import com.doyouknow.project.service.LoginService;
-import org.apache.catalina.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-//@SessionAttributes("seq")
-public class loginController {
+@SessionAttributes("seq")
+public class LoginController {
 
     @Autowired
     private LoginService loginService;
-    public loginController(LoginService loginService) {
+    public LoginController(LoginService loginService) {
         this.loginService = loginService;
+    }
+
+    @ModelAttribute("seq")
+    public Integer seq() {
+        return null;
     }
 
     @GetMapping("/login")
@@ -35,10 +37,11 @@ public class loginController {
         if(member==null){
             rttr.addFlashAttribute("message","없는 회원이거나 입력정보가 일치하지 않습니다.");
             return "redirect:/login";
-        }else if(member.getStatus()==1||member.getStatus()==0) {
+        }else if(member.getStatus()==-1||member.getStatus()==0) {
             rttr.addFlashAttribute("message","아직 회원가입 승인되지 않았거나 거부된 계정입니다.");
             return "redirect:/login";
         }else{
+            model.addAttribute("seq", member.getSeq());
             return "login/sucess";
         }
     }
@@ -87,6 +90,11 @@ public class loginController {
             rttr.addFlashAttribute("message","없는 회원이거나 입력정보가 일치하지 않습니다.");
         }
         return "redirect:/searchpwd";
+    }
+    @GetMapping("/logout")
+    public String logout(SessionStatus status) {
+        status.setComplete();
+        return "redirect:/login";
     }
 }
 
