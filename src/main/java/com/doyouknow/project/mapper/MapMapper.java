@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MapMapper {
 
-    @Select("SELECT name,phone,loc_detail,intro FROM dept WHERE loc=#{locDetail}")
+    @Select("SELECT seq,name,phone,loc_detail,intro FROM dept WHERE loc=#{locDetail}")
     List<DeptDTO> selectByLocDetail(String locDetail);
 
 }
