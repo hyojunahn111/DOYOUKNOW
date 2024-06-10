@@ -48,13 +48,6 @@ public class BoardController {
         return "board/intro";
     }
 
-    // 장학 페이지 테스트
-    @GetMapping("scholarship")
-    public String scholarship() {
-
-        return "board/scholarship";
-    }
-
     // 게시글 작성 양식 페이지
     @GetMapping("write")
     public String write(@RequestParam(defaultValue = "0", required = false) int type,
@@ -77,21 +70,5 @@ public class BoardController {
     public String detail(@RequestParam(defaultValue = "0", required = false) int type,
                          @RequestParam(defaultValue = "0", required = false) int type2){
         return "board/event-details";
-    }
-
-    // listMod1 사이드바 테스트 중
-    @GetMapping("list-test-sidebar")
-    public String testSideBar() {
-        return "board/list-test-sidebar";
-    }
-
-    @GetMapping("list-test-intro")
-    public String testIntro() {
-        return "board/list-test-intro";
-    }
-
-    @GetMapping("list-test-intro2")
-    public String testIntro2() {
-        return "board/list-test-intro2";
     }
 }
