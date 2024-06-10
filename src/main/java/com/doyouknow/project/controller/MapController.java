@@ -4,7 +4,9 @@ import com.doyouknow.project.dto.DeptDTO;
 import com.doyouknow.project.service.MapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,18 +20,16 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @GetMapping({"/","map"})
-    public String mapPage(String locDetail) {
+    @GetMapping({"/", "/map"})
+    public String mapPage(@RequestParam(value = "locDetail", required = false) String locDetail, Model model) {
+        System.out.println("확인용 locDetail: " + locDetail);
 
-//        locDetail = "건물5";
-//
-//        List<DeptDTO> deptinfo = mapService.selectdept(locDetail);
-//        System.out.println(deptinfo);
-
-
-
+        if (locDetail != null && !locDetail.isEmpty()) {
+            List<DeptDTO> deptInfo = mapService.selectdept(locDetail);
+            System.out.println("DeptInfo: " + deptInfo);
+            model.addAttribute("deptInfo", deptInfo);
+        }
 
         return "map/map";
     }
-
 }
