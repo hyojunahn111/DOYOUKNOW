@@ -1,13 +1,17 @@
 package com.doyouknow.project.controller;
 
+import com.doyouknow.project.common.Pagenation;
+import com.doyouknow.project.common.PagingButton;
 import com.doyouknow.project.dto.BoardDTO;
 import com.doyouknow.project.service.BoardService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("board")
@@ -21,10 +25,20 @@ public class BoardController {
     }
 
     // 게시글 목록 페이지
-    @GetMapping("list")
-    public String list(Model model) {
-        BoardDTO boardDTO = new BoardDTO();
-        model.addAttribute("board",boardDTO);
+    @GetMapping("dept/{deptSeq}")
+    public String list(Model model, @PageableDefault(size = 6) Pageable pageable, @PathVariable int deptSeq) {
+        Page<BoardDTO> boardList = boardService.deptBoard(pageable, deptSeq);
+
+        /* Page */
+        PagingButton paging = Pagenation.getPagingButtonInfo(boardList);
+
+        /*마감일 고정 목록*/
+        List<BoardDTO> top3 = boardService.top3List(deptSeq);
+
+        model.addAttribute("board",boardList);
+        model.addAttribute("paging",paging);
+        model.addAttribute("top3", top3);
+
         return "board/list";
     }
 

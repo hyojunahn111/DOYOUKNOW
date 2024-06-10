@@ -22,6 +22,9 @@ public class Board {
     private int type2;
 
     @Column
+    private String loc;
+
+    @Column
     private String title;
 
     @Column
@@ -53,4 +56,8 @@ public class Board {
 
     @Column(name = "writer_member_seq")
     private int writerMemberSeq;
+
+    @Column
+    private LocalDateTime date;
+
 }

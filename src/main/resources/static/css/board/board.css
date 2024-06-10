@@ -3,24 +3,25 @@ body {
     flex-direction: column;
     margin: 0;
 }
-header {
-    border: 1px solid black;
-}
+
 content {
-    border: 1px solid black;
     justify-content: center;
     display: flex;
+    min-width: 800px;
 }
+
 footer {
     border: 1px solid black;
 }
-.contentBody{
+
+.contentBody {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 90%;
     flex-direction: column;
 }
+
 .content-wrap {
     display: flex;
     flex-direction: row;
@@ -51,7 +52,7 @@ footer {
     margin-right: 20px;
 }
 
-.calendar-wrap{
+.calendar-wrap {
     width: 100%;
     border: 1px solid black;
     height: 60vh;
@@ -65,59 +66,156 @@ footer {
     flex-direction: column;
 }
 
-.listSearch{display: flex;
-    justify-content: space-between;}
-.writeBtn{background: #C2D9FF;
-    color: black;}
-select{  border-radius: 30px;
-    padding: 10px;
-    margin-right: 5px;}
-input{padding: 10px;
+.listSearch {
+    display: flex;
+    justify-content: space-between;
+}
+
+.writeBtn {
+    background: #C2D9FF;
+    color: black;
+}
+
+select {
     border-radius: 30px;
-    border: solid 0.5px gray;}
-button{    width: 70px;
+    padding: 10px;
+    margin-right: 5px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 30px;
+    border: solid 0.5px gray;
+}
+
+button {
+    width: 70px;
     border-radius: 30px;
     border: 0px;
     padding: 10px;
     background: #4D90FF;
-    color: white;}
-.fixListItems{}
-.listItems{}
-.listItem{border-radius: 20px;
+    color: white;
+}
+
+.fixListItems {
+}
+
+.listItems {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.listItem {
+    border-radius: 20px;
     width: 30%;
-    margin-top: 20px;
+    margin: 20px 7px;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     padding: 15px;
     box-shadow: 0 2px 4px rgb(0 0 0 / 22%), 0 3px 5px rgba(0, 0, 0, 0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);}
-.listItem:hover{
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    min-width: 230px;
+    max-width: 250px;
 }
-.imgflex{    width: 100%;
+
+.listItem:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.imgflex {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;}
-.listImg{width: 95%;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.listImg {
+    width: 95%;
     background: gray;
     height: 250px;
     border-radius: 20px;
-    margin-top: 5px;}
-.flex{     display: flex;
+    margin-top: 5px;
+}
+
+.flex {
+    display: flex;
     justify-content: space-between;
     font-size: 14px;
     align-items: center;
-    margin-top: 10px;}
-.maginX{margin: 0px;}
-#typeContent{border-radius: 30px;
+    margin-top: 15px;
+}
+
+.maginX {
+    margin: 0px;
+}
+
+#typeContent {
+    border-radius: 30px;
     background: gray;
     padding: 10px;
     font-size: 14px;
-background: #D9D9D9;}
-#typeContent1{border-radius: 30px;
+    background: #D9D9D9;
+}
+
+#typeContent1 {
+    border-radius: 30px;
     background: gray;
     padding: 10px;
     font-size: 14px;
-    background: #D9D9D9;}
+    background: #D9D9D9;
+}
+
+.listItem h2 {
+    font-size: 17px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.dday {
+    font-size: 33px;
+    color: #0963e6;
+}
+
+.fix {
+    background: #fa2e73d9;
+    width: 70px;
+    height: 35px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#paging {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 70px;
+}
+
+#paging button {
+    margin: 0px;
+    padding: 0px;
+    height: 35px;
+}
+
+.numSize {
+    font-size: 17px;
+    font-weight: 600;
+    background: #48c6ffcc;
+}
+
+.arrow {
+    height: 20px;
+}
+
+/* 카드 리스트 끝 */
 
