@@ -33,10 +33,12 @@ public class BoardController {
         PagingButton paging = Pagenation.getPagingButtonInfo(boardList);
 
         /*마감일 고정 목록*/
-        List<BoardDTO> top3 = boardService.top3List(deptSeq);
+        List<BoardDTO> top3 = boardService.deptTop(deptSeq);
 
         model.addAttribute("board",boardList);
         model.addAttribute("paging",paging);
+        model.addAttribute("boardType", "dept");
+        model.addAttribute("boardValue", deptSeq);
         model.addAttribute("top3", top3);
 
         return "board/list";
@@ -44,19 +46,20 @@ public class BoardController {
 
     // 취업, 장학 페이지
     @GetMapping("public/{type}")
-    public String publiclist(Model model, @PageableDefault(size = 6) Pageable pageable, @PathVariable int deptSeq) {
-        Page<BoardDTO> boardList = boardService.deptBoard(pageable, deptSeq);
+    public String publiclist(Model model, @PageableDefault(size = 6) Pageable pageable, @PathVariable int type) {
+        Page<BoardDTO> boardList = boardService.publicBoard(pageable, type);
 
         /* Page */
         PagingButton paging = Pagenation.getPagingButtonInfo(boardList);
 
         /*마감일 고정 목록*/
-        List<BoardDTO> top3 = boardService.top3List(deptSeq);
+        List<BoardDTO> top3 = boardService.publicTop(type);
 
         model.addAttribute("board",boardList);
         model.addAttribute("paging",paging);
         model.addAttribute("top3", top3);
-
+        model.addAttribute("boardType", "public");
+        model.addAttribute("boardValue", type);
         return "board/list";
     }
 

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BoardService {
@@ -44,10 +43,27 @@ public class BoardService {
     }
 
     /* 부서별 페이지 마감일 고정 목록*/
-    public List<BoardDTO> top3List(int deptSeq){
+    public List<BoardDTO> deptTop(int deptSeq){
 
         Pageable pageable = PageRequest.of(0, 3, Sort.by("applyEnd").ascending());
-        List<Board> result = boardRepository.findTop(deptSeq, pageable);
+        List<Board> result = boardRepository.findDeptTop(deptSeq, pageable);
+
+        return result.stream().map(board -> modelMapper.map(board, BoardDTO.class)).toList();
+    }
+
+    public Page<BoardDTO> publicBoard(Pageable pageable, int type) {
+        pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1,
+                pageable.getPageSize(),
+                Sort.by("seq").descending());
+        Page<Board> boardList = boardRepository.findAllByType(pageable, type);
+        return boardList.map(board -> modelMapper.map(board, BoardDTO.class));
+    }
+
+    /* 부서별 페이지 마감일 고정 목록*/
+    public List<BoardDTO> publicTop(int type){
+
+        Pageable pageable = PageRequest.of(0, 3, Sort.by("applyEnd").ascending());
+        List<Board> result = boardRepository.findPublicTop(type, pageable);
 
         return result.stream().map(board -> modelMapper.map(board, BoardDTO.class)).toList();
     }
