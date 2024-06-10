@@ -6,14 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     let map = new kakao.maps.Map(container, options);
 
-    // 마커 이미지 설정
     var imageSrc = 'img/location_marker.png',  // 마커 이미지의 주소
         imageSize = new kakao.maps.Size(40, 40),  // 마커 이미지의 크기
         imageOption = {offset: new kakao.maps.Point(20, 40)};  // 마커 이미지의 옵션
 
     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
-    var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+    var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
 
     var locations = [
         {name: "100주년기념관", latlng: new kakao.maps.LatLng(37.642833983307035, 127.10528090160582)},
@@ -52,20 +51,22 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     var overlays = [];
+    var markers = [];
 
     for (var i = 0; i < locations.length; i++) {
         var marker = new kakao.maps.Marker({
-            map: map,  // 마커 표시할 지도
-            position: locations[i].latlng,  // 마커 표시할 위치
-            title: locations[i].name,  // 마커 타이틀
-            image: markerImage  // 마커 이미지
+            map: map,
+            position: locations[i].latlng,
+            title: locations[i].name,
+            image: markerImage
         });
 
-        // 커스텀 오버레이 내용
+        markers.push(marker);
+
         var content = '<div class="wrap">' +
             '    <div class="info">' +
             '        <div class="title">' +
-            '            ' + locations[i].name +  // 장소 이름
+            '            ' + locations[i].name +
             '            <div class="close" onclick="closeOverlay(' + i + ')" title="닫기"></div>' +
             '        </div>' +
             '        <div class="body">' +
@@ -76,22 +77,19 @@ document.addEventListener("DOMContentLoaded", function () {
             '            </div>' +
             '        </div>' +
             '    </div>' +
-            '    <hr class="info_hr">'
+            '    <hr class="info_hr">' +
             '</div>';
 
-        // 커스텀 오버레이 생성
         var overlay = new kakao.maps.CustomOverlay({
             content: content,
             position: marker.getPosition()
         });
 
-        overlay.setMap(null);  // 초기에는 오버레이를 숨기기
+        overlay.setMap(null);
         overlays.push(overlay);
 
-        // 마커 클릭 이벤트 추가
         kakao.maps.event.addListener(marker, 'click', (function (overlay, map) {
             return function () {
-                // 모든 오버레이를 숨기기
                 for (var j = 0; j < overlays.length; j++) {
                     overlays[j].setMap(null);
                 }
@@ -100,9 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
         })(overlay, map));
     }
 
-    // 키워드 검색을 요청하는 함수
     function searchPlaces(event) {
-        event.preventDefault();  // 폼 제출 기본 동작 막기
+        event.preventDefault();
 
         var keyword = document.getElementById('keyword').value.trim();
 
@@ -111,28 +108,45 @@ document.addEventListener("DOMContentLoaded", function () {
             return false;
         }
 
-        // 모든 오버레이를 숨기기
         for (var j = 0; j < overlays.length; j++) {
             overlays[j].setMap(null);
+            markers[j].setMap(null);
         }
 
-        // 키워드와 일치하는 location을 찾기
+        var found = false;
         for (var i = 0; i < locations.length; i++) {
             if (locations[i].name === keyword) {
                 overlays[i].setMap(map);
+                markers[i].setMap(map);
                 map.setCenter(locations[i].latlng);
-                return;
+                found = true;
+                break;
             }
         }
 
-        alert('일치하는 장소가 없습니다.');
+        if (!found) {
+            alert('일치하는 장소가 없습니다.');
+            for (var j = 0; j < overlays.length; j++) {
+                markers[j].setMap(map);
+            }
+        }
     }
 
-    // 커스텀 오버레이를 닫기 위해 호출되는 함수
     window.closeOverlay = function (index) {
         overlays[index].setMap(null);
     }
 
-    // 폼 제출 이벤트 리스너 추가
     document.getElementById('searchForm').addEventListener('submit', searchPlaces);
+
+    document.getElementById('resetButton').addEventListener('click', function() {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+        for (var i = 0; i < overlays.length; i++) {
+            overlays[i].setMap(null);
+        }
+        map.setCenter(new kakao.maps.LatLng(37.642785, 127.105220));
+
+        alert('초기화 되었습니다.')
+    });
 });

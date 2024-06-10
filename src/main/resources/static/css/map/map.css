@@ -157,10 +157,43 @@
     margin-left:5px;
 }
 
-.option form {
+.twobtdiv{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.twobt:hover {
+}
+
+.option form {
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    padding: 10px;
+}
+
+.twobtdiv form input {
+    border-radius: 50px;
+    border: 1px solid #8fb7ff;
+    padding: 10px;
+}
+
+.twobtdiv form input:focus {
+    border-color: #508efa;
+    outline: none;
+}
+
+.option button {
+    border-radius: 30px;
+    border: 0px;
+    background: #8fb7ff;
+    color: white;
+    padding: 10px 13px;
+}
+
+.option button:hover {
+    background-color: #508efa;
 }
 
 .info_hr {

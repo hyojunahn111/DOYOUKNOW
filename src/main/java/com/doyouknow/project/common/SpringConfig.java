@@ -2,9 +2,11 @@ package com.doyouknow.project.common;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration.AccessLevel;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@MapperScan("com.doyouknow.project.mapper")
 @Configuration
 public class SpringConfig {
 
