@@ -41,7 +41,7 @@ public class BoardController {
         model.addAttribute("boardValue", deptSeq);
         model.addAttribute("top3", top3);
 
-        return "board/list";
+        return "board/list2";
     }
 
     // 취업, 장학 페이지
