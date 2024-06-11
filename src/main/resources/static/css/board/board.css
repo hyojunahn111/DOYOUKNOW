@@ -3,24 +3,21 @@ body {
     flex-direction: column;
     margin: 0;
 }
-header {
-    border: 1px solid black;
-}
+
 content {
-    border: 1px solid black;
     justify-content: center;
     display: flex;
+    min-width: 1200px;
 }
-footer {
-    border: 1px solid black;
-}
-.contentBody{
+
+.contentBody {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 90%;
     flex-direction: column;
 }
+
 .content-wrap {
     display: flex;
     flex-direction: row;
@@ -33,7 +30,12 @@ footer {
     margin: 10px 0 30px 0;
     width: 100%;
     background-color: gray;
-    height: 20vh;
+    height: 30vh;
+    background-image: url('/img/board/dept-computer.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
 }
 
 .mainContent {
@@ -47,14 +49,12 @@ footer {
 
 .sideBar {
     width: 20%;
-    border: 1px solid black;
     margin-right: 20px;
 }
 
-.calendar-wrap{
+.calendar-wrap {
     width: 100%;
-    border: 1px solid black;
-    height: 60vh;
+    max-width: 90%;
 }
 
 /* 카드 리스트 시작 */
@@ -65,59 +65,349 @@ footer {
     flex-direction: column;
 }
 
-.listSearch{display: flex;
-    justify-content: space-between;}
-.writeBtn{background: #C2D9FF;
-    color: black;}
-select{  border-radius: 30px;
-    padding: 10px;
-    margin-right: 5px;}
-input{padding: 10px;
+.listSearch {
+    margin: 0 auto;
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.writeBtn {
+    background: #C2D9FF;
+    color: black;
+}
+
+select {
     border-radius: 30px;
-    border: solid 0.5px gray;}
-button{    width: 70px;
+    padding: 10px;
+    margin-right: 5px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 30px;
+    border: solid 0.5px gray;
+}
+
+button {
+    width: 70px;
     border-radius: 30px;
     border: 0px;
     padding: 10px;
     background: #4D90FF;
-    color: white;}
-.fixListItems{}
-.listItems{}
-.listItem{border-radius: 20px;
+    color: white;
+}
+
+.fixListItems {
+}
+
+.listItems {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.listItem {
+    border-radius: 20px;
     width: 30%;
-    margin-top: 20px;
+    margin: 20px auto;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     padding: 15px;
     box-shadow: 0 2px 4px rgb(0 0 0 / 22%), 0 3px 5px rgba(0, 0, 0, 0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);}
-.listItem:hover{
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    min-width: 230px;
+    max-width: 280px;
 }
-.imgflex{    width: 100%;
+
+.listItem:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.imgflex {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;}
-.listImg{width: 95%;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.listImg {
+    width: 95%;
     background: gray;
     height: 250px;
     border-radius: 20px;
-    margin-top: 5px;}
-.flex{     display: flex;
+    margin-top: 5px;
+}
+
+.flex {
+    display: flex;
     justify-content: space-between;
     font-size: 14px;
     align-items: center;
-    margin-top: 10px;}
-.maginX{margin: 0px;}
-#typeContent{border-radius: 30px;
+    margin-top: 15px;
+}
+
+.maginX {
+    margin: 0px;
+}
+
+#typeContent {
+    border-radius: 30px;
     background: gray;
     padding: 10px;
     font-size: 14px;
-background: #D9D9D9;}
-#typeContent1{border-radius: 30px;
+    background: #D9D9D9;
+}
+
+#typeContent1 {
+    border-radius: 30px;
     background: gray;
     padding: 10px;
     font-size: 14px;
-    background: #D9D9D9;}
+    background: #D9D9D9;
+}
+
+.listItem h2 {
+    font-size: 17px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.dday {
+    font-size: 33px;
+    color: #0963e6;
+}
+
+.fix {
+    background: #fa2e73d9;
+    width: 70px;
+    height: 35px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#paging {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 70px;
+}
+
+#paging button {
+    margin: 0px;
+    padding: 0px;
+    height: 35px;
+}
+
+.numSize {
+    font-size: 17px;
+    font-weight: 600;
+    background: #48c6ffcc;
+}
+
+.arrow {
+    height: 20px;
+}
+
+/* 카드 리스트 끝 */
+
+
+/* 추가 */
+
+.titleBox {
+    margin: auto;
+    color: white;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.title-dept {
+    font-weight: 1000;
+}
+
+.sideBarFloat {
+    position: sticky;
+
+    /* 가운데 정렬 & 최대 폭 제한*/
+    margin: 0 auto;
+    max-width: 200px;
+    width: 100%;
+}
+
+.card {
+    background-color: white;
+}
+
+.card-top {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    border-top: 2px solid #1D4692;
+    border-left: 2px solid #1D4692;
+    border-right: 2px solid #1D4692;
+}
+
+.card-middle {
+    border-radius: 0;
+
+    border-left: 2px solid #1D4692;
+    border-right: 2px solid #1D4692;
+}
+
+.card-bottom {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    border-left: 2px solid #1D4692;
+    border-right: 2px solid #1D4692;
+    border-bottom: 2px solid #1D4692;
+}
+
+.card-header {
+    display: flex;
+    background: none;
+}
+
+.card-body {
+    padding: 0;
+    background-color: #DCF6F8;
+}
+
+.dropdown-caption {
+    padding: 0.5rem 1rem;
+
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    /*border: none;*/
+    /*border-radius: 0;*/
+    background-color: #DCF6F8;
+    padding: 0;
+}
+
+.a-center {
+    align-self: center;
+}
+
+.divider {
+    margin: 0 10px;
+    background: none;
+}
+
+/* 소개페이지 */
+.dept-card-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* 단일학부 정보 카드 */
+.dept-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.25);
+
+    padding: 10px 10px;
+}
+
+.dept-thumb {
+    width: 33%;
+    margin-right: 30px;
+}
+
+.dept-thumb > img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.dept-content {
+    width: calc(66% - 30px);
+}
+
+.dept-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.dept-text {
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.dept-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.dept-info > dl {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    padding: 7px 5px;
+    margin: 0;
+}
+
+.dept-button {
+    float: right;
+}
+
+/* 통합정보페이지 기관 정보 카드 */
+.dept-card.part {
+    padding: 10px 20px;
+    width: 40%;
+    margin-bottom: 30px;
+}
+
+.dept-card.part > .dept-thumb {
+    margin: 0 0 20px 0;
+    width: 100%;
+}
+
+.dept-card.part > .dept-content {
+    width: 100%;
+}
+
+/* 캘린더 */
+
+.calendar-wrap{
+    border-radius: 10px;
+    border: 4px solid #C2D9FF;
+}
+
+.fc-toolbar-title {
+    font-weight: bold
+}
+
+.fc-scrollgrid a {
+    text-decoration: none;
+    color: black;
+}
+
+.fc-scrollgrid thead a {
+    font-size: 17px;
+}
+
+.fc-scrollgrid .fc-event {
+    cursor: pointer;
+}
 

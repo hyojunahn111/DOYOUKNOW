@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/footer/footer.css">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
     <script src="https://kit.fontawesome.com/59d34efa84.js" crossorigin="anonymous"></script>
-    <script>
+    <script th:inline="javascript">
         function truncateText(selector, maxLength) {
             const elements = document.querySelectorAll(selector);
             elements.forEach(element => {
@@ -21,10 +21,37 @@
             });
         }
 
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     truncateText('.truncate-title', 33);
-        //     truncateText('.truncate-content', 30);
-        // });
+        const boardList = /*[[${board.content}]]*/ [];
+
+        let calendarBoard = [];
+        for(let i = 0; i < boardList.length; i++) {
+            const board = boardList[i];
+
+            if(board.applyStart) {
+                calendarBoard.push(
+                    {
+                        'title' : '[접수]' + board.title,
+                        'start' : board.applyStart,
+                        'end' : board.applyEnd,
+                        'color' : board.calendarColor,
+                        'url' : `${window.location.protocol}//${window.location.host}/board/detail/${board.seq}`
+                    }
+                )
+            }
+            if(board.eventStart) {
+                calendarBoard.push(
+                    {
+                        'title' : board.title,
+                        'start' : board.eventStart,
+                        'end' : board.eventEnd,
+                        'color' : board.calendarColor,
+                        'url' : `${window.location.protocol}//${window.location.host}/board/detail/${board.seq}`
+                    }
+                )
+            }
+
+        }
+
 
         window.onload = () => {
             truncateText('.truncate-title', 33);
@@ -54,16 +81,45 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
-                dayCellContent: (e) => {
-                    return e.dayNumberText.replace('일', '');
-                },
-                navLinks: true,
+                // 버튼 출력 텍스트
                 buttonText: {
                     today: '오늘',
                     dayGridMonth: '월간',
                     timeGridWeek: '주간',
                     timeGridDay: '일간'
-                }
+                },
+                // 날짜 후미에 붙는 '일' 제거
+                dayCellContent: (e) => {
+                    return e.dayNumberText.replace('일', '');
+                },
+                navLinks: true,
+                dayMaxEvents: true,
+                // 캘린더에 출력될 이벤트 할당
+                eventSources: [
+                    {
+                        events: calendarBoard
+                        /*[
+                            {
+                                title  : 'event1',
+                                start  : '2024-06-01'
+                            },
+                            {
+                                title  : 'event2',
+                                start  : '2024-06-05',
+                                end    : '2024-06-07',
+                                allDay : false,
+                                color : '#FFFF00'
+                            },
+                            {
+                                title  : 'event3',
+                                start  : '2024-06-09T12:30:00',
+                                allDay : false,
+                                color: 'blue'
+                            }
+                        ]*/
+                    }
+                ],
+
             });
             calendar.render();
 

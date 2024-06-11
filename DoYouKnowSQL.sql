@@ -44,6 +44,7 @@ CREATE TABLE `board` (
     `type2`	tinyint	NOT NULL	DEFAULT 0,
 	`title`	varchar(255)	NOT NULL,
 	`content`	varchar(255)	NOT NULL,
+    `date`  datetime    NOT NULL,
 	`hit`	int	NOT NULL	DEFAULT 0,
 	`apply_start`	datetime	NULL	COMMENT 'LocalDateTime 형 엔티티 컬럼',
 	`apply_end`	datetime	NULL	COMMENT 'LocalDateTime 형 엔티티 컬럼',
