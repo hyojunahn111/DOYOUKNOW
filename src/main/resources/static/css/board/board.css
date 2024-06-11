@@ -217,7 +217,11 @@ button {
 .arrow {
     height: 20px;
 }
-
+.flex2{display: flex;}
+.closed{
+    font-size: 33px;
+    color: #7d7e81;
+}
 /* 카드 리스트 끝 */
 
 

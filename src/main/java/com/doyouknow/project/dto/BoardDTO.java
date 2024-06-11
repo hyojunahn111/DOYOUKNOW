@@ -73,4 +73,9 @@ public class BoardDTO {
         return ChronoUnit.DAYS.between(LocalDateTime.now(), this.applyEnd);
     }
 
+    /* 마감 표시용 */
+    public long getSeconds() {
+        return ChronoUnit.SECONDS.between(LocalDateTime.now(), this.applyEnd);
+    }
+
 }
