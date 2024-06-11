@@ -2,7 +2,6 @@ package com.doyouknow.project.controller;
 
 import com.doyouknow.project.entity.Member;
 import com.doyouknow.project.service.LoginService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-
-import static java.lang.Integer.parseInt;
 
 @Controller
 @SessionAttributes("seq")
