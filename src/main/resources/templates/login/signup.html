@@ -7,6 +7,14 @@
 
     <link rel="stylesheet" href="/css/header/header.css">
     <link rel="stylesheet" href="/css/footer/footer.css">
+
+    <script type="text/javascript">
+        const result=`[[${result}]]`;
+        if(result.length!==0) {
+            alert(result);
+            location.href = "/login";
+        }
+    </script>
 </head>
 <body>
 <h2>관리자 로그인</h2>
@@ -21,13 +29,17 @@
             <span>회원가입을 위한 정보를 입력해주세요</span>
             <br>
             <input name="name" type="text" placeholder="이름을 입력해주세요" />
-            <input name="id" type="text" placeholder="아이디를 입력해주세요" />
+            <input name="id" type="text"  placeholder="아이디를 입력해주세요" />
             <input name="pwd" type="password" placeholder="비밀번호를 입력해주세요" />
             <input name="phone" type="text" placeholder="전화번호를 입력해주세요 ( - 없이 입력)" />
             <input name="email" type="email" placeholder="이메일을 입력해주세요" />
-            <input name="deptName" type="text" placeholder="소속 부서를 입력해주세요" />
+            <select name="deptName">
+                <option value="관리부서">해당하는 학과나 부서를 입력해주세요.</option>
+                <option  th:each="dept : ${deptList}" th:value="${dept.name}" th:text="${dept.name}"></option>
+            </select>
             <br>
             <button>회원가입</button>
+            <pre th:text="${message}"></pre>
         </form>
     </div>
     <div class="overlay-container">

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name="member")
@@ -32,5 +33,6 @@ public class Member {
     @Column(name="status")
     private int status;
     @Column(name="type")
+    @ColumnDefault("1")
     private int type;
 }

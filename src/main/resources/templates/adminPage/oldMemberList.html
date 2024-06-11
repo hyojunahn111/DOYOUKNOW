@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/adminPage/adminPage.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+
+</head>
+<body>
+
+<header th:replace="~{/fragment/header/header :: headerFragment}">
+</header>
+
+<form action="oldMemberList" method="post">
+<div class="bodystyle">
+    <h1 class="memberList">기존 관리자 목록</h1>
+    <div th:each="member : ${memberList}">
+        <div class="container">
+            <input type="hidden" name="seq" th:value="${member.seq}">
+            <div class="member-list">
+                    <div class="info">
+                        <p th:text="'이름 : '+${member.name}"></p>
+                        <p th:text="'전화번호 : '+${member.phone}"></p>
+
+                    </div>
+                    <div class="info">
+                        <p th:text="'담당부서 : '+${member.deptName}"></p>
+                        <p th:text="'이메일 : '+${member.email}"></p>
+                    </div>
+                    <div class="buttons">
+                        <label th:if="${member.status == 0}" class="status">미승인</label>
+                        <label th:if="${member.status == 1}" class="status">승인</label>
+                        <label th:if="${member.status == -1}" class="status">승인거부</label>
+                        <button value="denied" name="action" type="submit" class="denied">삭제</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{/fragment/footer/footer :: footerFragment}">
+</footer>
+</form>
+</body>
+</html>

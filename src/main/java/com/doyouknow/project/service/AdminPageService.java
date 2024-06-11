@@ -24,9 +24,13 @@ public class AdminPageService {
     }
 
     @Transactional
-    public List<Member> findMemberByType(int status){
-        return  memberRepository.findMemberByType(status);
+    public List<Member> findMemberByStatus(int status){
+        return  memberRepository.findMemberByStatus(status);
+    }
 
+    @Transactional
+    public List<Member> findMemberByType(int type){
+        return  memberRepository.findMemberByType(type);
     }
 
     @Transactional
@@ -34,5 +38,8 @@ public class AdminPageService {
         memberRepository.updateMemberStatus(status, seq);
     }
 
-
+    @Transactional
+    public void deleteMember(int seq){
+        memberRepository.deleteMemberBySeq(seq);
+    }
 }

@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
+import static java.lang.Integer.parseInt;
+
 @Controller
 @SessionAttributes("seq")
 public class LoginController {
@@ -55,8 +59,36 @@ public class LoginController {
                          @RequestParam("pwd") String pwd,
                          @RequestParam("phone") String phone,
                          @RequestParam("email") String email,
-                         @RequestParam("deptName") String deptName){
-        loginService.signup(name, id, pwd, phone, email, deptName);
+                         @RequestParam("deptName") String deptName,
+                           RedirectAttributes rttr
+                           ){
+        List<Member> memberList=loginService.findAll();
+        if(name.isBlank()||id.isBlank()||pwd.isBlank()||phone.isBlank()||email.isBlank()){
+            rttr.addFlashAttribute("message","입력란은 비워둘수 없습니다");
+            return "redirect:/signup";
+        }
+        for (Member member : memberList) {
+            if (member.getId().equals(id)) {
+                rttr.addFlashAttribute("message", "이미 존재하는 ID입니다. 다른 ID를 사용하십시오.");
+                return "redirect:/signup";
+            }
+        }
+        for (Member member : memberList) {
+            if (member.getEmail().equals(email)) {
+                rttr.addFlashAttribute("message", "이미 존재하는 Email입니다. 다른 Email을 사용하십시오.");
+                return "redirect:/signup";
+            }
+        }
+        if(!pwd.matches("^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$")) {
+            rttr.addFlashAttribute("message", "비밀번호는 8자 이상 15자 이하이어야 하며,\n 하나 이상의 알파벳 문자, 숫자, 특수 문자를 포함해야 합니다.");
+            return "redirect:/signup";
+        }if(!phone.matches("\\d+")) {
+            rttr.addFlashAttribute("message", "전화번호는 숫자만 입력해주십시오");
+            return "redirect:/signup";
+        }else {
+            loginService.signup(name, id, pwd, phone, email, deptName, 1);
+            rttr.addFlashAttribute("result","회원가입이 완료되었습니다.");
+        }
         return "login/login";
     }
 
@@ -66,7 +98,6 @@ public class LoginController {
     @PostMapping("/searchid")
     public String searchidOk(@RequestParam("name") String name,
                              @RequestParam("email") String eamil,
-                             Model model,
                              RedirectAttributes rttr){
         if(loginService.searchId(name,eamil)!=null){
             rttr.addFlashAttribute("result",loginService.searchId(name,eamil));
@@ -82,7 +113,6 @@ public class LoginController {
     @PostMapping("/searchpwd")
     public String searchpwdOk(@RequestParam("id") String id,
                              @RequestParam("phone") String phone,
-                             Model model,
                              RedirectAttributes rttr){
         if(loginService.searchPwd(id,phone)!=null){
             rttr.addFlashAttribute("result",loginService.searchPwd(id,phone));

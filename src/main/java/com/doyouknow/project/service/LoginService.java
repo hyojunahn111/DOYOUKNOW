@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LoginService {
 
@@ -22,7 +24,7 @@ public class LoginService {
     }
 
     @Transactional
-    public Member signup(String name, String id, String pwd, String phone, String email, String deptName) {
+    public Member signup(String name, String id, String pwd, String phone, String email, String deptName, int type) {
         Member member = new Member();
         member.setName(name);
         member.setId(id);
@@ -31,6 +33,8 @@ public class LoginService {
         member.setEmail(email);
         member.setDeptName(deptName);
         member.setDeptSeq(memberRepository.findDeptSeqByName(deptName));
+        member.setType(type);
+
         return memberRepository.save(member);
     }
 
@@ -48,5 +52,8 @@ public class LoginService {
     public String searchPwd(String id, String phone){
         return memberRepository.searchPwd(id, phone);
     }
+
+    @Transactional
+    public List<Member> findAll(){return memberRepository.findAll();}
 }
 
