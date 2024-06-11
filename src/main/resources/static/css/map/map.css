@@ -1,0 +1,262 @@
+.mapstyle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+#map {
+    border-radius: 10px;
+    width: 70%;
+    height: 800px;
+    border: 6px solid;
+    border-color: #063170;
+}
+
+
+/* 앱 커스텀 오버레이 css*/
+.wrap {
+    position: absolute;
+    left: 0;
+    bottom: 40px;
+    width: 288px;
+    max-height: 400px;
+    margin-left: -144px;
+    text-align: left;
+    overflow: hidden;
+    font-size: 12px;
+    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+    line-height: 1.5;
+}
+
+.wrap * {
+    padding: 0;
+    margin: 0;
+}
+
+.wrap .info {
+    width: 286px;
+    max-height: 380px; /* 최대 높이 설정 */
+    border-radius: 5px;
+    border-bottom: 2px solid #ccc;
+    border-right: 1px solid #ccc;
+    overflow: hidden;
+    background: #fff;
+}
+
+.wrap .info:nth-child(1) {
+    border: 0;
+    box-shadow: 0px 1px 2px #888;
+}
+
+.info .title {
+    padding: 5px 0 0 10px;
+    height: 30px;
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.info .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #888;
+    width: 17px;
+    height: 17px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+}
+
+.info .close:hover {
+    cursor: pointer;
+}
+
+.info .body {
+    position: relative;
+    overflow: hidden;
+}
+
+.info .desc {
+    position: relative;
+    margin: 5px 0 0 90px;
+    height: 90px;
+}
+
+.desc .dept {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.desc .infro {
+    font-size: 11px;
+    color: #888;
+    margin-top: -2px;
+}
+
+.info .img {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    width: 73px;
+    height: 71px;
+    border: 1px solid #ddd;
+    color: #888;
+    overflow: hidden;
+}
+
+.info:after {
+    content: '';
+    position: absolute;
+    margin-left: -12px;
+    left: 50%;
+    bottom: 0;
+    width: 22px;
+    height: 12px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');
+}
+
+.info .link {
+    color: #5085BB;
+}
+
+#menu_wrap {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    /*width: 200px;*/
+    max-width: 1000px;
+    height: 90%;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 10;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.bg_white {
+    background:#fff;
+}
+
+#menu_wrap hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #5F5F5F;
+    margin:3px 0;
+}
+
+#menu_wrap .option{
+    text-align: center;
+}
+#menu_wrap .option p {
+    margin:10px 0;
+}
+#menu_wrap .option button {
+    margin-left:5px;
+}
+
+.twobtdiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.twobt:hover {
+}
+
+.option form {
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    padding: 10px;
+}
+
+.twobtdiv form input {
+    border-radius: 50px;
+    border: 1px solid #8fb7ff;
+    padding: 10px;
+}
+
+.twobtdiv form input:focus {
+    border-color: #508efa;
+    outline: none;
+}
+
+.option button {
+    border-radius: 30px;
+    border: 0px;
+    background: #8fb7ff;
+    color: white;
+    padding: 10px 13px;
+}
+
+.option button:hover {
+    background-color: #508efa;
+}
+
+.info_hr {
+    border : 0px;
+    border-top: 1px solid #06316f;
+    margin: 0 10px 10px 10px;
+    border-radius: 10px;
+}
+
+#placesList p {
+    margin: 1px;
+    font-size: 15px;
+}
+
+#placesList button {
+    border-radius: 30px;
+    border: 0px;
+    background: #8fb7ff;
+    color: white;
+    padding: 10px 13px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#placesList button:hover {
+    background-color: #5193fd;
+}
+
+#placesList li {
+    list-style-type: none;
+    position: relative;
+    padding-left: 40px;
+}
+
+#placesList li::before {
+    content: "";
+    background-image: url("../../img/penguinui.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 0;
+    top: 9%;
+    transform: translateY(-50%);
+}
+
+#placesList {
+    padding: 0;
+}
+
+#content {
+    border-radius: 10px;
+    background-color: #eaf3ff;
+    text-align: left;
+    margin-right: 50%;
+    margin-left: 15%;
+    margin-bottom: 10px;
+    color: #8e8e8e;
+    padding-left: 5px;
+}
+
+#locDetailForm{
+    padding: 0;
+}

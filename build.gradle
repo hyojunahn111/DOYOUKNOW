@@ -34,6 +34,8 @@ dependencies {
 
     /* ModelMapper */
     implementation 'org.modelmapper:modelmapper:3.1.1'
+    /* Mybatis */
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 }
 
 tasks.named('test') {
