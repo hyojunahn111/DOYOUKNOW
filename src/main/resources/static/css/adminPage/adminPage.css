@@ -5,7 +5,7 @@ body {
 .bodystyle {
     margin: 50px 0;
     font-family: "Jua", sans-serif;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
 }
@@ -14,8 +14,9 @@ body {
     background-color: white;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     font-size: 1.5em;
+    margin: 50px 350px;
 }
 
 h1 {
@@ -62,4 +63,21 @@ button.allow {
 button.denied {
     background-color: #ff4b4b;
     font-family: "Jua", sans-serif;
+}
+
+label.status{
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    color: black;
+
+    background-color: #b9b9b9;
+    font-family: "Jua", sans-serif;
+}
+
+.memberList{
+    margin-left:80px;
+    font-size:2.0em;
 }

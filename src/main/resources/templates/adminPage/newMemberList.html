@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/adminPage/adminPage.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+
+</head>
+<body>
+
+<header th:replace="~{/fragment/header/header :: headerFragment}">
+</header>
+
+<form action="newMemberList" method="post">
+<div class="bodystyle">
+    <div th:each="member : ${memberList}">
+        <div class="container">
+            <h1>회원가입 승인</h1>
+            <input type="hidden" name="seq" th:value="${member.seq}">
+            <div class="member-list">
+                    <div class="info">
+                        <p th:text="'이름 : '+${member.name}"></p>
+                        <p th:text="'전화번호 : '+${member.phone}"></p>
+
+                    </div>
+                    <div class="info">
+                        <p th:text="'담당부서 : '+${member.deptName}"></p>
+                        <p th:text="'이메일 : '+${member.email}"></p>
+                    </div>
+                    <div class="buttons">
+                        <button value="allow" name="action" type="submit" class="allow">승인</button>
+                        <button value="denied" name="action" type="submit" class="denied">거부</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{/fragment/footer/footer :: footerFragment}">
+</footer>
+</form>
+</body>
+</html>

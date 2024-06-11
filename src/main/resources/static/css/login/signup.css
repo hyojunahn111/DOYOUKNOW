@@ -79,7 +79,7 @@ form {
     text-align: center;
 }
 
-input {
+input,select {
     background-color: #eee;
     border: none;
     padding: 12px 15px;
@@ -253,4 +253,13 @@ footer i {
 footer a {
     color: #3c97bf;
     text-decoration: none;
+}
+
+pre{
+    font-size:0.9em;
+    color: #ff4747;
+}
+
+option[value=""][disabled] {
+    display:none
 }
