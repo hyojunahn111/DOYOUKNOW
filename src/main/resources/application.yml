@@ -12,3 +12,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+mybatis:
+  configuration:
+    map_underscore-to-camel-case: true

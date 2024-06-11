@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="/css/footer/footer.css">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
     <script src="https://kit.fontawesome.com/59d34efa84.js" crossorigin="anonymous"></script>
-    <script>
-        /* 목록 글자수 제한 */
+    <script th:inline="javascript">
         function truncateText(selector, maxLength) {
             const elements = document.querySelectorAll(selector);
             elements.forEach(element => {
@@ -21,6 +20,38 @@
                 }
             });
         }
+
+        const boardList = /*[[${board.content}]]*/ [];
+
+        let calendarBoard = [];
+        for(let i = 0; i < boardList.length; i++) {
+            const board = boardList[i];
+
+            if(board.applyStart) {
+                calendarBoard.push(
+                    {
+                        'title' : '[접수]' + board.title,
+                        'start' : board.applyStart,
+                        'end' : board.applyEnd,
+                        'color' : board.calendarColor,
+                        'url' : `${window.location.protocol}//${window.location.host}/board/detail/${board.seq}`
+                    }
+                )
+            }
+            if(board.eventStart) {
+                calendarBoard.push(
+                    {
+                        'title' : board.title,
+                        'start' : board.eventStart,
+                        'end' : board.eventEnd,
+                        'color' : board.calendarColor,
+                        'url' : `${window.location.protocol}//${window.location.host}/board/detail/${board.seq}`
+                    }
+                )
+            }
+
+        }
+
 
         window.onload = () => {
             truncateText('.truncate-title', 33);
@@ -50,16 +81,45 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
-                dayCellContent: (e) => {
-                    return e.dayNumberText.replace('일', '');
-                },
-                navLinks: true,
+                // 버튼 출력 텍스트
                 buttonText: {
                     today: '오늘',
                     dayGridMonth: '월간',
                     timeGridWeek: '주간',
                     timeGridDay: '일간'
-                }
+                },
+                // 날짜 후미에 붙는 '일' 제거
+                dayCellContent: (e) => {
+                    return e.dayNumberText.replace('일', '');
+                },
+                navLinks: true,
+                dayMaxEvents: true,
+                // 캘린더에 출력될 이벤트 할당
+                eventSources: [
+                    {
+                        events: calendarBoard
+                        /*[
+                            {
+                                title  : 'event1',
+                                start  : '2024-06-01'
+                            },
+                            {
+                                title  : 'event2',
+                                start  : '2024-06-05',
+                                end    : '2024-06-07',
+                                allDay : false,
+                                color : '#FFFF00'
+                            },
+                            {
+                                title  : 'event3',
+                                start  : '2024-06-09T12:30:00',
+                                allDay : false,
+                                color: 'blue'
+                            }
+                        ]*/
+                    }
+                ],
+
             });
             calendar.render();
 
@@ -143,12 +203,10 @@
             <div class="mainContent">
                 <div class="calendar-wrap" id="calendar">
                 </div>
-
-                <!-- 목록 -->
                 <div class="card-list">
                     <div class="listSearch">
                         <button type="submit" class="writeBtn">글쓰기</button>
-                        <div class="flex2">
+                        <div>
                             <select name="order1">
                                 <option value="all" selected>전체</option>
                                 <option value="type1">장학</option>
@@ -163,23 +221,8 @@
                                 <option value="type7">등록순</option>
                                 <option value="type8">시작순</option>
                             </select>
-                            <!-- 학과 페이지 일때 검색창 -->
-                            <th:block th:if="${boardType == 'dept'}">
-                                <form method="get" th:action="@{/board/dept/{deptSeq}(deptSeq=${deptSeq})}">
-                                    <input type="text" name="search" placeholder="텍스트 검색"
-                                           th:value="${#strings.isEmpty(param.search) ? '' : param.search}">
-                                    <button type="submit">검색</button>
-                                </form>
-                            </th:block>
-
-                            <!-- 부서 페이지 일때 검색창 -->
-                            <th:block th:if="${boardType == 'public'}">
-                                <form method="get" th:action="@{/board/public/{type}(type=${type})}">
-                                    <input type="text" name="search" placeholder="텍스트 검색"
-                                           th:value="${#strings.isEmpty(param.search) ? '' : param.search}">
-                                    <button type="submit">검색</button>
-                                </form>
-                            </th:block>
+                            <input type="text" name="search" placeholder="텍스트 검색">
+                            <button type="submit">검색</button>
                         </div>
                     </div>
 
@@ -208,41 +251,41 @@
                             <h2 th:text="${board.title}" class="truncate-title maginX">제목</h2>
                             <p th:text="${board.content}" class="truncate-content maginX">간단한 설명</p>
                             <div class="flex">
-                                <h1 th:classappend="${board.seconds < 0} ? 'closed' : 'dday'" th:text="${board.seconds < 0} ? '마감' : 'D-' + ${board.dday}" class="maginX"></h1>
+                                <h1 class="maginX dday" th:text="'D-' + ${board.dday}"></h1>
                                 <h3 th:text="${board.writerDeptSeq}" id="typeContent1" class="maginX">부서이름</h3>
                             </div>
                         </div>
                     </div>
 
                     <!-- paging -->
-                    <!-- 부서면 부서페이지로, 학과면 학과 페이지로 생성 -->
                     <div id="paging">
                         <!-- 맨앞 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]">
+                        <button th:onclick="'location.href=\'/board/dept/'+${deptSeq}+'?page=' + ${ paging.startPage } + '\''">
                             <img th:src="@{/img/board/왼쪽화살표.png}" class="arrow">
                         </button>
+
                         <!-- 이전 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?page='+ [[${ paging.currentPage - 1 }]]"
+                        <button th:onclick="'location.href=\'/board/dept/'+${deptSeq}+'?page=' + ${ paging.currentPage - 1 } + '\''"
                                 th:disabled="${ board.first }">
                             <i class="fa-solid fa-chevron-left"></i>
                         </button>
 
                         <!-- 숫자 버튼 -->
                         <th:block th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage) }">
-                            <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?page='+[[${ page }]]"
+                            <button th:onclick="'location.href=\'/board/dept/'+${deptSeq}+'?page=' + ${ page } + '\''"
                                     th:text="${ page }"
                                     th:disabled="${ paging.currentPage eq page }"
                                     class="numSize">
                             </button>
                         </th:block>
                         <!-- 다음 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?page='+[[${ paging.currentPage + 1 }]]"
+                        <button th:onclick="'location.href=\'/board/dept/'+${deptSeq}+'?page=' + ${ paging.currentPage + 1 } + '\''"
                                 th:disabled="${ board.last }">
                             <i class="fa-solid fa-chevron-right"></i>
                         </button>
 
                         <!-- 맨뒤 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?page='+[[${ paging.endPage }]]">
+                        <button th:onclick="'location.href=\'/board/dept/'+${deptSeq}+'?page=' + ${ paging.endPage } + '\''">
                             <img th:src="@{/img/board/오른쪽화살표.png}" class="arrow">
                         </button>
                     </div>

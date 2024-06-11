@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @NoArgsConstructor
 @Getter
@@ -18,6 +19,8 @@ public class BoardDTO {
     private int type;
 
     private int type2;
+
+    private String loc;
 
     private String title;
 
@@ -41,11 +44,16 @@ public class BoardDTO {
 
     private int writerMemberSeq;
 
+    private LocalDateTime date;
+
+
     /* AllArgsConstructor */
-    public BoardDTO(int seq, int type, int type2, String title, String content, int hit, LocalDateTime applyStart, LocalDateTime applyEnd, LocalDateTime eventStart, LocalDateTime eventEnd, String filename, String calendarColor, int writerDeptSeq, int writerMemberSeq) {
+
+    public BoardDTO(int seq, int type, int type2, String loc, String title, String content, int hit, LocalDateTime applyStart, LocalDateTime applyEnd, LocalDateTime eventStart, LocalDateTime eventEnd, String filename, String calendarColor, int writerDeptSeq, int writerMemberSeq, LocalDateTime date) {
         this.seq = seq;
         this.type = type;
         this.type2 = type2;
+        this.loc = loc;
         this.title = title;
         this.content = content;
         this.hit = hit;
@@ -57,5 +65,17 @@ public class BoardDTO {
         this.calendarColor = calendarColor;
         this.writerDeptSeq = writerDeptSeq;
         this.writerMemberSeq = writerMemberSeq;
+        this.date = date;
     }
+
+    /* 마감일 D-day 용*/
+    public long getDday() {
+        return ChronoUnit.DAYS.between(LocalDateTime.now(), this.applyEnd);
+    }
+
+    /* 마감 표시용 */
+    public long getSeconds() {
+        return ChronoUnit.SECONDS.between(LocalDateTime.now(), this.applyEnd);
+    }
+
 }
