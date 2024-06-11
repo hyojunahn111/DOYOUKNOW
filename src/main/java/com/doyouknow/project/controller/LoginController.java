@@ -43,7 +43,7 @@ public class LoginController {
             return "redirect:/login";
         }else{
             model.addAttribute("seq", member.getSeq());
-            return "login/sucess";
+            return "redirect:/map";
         }
     }
 
