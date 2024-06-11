@@ -141,6 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 $(document).ready(function() {
+    var allData = [];  // 전역 변수로 데이터 저장
+
     function fetchDeptData(locDetail) {
         $.ajax({
             url: '/mapData',
@@ -148,30 +150,19 @@ $(document).ready(function() {
             data: { locDetail: locDetail },
             success: function(data) {
                 console.log('DeptInfo:', data);
+                allData = data;  // 전역 변수에 데이터 저장
                 var placesList = $('#placesList');
                 placesList.empty();
                 data.forEach(function(dept) {
-                    if(keyword == dept.loc) {
-                        placesList.append(
-                            '<li>' + '<h3>' + dept.name + '</h3>' +
-                            '<p class="deptphone">' + dept.phone + '</p>' +
-                            '<p class="locdetail">' + dept.locDetail + '</p>' +
-                            '<p class="intro">' + dept.intro + '</p>' +
-                            '<button class="link">' + "링크입니다" + '</button>' +
-                            '</li>' +
-                            '<hr>'
-                        );
-                    }else{
-                        placesList.append(
-                            '<li>' + '<h3>' + dept.name + '</h3>' +
-                            '<p class="deptphone">' + dept.phone + '</p>' +
-                            '<p class="locdetail">' + dept.locDetail + '</p>' +
-                            '<p class="intro">' + dept.intro + '</p>' +
-                            '<button class="link">' + "링크입니다" + '</button>' +
-                            '</li>' +
-                            '<hr>'
-                        );
-                    }
+                    placesList.append(
+                        '<li>' + '<h3>' + dept.name + '</h3>' +
+                        '<p class="deptphone">' + dept.phone + '</p>' +
+                        '<p class="locdetail">' + dept.locDetail + '</p>' +
+                        '<p class="intro">' + dept.intro + '</p>' +
+                        '<button class="link">' + "링크입니다" + '</button>' +
+                        '</li>' +
+                        '<hr>'
+                    );
                 });
             },
             error: function(error) {
@@ -191,6 +182,28 @@ $(document).ready(function() {
         fetchDeptData();
     });
 
-    // 초기 데이터 로드
+    const myContent = document.querySelector("#content");
+    const keyword = document.querySelector("#keyword");
+
+    keyword.addEventListener("keyup", function () {
+        if (!this.value.trim()) {
+            myContent.innerHTML = "";
+            myContent.style.display = "none";
+            return;
+        }
+        console.log("확인:", this.value);
+        myContent.innerHTML = "";
+        myContent.style.display = "none";
+
+        let findArr = allData.filter(dept => dept.name.includes(this.value));
+
+        if (!findArr.length) {
+            return;
+        }
+        findArr.forEach(item => {
+            myContent.innerHTML += '<div>' + item.name + '</div>';
+        });
+        myContent.style.display = "block";
+    });
     fetchDeptData();
 });
