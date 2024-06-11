@@ -374,12 +374,8 @@ button {
 /* 통합정보페이지 기관 정보 카드 */
 .dept-card.part {
     padding: 10px 20px;
-    width: 45%;
+    width: 40%;
     margin-bottom: 30px;
-}
-
-.dept-card.part:last-child {
-    visibility: hidden;
 }
 
 .dept-card.part > .dept-thumb {

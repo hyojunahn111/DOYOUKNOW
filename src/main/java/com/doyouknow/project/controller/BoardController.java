@@ -3,7 +3,9 @@ package com.doyouknow.project.controller;
 import com.doyouknow.project.common.Pagenation;
 import com.doyouknow.project.common.PagingButton;
 import com.doyouknow.project.dto.BoardDTO;
+import com.doyouknow.project.dto.DeptDTO;
 import com.doyouknow.project.service.BoardService;
+import com.doyouknow.project.service.DeptService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -19,9 +21,11 @@ public class BoardController {
 
 
     private BoardService boardService;
+    private DeptService deptService;
 
-    public BoardController(BoardService boardService) {
+    public BoardController(BoardService boardService, DeptService deptService) {
         this.boardService = boardService;
+        this.deptService = deptService;
     }
 
     // 부서 게시글 목록 페이지
@@ -63,11 +67,35 @@ public class BoardController {
         return "board/list";
     }
 
+    // 소개 페이지
+    @GetMapping("dept/{boardValue}/intro")
+    public String intro(Model model, @PathVariable int boardValue) {
+
+        DeptDTO deptInfo = deptService.findBySeq(boardValue);
+
+        model.addAttribute("deptInfo", deptInfo);
+        model.addAttribute("boardType", "dept");
+        model.addAttribute("boardValue", boardValue);
+
+        return "board/intro";
+
+    }
 
     // 소개 페이지
-    @GetMapping("intro")
-    public String intro() {
-        return "board/intro";
+    @GetMapping("public/{boardValue}/intro")
+    public String intro2(Model model, @PathVariable int boardValue) {
+
+        List<DeptDTO> deptList = deptService.findByBoardType(boardValue);
+
+        for(DeptDTO dept : deptList) {
+            System.out.println(dept);
+        }
+
+        model.addAttribute("deptList", deptList);
+        model.addAttribute("boardType", "dept");
+        model.addAttribute("boardValue", boardValue);
+
+        return "board/intro2";
     }
 
     // 게시글 작성 양식 페이지
