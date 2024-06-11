@@ -21,4 +21,8 @@ public class MapService {
         return mapper.selectByLocDetail(locDetail);
     }
 
+    public List<DeptDTO> selectAllDept(){
+        return mapper.selectAll();
+    }
+
 }
