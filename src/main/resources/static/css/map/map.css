@@ -127,9 +127,9 @@
     left: 10px;
     /*width: 200px;*/
     max-width: 1000px;
-    height: auto;
+    height: 90%;
     overflow-y: auto;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     z-index: 10;
     border-radius: 10px;
     padding: 10px;
@@ -206,4 +206,42 @@
 #placesList p {
     margin: 1px;
     font-size: 15px;
+}
+
+#placesList button {
+    border-radius: 30px;
+    border: 0px;
+    background: #8fb7ff;
+    color: white;
+    padding: 10px 13px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#placesList button:hover {
+    background-color: #5193fd;
+}
+
+#placesList li {
+    list-style-type: none;
+    position: relative;
+    padding-left: 40px;
+}
+
+#placesList li::before {
+    content: "";
+    background-image: url("../../img/penguinui.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 0;
+    top: 9%;
+    transform: translateY(-50%);
+}
+
+#placesList {
+    padding: 0;
 }

@@ -15,42 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
 
     var locations = [
-        {name: "100주년기념관", latlng: new kakao.maps.LatLng(37.642833983307035, 127.10528090160582),
-            departments: []
-        },
-        {name: "국제교육관", latlng: new kakao.maps.LatLng(37.64322349388041, 127.10546557413087),
-            departments: []
-        },
-        {name: "음악관", latlng: new kakao.maps.LatLng(37.64366565158367, 127.10470704225811),
-            departments: [
-                {
-                    deptName: "음악학과",
-                    deptPhone: "02-3399-1818",
-                    locDetail: "108호",
-                    intro: "간단한설명21",
-                    link: "이것은 링크입니다."
-                }
-            ]
-        },
-        {name: "제1과학관", latlng: new kakao.maps.LatLng(37.64406006374351, 127.10695958468133),
-            departments: [
-                {
-                    deptName: "화학생명과학과",
-                    deptPhone: "02-3399-1720",
-                    locDetail: "204호",
-                    intro: "간단한 설명9",
-                    link: "이것은 링크입니다."
-                },
-                {
-                    deptName: "컴퓨터학부",
-                    deptPhone: "02-3399-1790",
-                    locDetail: "401호",
-                    intro: "간단한 설명14",
-                    link: "이것은 링크입니다."
-                }
-            ]
+        {name: "100주년기념관", latlng: new kakao.maps.LatLng(37.642833983307035, 127.10528090160582)},
+        {name: "국제교육관", latlng: new kakao.maps.LatLng(37.64322349388041, 127.10546557413087)},
+        {name: "음악관", latlng: new kakao.maps.LatLng(37.64366565158367, 127.10470704225811)},
+        {name: "제1과학관", latlng: new kakao.maps.LatLng(37.64406006374351, 127.10695958468133)
         }
-        // {name: "박물관", latlng: new kakao.maps.LatLng(37.642171881642135, 127.10764237112055), imgSrc: 'img/default.png', departments: [{ deptName: '상담심리학과', deptPhone: '02-3399-1679', locDetail: '122호', intro: '간단한 설명6', link: 'http://localhost:8080/hundredhall' }]}
     ];
 
     var overlays = [];
@@ -128,42 +97,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 overlays[i].setMap(map);
                 markers[i].setMap(map);
                 map.setCenter(locations[i].latlng);
+                map.setLevel(1);
                 found = true;
-
-                for (var j = 0; j < locations[i].departments.length; j++) {
-                    placesList.innerHTML += `
-                    <li>
-                        <h3>${locations[i].departments[j].deptName}</h3>
-                        <p class="deptphone">${locations[i].departments[j].deptPhone}</p>
-                        <p class="loc">${locations[i].name}&nbsp${locations[i].departments[j].locDetail}</p>
-                        <p class="intro">${locations[i].departments[j].intro}</p>
-                        <p class="link">${locations[i].departments[j].link}</p>
-                    </li>
-                `;
-                }
                 break;
-            } else {
-                for (var j = 0; j < locations[i].departments.length; j++) {
-                    var deptMatch = locations[i].departments[j].deptName.toLowerCase().includes(keyword);
-
-                    if (deptMatch) {
-                        overlays[i].setMap(map);
-                        markers[i].setMap(map);
-                        map.setCenter(locations[i].latlng);
-                        found = true;
-
-                        placesList.innerHTML += `
-                        <li>
-                            <h3>${locations[i].departments[j].deptName}</h3>
-                            <p class="deptphone">${locations[i].departments[j].deptPhone}</p>
-                            <p class="loc">${locations[i].name}&nbsp${locations[i].departments[j].locDetail}</p>
-                            <p class="intro">${locations[i].departments[j].intro}</p>
-                            <p class="link">${locations[i].departments[j].link}</p>
-                        </li>
-                    `;
-                        break;
-                    }
-                }
             }
 
             if (found) {
@@ -194,11 +130,67 @@ document.addEventListener("DOMContentLoaded", function () {
             overlays[i].setMap(null);
         }
         map.setCenter(new kakao.maps.LatLng(37.642785, 127.105220));
+        map.setLevel(3);
 
         // 목록 초기화
         var placesList = document.getElementById('placesList');
         placesList.innerHTML = '';
 
-        alert('초기화 되었습니다.')
+        /*alert('초기화 되었습니다.')*/ //사용시에 알람창 확인을 눌러야지만 초기화가 됨
     });
+});
+
+$(document).ready(function() {
+    function fetchDeptData(locDetail) {
+        $.ajax({
+            url: '/mapData',
+            type: 'GET',
+            data: { locDetail: locDetail },
+            success: function(data) {
+                console.log('DeptInfo:', data);
+                var placesList = $('#placesList');
+                placesList.empty();
+                data.forEach(function(dept) {
+                    if(keyword == dept.loc) {
+                        placesList.append(
+                            '<li>' + '<h3>' + dept.name + '</h3>' +
+                            '<p class="deptphone">' + dept.phone + '</p>' +
+                            '<p class="locdetail">' + dept.locDetail + '</p>' +
+                            '<p class="intro">' + dept.intro + '</p>' +
+                            '<button class="link">' + "링크입니다" + '</button>' +
+                            '</li>' +
+                            '<hr>'
+                        );
+                    }else{
+                        placesList.append(
+                            '<li>' + '<h3>' + dept.name + '</h3>' +
+                            '<p class="deptphone">' + dept.phone + '</p>' +
+                            '<p class="locdetail">' + dept.locDetail + '</p>' +
+                            '<p class="intro">' + dept.intro + '</p>' +
+                            '<button class="link">' + "링크입니다" + '</button>' +
+                            '</li>' +
+                            '<hr>'
+                        );
+                    }
+                });
+            },
+            error: function(error) {
+                console.error('데이터 에러 발생:', error);
+            }
+        });
+    }
+
+    $('#locDetailForm').on('submit', function(event) {
+        event.preventDefault();
+        var locDetail = $('#keyword').val();
+        fetchDeptData(locDetail);
+    });
+
+    $('#resetButton').on('click', function() {
+        $('#keyword').val('');
+        fetchDeptData();
+    });
+
+    // 초기 데이터 로드
+    fetchDeptData();
 });
