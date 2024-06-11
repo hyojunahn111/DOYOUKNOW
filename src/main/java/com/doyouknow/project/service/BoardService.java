@@ -33,16 +33,23 @@ public class BoardService {
         boardRepository.save(newBoardEntity);
     }
 
-    /* 부서별 페이지 */
-    public Page<BoardDTO> deptBoard(Pageable pageable, int deptSeq) {
+    /* 학과별 페이지 */
+    public Page<BoardDTO> deptBoard(Pageable pageable, int deptSeq, String search) {
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1,
                 pageable.getPageSize(),
                 Sort.by("seq").descending());
-        Page<Board> boardList = boardRepository.findAllByDept(pageable, deptSeq);
+
+        /*검색어가 입력되면 검색한 결과 보여주기 없으면 결과 보여주지 않기 */
+        Page<Board> boardList;
+        if(search !=null && !search.isEmpty()){
+            boardList = boardRepository.findAllByDeptSearch(pageable, deptSeq, search);
+        }else {
+            boardList = boardRepository.findAllByDept(pageable, deptSeq);
+        }
         return boardList.map(board -> modelMapper.map(board, BoardDTO.class));
     }
 
-    /* 부서별 페이지 마감일 고정 목록*/
+    /* 학과별 페이지 마감일 고정 목록*/
     public List<BoardDTO> deptTop(int deptSeq){
 
         Pageable pageable = PageRequest.of(0, 3, Sort.by("applyEnd").ascending());
@@ -51,11 +58,19 @@ public class BoardService {
         return result.stream().map(board -> modelMapper.map(board, BoardDTO.class)).toList();
     }
 
-    public Page<BoardDTO> publicBoard(Pageable pageable, int type) {
+    /* 부서별 페이지 */
+    public Page<BoardDTO> publicBoard(Pageable pageable, int type, String search) {
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1,
                 pageable.getPageSize(),
                 Sort.by("seq").descending());
-        Page<Board> boardList = boardRepository.findAllByType(pageable, type);
+
+        /*검색어가 입력되면 검색한 결과 보여주기 없으면 결과 보여주지 않기 */
+        Page<Board> boardList;
+        if(search !=null && !search.isEmpty()){
+            boardList = boardRepository.findAllByPublicSearch(pageable, type, search);
+        }else {
+            boardList = boardRepository.findAllByType(pageable, type);
+        }
         return boardList.map(board -> modelMapper.map(board, BoardDTO.class));
     }
 
@@ -68,11 +83,7 @@ public class BoardService {
         return result.stream().map(board -> modelMapper.map(board, BoardDTO.class)).toList();
     }
 
-    /* 제목 검색 기능 */
-//    @Transactional
-//    public List<BoardDTO> search(String keyword){
-//        List<BoardDTO> postsList = boardRepository.findTitleContaining(keyword);
-//    }
+
 
 
 }

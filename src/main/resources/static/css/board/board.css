@@ -217,6 +217,7 @@ button {
 .arrow {
     height: 20px;
 }
+.flex2{display: flex;}
 
 /* 카드 리스트 끝 */
 
