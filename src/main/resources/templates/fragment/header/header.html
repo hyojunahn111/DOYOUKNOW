@@ -16,25 +16,21 @@
         <div class="dropdown">
             <p>학과</p>
             <div class="dropdown-content">
-                <a style="color: white;">학과1</a>
-                <a style="color: white;">학과2</a>
-                <a style="color: white;">학과3</a>
+                <a th:each="dept : ${deptInfo}" th:if="${dept.isDivision == 1}" th:href="@{'/board/dept/' + ${dept.seq}}" th:text="${dept.name}" style="color: white;"></a>
             </div>
         </div>
         <div class="dropdown">
             <p>기관</p>
             <div class="dropdown-content">
-                <a style="color: white;">기관1</a>
-                <a style="color: white;">기관2</a>
-                <a style="color: white;">기관3</a>
+                <a th:each="dept : ${deptInfo}" th:if="${dept.isDivision == 0}" th:href="@{'/board/dept/' + ${dept.seq}}" th:text="${dept.name}" style="color: white;"></a>
             </div>
         </div>
         <div class="loginBtDiv">
             <!--<div th:if="${session.userSeq==null}" onclick="location.href='/hanuldure/login'">로그인</div>-->
 <!--            <div th:if="seq == null">-->
-            <button th:if="seq == null" class="loginBt" onclick="location.href='http://localhost:8080/login'">로그인</button>
+<!--            <button th:if="seq == null" class="loginBt" onclick="location.href='http://localhost:8080/login'">로그인</button>-->
 <!--            </div>-->
-            <button th:if="seq != null" class="loginBt" onclick="location.href='http://localhost:8080/logout'">로그아웃</button>
+<!--            <button th:if="seq != null" class="loginBt" onclick="location.href='http://localhost:8080/logout'">로그아웃</button>-->
         </div>
     </div>
 </header>

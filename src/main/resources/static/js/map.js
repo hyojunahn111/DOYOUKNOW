@@ -147,7 +147,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.closeOverlay = function (index) {
         overlays[index].setMap(null);
+
+        // resetMap();
     }
+
+    /* 밑의 함수가 오버레이에서 x 버튼을 눌렀을 때 초기 화면으로 돌아가게함*/
+    // function resetMap() {
+    //     // 모든 마커를 맵에 다시 표시
+    //     for (var i = 0; i < markers.length; i++) {
+    //         markers[i].setMap(map);
+    //     }
+    //
+    //     // 모든 오버레이를 맵에서 제거
+    //     for (var i = 0; i < overlays.length; i++) {
+    //         overlays[i].setMap(null);
+    //     }
+    //
+    //     // 맵의 중심과 레벨을 초기 상태로 설정
+    //     map.setCenter(new kakao.maps.LatLng(37.642785, 127.105220));
+    //     map.setLevel(3);
+    //
+    //     // 목록 초기화
+    //     var placesList = document.getElementById('placesList');
+    //     placesList.innerHTML = '';
+    //
+    //     // 초기화 알림 (필요시 사용)
+    //     // alert('초기화 되었습니다.');
+    // }
 
     document.getElementById('locDetailForm').addEventListener('submit', searchPlaces);
 
