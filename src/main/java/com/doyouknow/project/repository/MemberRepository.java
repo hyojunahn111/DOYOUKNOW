@@ -39,4 +39,8 @@ public interface MemberRepository extends JpaRepository<Member,Integer> {
     @Modifying
     @Query(value="delete from member where member.seq= :seq",nativeQuery = true)
     void deleteMemberBySeq(Integer seq);
+
+    @Query(value="SELECT * FROM member WHERE seq = ?", nativeQuery = true)
+    Member findMemberBySeq(int seq);
+
 }

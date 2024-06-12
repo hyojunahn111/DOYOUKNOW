@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 @Controller
 @RequestMapping("/board")
@@ -20,7 +21,6 @@ public class BoardController2 {
 
     @Autowired
     private BoardService2 boardService2;
-
 
     public BoardController2(BoardService2 boardService2) {
         this.boardService2 = boardService2;
@@ -39,12 +39,9 @@ public class BoardController2 {
                           @RequestParam("applyEndDate") LocalDate applyEndDate, @RequestParam("applyEndTime")LocalTime applyEndTime,
                           @RequestParam("eventStartDate") LocalDate eventStartDate, @RequestParam("eventStartTime")LocalTime eventStartTime,
                           @RequestParam("eventEndDate") LocalDate eventEndDate, @RequestParam("eventEndTime")LocalTime eventEndTime, @RequestParam("filename") MultipartFile filename,
-                          @RequestParam("calendarColor") String calendarColor, @RequestParam("loc") String loc, @SessionAttribute("seq") int seq
+                          @RequestParam("calendarColor") String calendarColor, @RequestParam("loc") String loc
                           ) {
-        int hit=0;
-        System.out.println(seq);
-        Board board1= boardService2.findBoardBySeq(seq);
-        System.out.println(board1);
+        int seq=1;
         Member member= boardService2.findMemberBySeq(seq);
         System.out.println(member);
 
@@ -54,9 +51,10 @@ public class BoardController2 {
         LocalDateTime applyEndDateTime = LocalDateTime.of(applyEndDate, applyEndTime);
         LocalDateTime eventStartDateTime = LocalDateTime.of(eventStartDate, eventStartTime);
         LocalDateTime eventEndDateTime = LocalDateTime.of(eventEndDate, eventEndTime);
-        Board board=boardService2.createBoard(type, type2, title,content,hit,applyStartDateTime, applyEndDateTime, eventStartDateTime, eventEndDateTime, filenameString,calendarColor,1,seq,loc, LocalDateTime.now());
+
+        Board board=boardService2.createBoard(type, type2, title,content,applyStartDateTime, applyEndDateTime, eventStartDateTime, eventEndDateTime, filenameString,calendarColor, member.getDeptSeq(), member.getSeq(), loc, LocalDateTime.now());
         System.out.println(board);
-        return "redirect:/board/event-details/1";
+        return "redirect:/board/event-details/"+board.getSeq();
     }
 
     // 이벤트 폼 페이지
@@ -69,10 +67,17 @@ public class BoardController2 {
     @GetMapping("/event-details/{seq}")
     public String showEventDetails(@PathVariable("seq") int seq, Model model) {
         Board board = boardService2.findBoardBySeq(seq);
-//        Member member = boardService2.findMemberBySeq(seq);
-//        System.out.println(member);
+        Member member = boardService2.findMemberBySeq(board.getWriterMemberSeq());
+        Dept dept=boardService2.findDeptBySeq(board.getWriterDeptSeq());
         System.out.println(board);
+        System.out.println(member);
+        System.out.println(dept);
+        long dayUntilEvent = ChronoUnit.DAYS.between(LocalDate.now(), board.getApplyEnd());
+        System.out.println(dayUntilEvent);
+        model.addAttribute("dayUntilEvent",dayUntilEvent);
         model.addAttribute("board", board);
+        model.addAttribute("member", member);
+        model.addAttribute("dept", dept);
         return "board/event-details";
     }
 }

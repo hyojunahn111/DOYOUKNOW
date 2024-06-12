@@ -12,4 +12,7 @@ public interface DeptRepository extends JpaRepository<Dept, Integer> {
 
     @Query(value="select * from dept d", nativeQuery=true)
     List<Dept> findAll();
+
+    @Query(value="SELECT * FROM dept WHERE seq = ?", nativeQuery = true)
+    Dept findDeptBySeq(int seq);
 }

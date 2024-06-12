@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
@@ -35,6 +36,7 @@ public class Board {
     private String content;
 
     @Column
+    @ColumnDefault("0")
     private int hit;
 
     @Column(name = "apply_start")
