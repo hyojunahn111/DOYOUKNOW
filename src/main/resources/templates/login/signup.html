@@ -34,7 +34,7 @@
             <input name="phone" type="text" placeholder="전화번호를 입력해주세요 ( - 없이 입력)" />
             <input name="email" type="email" placeholder="이메일을 입력해주세요" />
             <select name="deptName">
-                <option value="관리부서">해당하는 학과나 부서를 입력해주세요.</option>
+                <option value="null">해당하는 학과나 부서를 입력해주세요.</option>
                 <option  th:each="dept : ${deptList}" th:value="${dept.name}" th:text="${dept.name}"></option>
             </select>
             <br>

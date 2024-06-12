@@ -1,6 +1,9 @@
 package com.doyouknow.project.controller;
 
+import com.doyouknow.project.entity.Dept;
 import com.doyouknow.project.entity.Member;
+import com.doyouknow.project.repository.DeptRepository;
+import com.doyouknow.project.service.DeptService;
 import com.doyouknow.project.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +20,13 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
-    public LoginController(LoginService loginService) {
+    @Autowired
+    private DeptService deptService;
+
+
+    public LoginController(LoginService loginService, DeptService deptService) {
         this.loginService = loginService;
+        this.deptService = deptService;
     }
 
     @ModelAttribute("seq")
@@ -43,12 +51,15 @@ public class LoginController {
             return "redirect:/login";
         }else{
             model.addAttribute("seq", member.getSeq());
-            return "login/sucess";
+            return "redirect:/map";
         }
     }
 
     @GetMapping("/signup")
-    public String signup(){return "login/signup";}
+    public String signup(Model model){
+            List<Dept> deptList=deptService.findAll();
+            model.addAttribute("deptList",deptList);
+        return "login/signup";}
 
     @PostMapping("/signup")
     public String signupOk(@RequestParam("name") String name,
