@@ -52,10 +52,11 @@
 .info .title {
     padding: 5px 0 0 10px;
     height: 30px;
-    background: #eee;
+    background: #8fb7ff;
     border-bottom: 1px solid #ddd;
     font-size: 18px;
     font-weight: bold;
+    color: #FFFFFF;
 }
 
 .info .close {
