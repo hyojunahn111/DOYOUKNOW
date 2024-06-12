@@ -62,6 +62,10 @@ public class BoardController {
             default:
         }
 
+        DeptDTO deptInfo = deptService.findBySeq(deptSeq);
+
+        model.addAttribute("deptInfo", deptInfo);
+
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1,
                 pageable.getPageSize(),
                 sort);
@@ -74,6 +78,7 @@ public class BoardController {
         /*마감일 고정 목록*/
         List<BoardDTO> top3 = boardService.deptTop(deptSeq);
 
+        model.addAttribute("deptInfo", deptInfo);
         model.addAttribute("board",boardList);
         model.addAttribute("paging",paging);
         model.addAttribute("boardType", "dept");
