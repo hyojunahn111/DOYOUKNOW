@@ -247,6 +247,11 @@
     padding: 0;
 }
 
+#placesList a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
 #content {
     border-radius: 10px;
     background-color: #eaf3ff;
