@@ -15,29 +15,33 @@
 </header>
 
 <div class="container">
-    <h1>행사 제목</h1>
+    <h1 th:text="${board.title}"></h1>  <!--행사 제목-->
     <h3>D-7일</h3>
     <div class="info">
-        <span>등록날짜 | 부서/학과 | 조회수</span>
+        <span th:text="${board.applyStart}"></span> <!--등록날짜--> |
+        <span>부서/학과</span> |
+        <span th:text="${board.hit}"></span> <!--조회수-->
         <span class="tags">태그 | 글분류</span>
     </div>
     <hr>
-    <div class="event-details">
-        <div class="left">
-            <p>신청 날짜 및 시간</p>
-            <p>행사 날짜 및 시간</p>
-            <p>장소</p>
-        </div>
+<!--    <div class="event-details">-->
+
         <div class="right">
             <i class="fas fa-share-alt" aria-hidden="true"></i>
         </div>
     </div>
-    <img src="event-image.jpg" alt="행사 이미지" class="event-image">
     <div class="text-area">
-        상세내용이 여기에 들어갑니다.
+            <p th:text="${board.applyStart}"></p>   <!--신청 날짜 및 시간-->
+            <p th:text="${board.eventStart}"></p>   <!--행사 날짜 및 시간-->
+            <p >장소</p>
+        </div>
+    </div>
+    <img alt="행사 이미지" class="event-image">
+    <div class="text-area" th:text="${board.content}">
+        <!--상세내용이 여기에 들어갑니다.-->
     </div>
     <div class="contact-box">
-        <div>이름: 이수빈</div>
+        <div></div> <!--이름: 이수빈 th:text="${member.name}"-->
         <div>전화번호: 02-0000-0000</div>
         <div>위치: 에스라관</div>
     </div>
@@ -49,9 +53,7 @@
         </div>
     </div>
 </div>
-
 <footer th:replace="~{/fragment/footer/footer :: footerFragment}">
 </footer>
-
 </body>
 </html>

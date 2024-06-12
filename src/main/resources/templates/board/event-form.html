@@ -14,70 +14,69 @@
 <header th:replace="~{/fragment/header/header :: headerFragment}">
 </header>
 
+<form action="/board/event-form" method="post" enctype="multipart/form-data">
 <div class="container">
     <h1>공지 / 행사 신청 양식</h1>
     <div class="dropdown-section">
-        <select class="dropdown" id="eventType">
+        <select class="dropdown" id="eventType" name="type">
             <option value="" disabled selected hidden>분류</option>
-            <option value="event">행사</option>
-            <option value="notice">공지</option>
+            <option value="0">일반</option>
+            <option value="1">장학</option>
+            <option value="2">취업</option>
         </select>
-        <select class="dropdown" id="categoryType">
+        <select class="dropdown" id="categoryType" name="type2">
             <option value="" disabled selected hidden>분류</option>
-            <option value="employment">취업</option>
-            <option value="scholarship">장학</option>
+            <option value="0">행사</option>
+            <option value="1">공지</option>
         </select>
     </div>
 
+        <h2>제목</h2>
+        <input type="text" id="title" name="title" placeholder="제목">
+        <div class="date-section">
+            <h2><label for="applyStartDate">신청일:</label></h2>
+            <input type="date" id="applyStartDate" name="applyStartDate">
 
-    <h2>제목</h2>
-    <input type="text" id="title" placeholder="제목">
-    <div class="date-section">
-        <h2><label for="applyDate">신청일:</label></h2>
-        <input type="date" id="applyDate">
+            <h2><label for="applyStartTime"></label></h2>
+            <input type="time" id="applyStartTime" name="applyStartTime">
 
-        <h2><label for="applyDateTime"></label></h2>
-        <input type="time" id="applyDateTime">
+            <h2><label for="applyEndDate"> ~ </label></h2>
+            <input type="date" id="applyEndDate" name="applyEndDate">
 
-        <h2><label for="deadlineDate"> ~ </label></h2>
-        <input type="date" id="deadlineDate">
+            <h2><label for="applyEndTime"></label></h2>
+            <input type="time" id="applyEndTime" name="applyEndTime">
+        </div>
 
-        <h2><label for="deadlineTime"></label></h2>
-        <input type="time" id="deadlineTime">
+        <div class="date-section">
+            <h2><label for="eventStartDate">행사일:</label></h2>
+            <input type="date" id="eventStartDate" name="eventStartDate">
+
+            <h2><label for="eventStartTime"></label></h2>
+            <input type="time" id="eventStartTime" name="eventStartTime">
+
+            <h2><label for="eventEndDate"> ~ </label></h2>
+            <input type="date" id="eventEndDate" name="eventEndDate">
+
+            <h2><label for="eventEndTime"></label></h2>
+            <input type="time" id="eventEndTime" name="eventEndTime">
+        </div>
+
+        <h2>장소</h2>
+        <input type="text" id="loc" name="loc" placeholder="장소">
+        <h2>상세설명</h2>
+        <textarea id="content" name="content" placeholder="상세설명"></textarea>
+        <h2>첨부파일</h2>
+        <input type="file" id="filename" name="filename">
+
+        <h2 class="calender-title">달력 색 선택</h2>
+        <input type="color" id="calendarColor" class="color-input" name="calendarColor">
+
+        <div class="button-section">
+            <button type="submit" class="submit-btn">작성</button>
+            <button class="cancel-btn">취소</button>
+        </div>
     </div>
-
-
-    <div class="date-section">
-        <h2><label for="startEventDate">행사일:</label></h2>
-        <input type="date" id="startEventDate">
-
-        <h2><label for="startEventTime"></label></h2>
-        <input type="time" id="startEventTime">
-
-        <h2><label for="endEventDate"> ~ </label></h2>
-        <input type="date" id="endEventDate">
-
-        <h2><label for="endEventTime"></label></h2>
-        <input type="time" id="endEventTime">
-    </div>
-
-
-    <h2>장소</h2>
-    <input type="text" id="location" placeholder="장소">
-    <h2>상세설명</h2>
-    <textarea id="description" placeholder="상세설명"></textarea>
-    <h2>첨부파일</h2>
-    <input type="file" id="attachment">
-
-    <h2 class="calender-title">달력 색 선택</h2>
-    <input type="color" id="calendarColor" class="color-input">
-
-
-    <div class="button-section">
-        <button class="submit-btn">작성</button>
-        <button class="cancel-btn">취소</button>
-    </div>
-</div>
+</form>
 
 <footer th:replace="~{/fragment/footer/footer :: footerFragment}">
 </footer>
