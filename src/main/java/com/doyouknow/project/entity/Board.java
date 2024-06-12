@@ -59,5 +59,4 @@ public class Board {
 
     @Column
     private LocalDateTime date;
-
 }

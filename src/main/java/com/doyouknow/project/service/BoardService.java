@@ -53,7 +53,7 @@ public class BoardService {
     /* 학과별 페이지 마감일 고정 목록*/
     public List<BoardDTO> deptTop(int deptSeq){
 
-        Pageable pageable = PageRequest.of(0, 5, Sort.by("applyEnd").ascending());
+        Pageable pageable = PageRequest.of(0, 3, Sort.by("applyEnd").ascending());
         // 3개의 게시물 가져오기
         List<Board> boardList = boardRepository.findDeptTop(deptSeq, pageable);
 
@@ -63,10 +63,7 @@ public class BoardService {
                 .toList();
 
         // 가져온 게시물 중 마감일이 지나지 않은 것들을 필터링하여 반환
-        return boardDTOList.stream()
-                .filter(boardDTO -> boardDTO.getSeconds() > 0 || boardDTOList.size() < 3) // 마감일이 지나지 않은 게시물이거나, 3개 미만일 경우 포함
-                .limit(3) // 최대 3개까지만 반환
-                .toList();
+        return boardDTOList;
     }
 
     /* 부서별 페이지 */
@@ -87,7 +84,7 @@ public class BoardService {
 
     /* 부서별 페이지 마감일 고정 목록*/
     public List<BoardDTO> publicTop(int type) {
-        Pageable pageable = PageRequest.of(0, 5, Sort.by("applyEnd").ascending());
+        Pageable pageable = PageRequest.of(0, 3, Sort.by("applyEnd").ascending());
         // 3개의 게시물 가져오기
         List<Board> boardList = boardRepository.findPublicTop(type, pageable);
 
@@ -97,8 +94,8 @@ public class BoardService {
                 .toList();
 
 /* modelMapper = 어떠한 클래스(1번 클래스 = Board)가 존재할 때 일부 필드의 자료형과 이름이 겹치는 다른 클래스(2번 클래스 = BoardDTO)가 존재할 때
-	1번 클래스의 필드 데이터를 2번 클래스 인스턴스를 생성함과 동시에 동일한 필드로 값을 매핑하여 할당한다.*/
-            /* 예시 */
+   1번 클래스의 필드 데이터를 2번 클래스 인스턴스를 생성함과 동시에 동일한 필드로 값을 매핑하여 할당한다.*/
+        /* 예시 */
 //        for(BoardDTO boardDTO : boardDTOList) {
 //            if(boardDTO.getSeconds() > 0) {
 //                // 아무 코드
@@ -106,14 +103,9 @@ public class BoardService {
 //        }
 
 
-            // 가져온 게시물 중 마감일이 지나지 않은 것들을 필터링하여 반환
-            return boardDTOList.stream()
-                    .filter(boardDTO -> boardDTO.getSeconds() > 0 || boardDTOList.size() < 3) // 마감일이 지나지 않은 게시물이거나, 3개 미만일 경우 포함
-                    .limit(3) // 최대 3개까지만 반환
-                    .toList();
-        }
+        // 가져온 게시물 중 마감일이 지나지 않은 것들을 필터링하여 반환
+        return boardDTOList;
 
-
-
+    }
 
 }

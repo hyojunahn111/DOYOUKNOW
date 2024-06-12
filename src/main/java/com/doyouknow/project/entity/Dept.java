@@ -34,10 +34,10 @@ public class Dept {
     private String intro;
 
     @Column(name = "board_type")
-    private int boardType;
+    private Integer boardType;
 
     /* AllArgsConstructor */
-    public Dept(int seq, String name, String phone, String loc, String locDetail, String intro, int boardType) {
+    public Dept(int seq, String name, String phone, String loc, String locDetail, String intro, Integer boardType) {
         this.seq = seq;
         this.name = name;
         this.phone = phone;
