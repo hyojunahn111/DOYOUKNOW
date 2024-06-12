@@ -140,11 +140,27 @@
 </header>
 <content>
     <div class="contentBody">
-        <div class="mainImg">
+        <div class="mainImg" th:style="|background-image: url(/img/board/main/${boardType}/${boardValue}.jpg)|">
             <div class="titleBox">
                 <div class="title">
-                    삼육대학교
-                    <span class="title-dept">컴퓨터공학부</span>
+                    <th:block th:switch="${boardType}">
+                        <th:block th:case="dept">
+                            삼육대학교
+                            <span class="title-dept" th:text="${deptInfo.name}">학과명</span>
+                        </th:block>
+                        <th:block th:case="public">
+                            <div class="d-flex flex-column text-center">
+                                <span class="title-dept-sub">
+                                    <th:block th:if="${boardValue} == 1" th:text="Scholarship"/>
+                                    <th:block th:if="${boardValue} == 2" th:text="Employment"/>
+                                </span>
+                                <span class="title-dept">
+                                    <th:block th:if="${boardValue} == 1" th:text="장학"/>
+                                    <th:block th:if="${boardValue} == 2" th:text="취업"/>
+                                </span>
+                            </div>
+                        </th:block>
+                    </th:block>
                 </div>
             </div>
         </div>
