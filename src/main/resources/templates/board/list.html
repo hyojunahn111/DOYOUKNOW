@@ -11,6 +11,7 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
     <script src="https://kit.fontawesome.com/59d34efa84.js" crossorigin="anonymous"></script>
     <script th:inline="javascript">
+
         /* 목록 글자수 제한 */
         function truncateText(selector, maxLength) {
             const elements = document.querySelectorAll(selector);
@@ -22,6 +23,7 @@
             });
         }
 
+        /* 달력에 삽입될 행사, 공지 정보 리스트 */
         const boardList = /*[[${board.content}]]*/ [];
         console.log(boardList);
         let calendarBoard = [];
@@ -55,6 +57,7 @@
 
         console.log(calendarBoard);
 
+        /* 글자수 제한 */
         window.onload = () => {
             truncateText('.truncate-title', 33);
             truncateText('.truncate-content', 30);
@@ -108,6 +111,27 @@
 
             // 페이지 로드 시 한 번 실행
             updateSidebarPosition();
+
+
+            /* 정렬 */
+            const sortOrder = document.getElementById('sortOrder');
+            sortOrder.addEventListener('change', (e) => {
+                const val = e.target.value;
+                const boardType = [[${boardType}]];
+                const boardValue = [[${boardValue}]];
+                const sortPublicType = [[${param.sortPublicType}]];
+                location.href = `${location.protocol}//${location.host}/board/${boardType}/${boardValue}?${sortPublicType ? 'sortPublicType=' + sortPublicType + '&' : ''}sortOrder=${val}`;
+            });
+
+            /* 학과에만 있는 정렬*/
+            const sortPublicType = document.getElementById('sortPublicType');
+            sortPublicType.addEventListener('change', (e) => {
+                const val = e.target.value;
+                const boardType = [[${boardType}]];
+                const boardValue = [[${boardValue}]];
+                const sortOrder = [[${param.sortOrder}]];
+                location.href = `${location.protocol}//${location.host}/board/${boardType}/${boardValue}?sortPublicType=${val}${sortOrder ? '&sortOrder=' + sortOrder : ''}`;
+            })
         }
     </script>
 </head>
@@ -192,18 +216,18 @@
                     <div class="listSearch">
                         <button type="submit" class="writeBtn">글쓰기</button>
                         <div class="flex2">
-                            <select name="order1">
-                                <option value="all" selected>전체</option>
-                                <option value="type1">장학</option>
-                                <option value="type2">행사</option>
-                                <option value="type3">취업</option>
-                                <option value="type4">공지</option>
-                            </select>
-                            <select name="order2">
-                                <option value="type7" selected>등록순</option>
-                                <option value="type5">조회순</option>
-                                <option value="type6">마감순</option>
-                                <option value="type8">시작순</option>
+                                <select id="sortPublicType"  name="sortPublicType">
+                                    <option value="0" th:selected="${sortPublicType} == '0'">전체</option>
+                                    <option value="1" th:selected="${sortPublicType} == '1'">장학</option>
+<!--                                    <option value="2" th:selected="${sortPublicType} == '2'">행사</option>-->
+                                    <option value="3" th:selected="${sortPublicType} == '3'">취업</option>
+<!--                                    <option value="4" th:selected="${sortPublicType} == '4'">공지</option>-->
+                                </select>
+                            <select id="sortOrder" name="sortOrder">
+                                <option value="1" th:selected="${sortOrder} == '1'">등록순</option>
+                                <option value="2" th:selected="${sortOrder} == '2'">조회순</option>
+                                <option value="3" th:selected="${sortOrder} == '3'">마감순</option>
+                                <option value="4" th:selected="${sortOrder} == '4'">시작순</option>
                             </select>
                             <!-- 학과 페이지 일때 검색창 -->
                             <th:block th:if="${boardType == 'dept'}">
@@ -260,31 +284,31 @@
                     <!-- 부서면 부서페이지로, 학과면 학과 페이지로 생성 -->
                     <div id="paging">
                         <!-- 맨앞 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]">
+                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+([[${param.sortOrder}]] ? '?sortOrder='+[[${param.sortOrder}]] : '')">
                             <img th:src="@{/img/board/왼쪽화살표.png}" class="arrow">
                         </button>
                         <!-- 이전 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?page='+ [[${ paging.currentPage - 1 }]]"
+                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+ [[${ paging.currentPage - 1 }]]"
                                 th:disabled="${ board.first }">
                             <i class="fa-solid fa-chevron-left"></i>
                         </button>
 
                         <!-- 숫자 버튼 -->
                         <th:block th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage) }">
-                            <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?page='+[[${ page }]]"
+                            <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+[[${ page }]]"
                                     th:text="${ page }"
                                     th:disabled="${ paging.currentPage eq page }"
                                     class="numSize">
                             </button>
                         </th:block>
                         <!-- 다음 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?page='+[[${ paging.currentPage + 1 }]]"
+                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+[[${ paging.currentPage + 1 }]]"
                                 th:disabled="${ board.last }">
                             <i class="fa-solid fa-chevron-right"></i>
                         </button>
 
                         <!-- 맨뒤 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?page='+[[${ paging.endPage }]]">
+                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+[[${ paging.endPage }]]">
                             <img th:src="@{/img/board/오른쪽화살표.png}" class="arrow">
                         </button>
                     </div>

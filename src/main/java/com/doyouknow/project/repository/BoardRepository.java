@@ -13,8 +13,8 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     /* 학과별 리스트 출력 */
-    @Query(value = "select b from Board b where b.writerDeptSeq = :deptSeq")
-    Page<Board> findAllByDept(Pageable pageable, int deptSeq);
+    @Query(value = "select b from Board b where b.writerDeptSeq = :deptSeq AND (:sortPublicType = 0 or b.type = :sortPublicType)")
+    Page<Board> findAllByDept(Pageable pageable, int deptSeq, int sortPublicType);
 
     /* 학과별 마감순 고정 값 출력 */
     @Query(value = "select b from Board b where b.writerDeptSeq = :deptSeq AND b.applyEnd > now()")

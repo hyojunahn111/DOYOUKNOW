@@ -222,6 +222,8 @@ button {
     font-size: 33px;
     color: #7d7e81;
 }
+
+select option:checked{}
 /* 카드 리스트 끝 */
 
 
