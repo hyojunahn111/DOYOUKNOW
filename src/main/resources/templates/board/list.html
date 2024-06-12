@@ -216,13 +216,14 @@
                     <div class="listSearch">
                         <button type="submit" class="writeBtn">글쓰기</button>
                         <div class="flex2">
+                            <!--학과 페이지일때만 기능-->
+                            <th:block th:if="${boardType == 'dept'}">
                                 <select id="sortPublicType"  name="sortPublicType">
                                     <option value="0" th:selected="${sortPublicType} == '0'">전체</option>
                                     <option value="1" th:selected="${sortPublicType} == '1'">장학</option>
-<!--                                    <option value="2" th:selected="${sortPublicType} == '2'">행사</option>-->
-                                    <option value="3" th:selected="${sortPublicType} == '3'">취업</option>
-<!--                                    <option value="4" th:selected="${sortPublicType} == '4'">공지</option>-->
+                                    <option value="3" th:selected="${sortPublicType} == '2'">취업</option>
                                 </select>
+                            </th:block>
                             <select id="sortOrder" name="sortOrder">
                                 <option value="1" th:selected="${sortOrder} == '1'">등록순</option>
                                 <option value="2" th:selected="${sortOrder} == '2'">조회순</option>
