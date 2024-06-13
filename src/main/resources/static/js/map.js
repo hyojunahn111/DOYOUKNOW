@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         {name: "다니엘관", latlng: new kakao.maps.LatLng(37.642563695355015, 127.1077675723511),deptNames: "스미스교양대학"},
         {name: "요한관", latlng: new kakao.maps.LatLng(37.642270673938604, 127.10798809359333),deptNames: ""},
         {name: "박물관", latlng: new kakao.maps.LatLng(37.642171881642135, 127.10764237112055),deptNames: ""},
+        {name: "바울관", latlng: new kakao.maps.LatLng(37.64273097304791, 127.10711347420661),deptNames: "중국어학과, 일본어학과, 경영학과, 교목처, 교직"},
         {name: "대학일자리본부/학생회관", latlng: new kakao.maps.LatLng(37.641361866714746, 127.1066837876751),deptNames: "대학일자리본부"}
     ];
 

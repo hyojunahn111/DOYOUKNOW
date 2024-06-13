@@ -1,5 +1,5 @@
-window.open("/popup", 'popup', 'width=505, height=505, status=no, scrollbars= 0, toolbar=0, menubar=no, left = 100, right = 0, top=100')
-window.open("/popup", 'popup2', 'width=505, height=505, status=no, scrollbars= 0, toolbar=0, menubar=no, left = 180, right = 0, top=180')
+window.open("/popup", 'popup', 'width=505, height=505, status=no, scrollbars= 0, toolbar=0, menubar=no, left = 200, right = 0, top=100')
+window.open("/popup", 'popup2', 'width=505, height=505, status=no, scrollbars= 0, toolbar=0, menubar=no, left = 280, right = 0, top=180')
 
 // window.open('/popup', 'width=500, height=650, status=no, scrollbars= 0, toolbar=0, menubar=no');
 
