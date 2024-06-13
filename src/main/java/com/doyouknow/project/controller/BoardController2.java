@@ -86,4 +86,74 @@ public class BoardController2 {
         model.addAttribute("dept", dept);
         return "board/event-details";
     }
+
+    @GetMapping("/event-delete/{seq}")
+    public String deleteBoardBySeq(@PathVariable("seq")int seq){
+        boardService2.deleteBoardBySeq(seq);
+        return "redirect:/map";
+    }
+
+    @GetMapping("/event-out")
+    public String eventOut() {
+        return "redirect:/map";
+    }
+
+     @GetMapping("/event-modify/{seq}")
+    public String modifyBoard(@PathVariable("seq") int seq, Model model) {
+        Board board = boardService2.findBoardBySeq(seq);
+        model.addAttribute("board", board);
+
+        LocalDate applyStartDate=board.getApplyStart().toLocalDate();
+        model.addAttribute("applyStartDate",applyStartDate);
+        LocalTime applyStartTime=board.getApplyStart().toLocalTime();
+        model.addAttribute("applyStartTime",applyStartTime);
+
+         LocalDate applyEndDate=board.getApplyEnd().toLocalDate();
+         model.addAttribute("applyEndDate",applyEndDate);
+         LocalTime applyEndTime=board.getApplyEnd().toLocalTime();
+         model.addAttribute("applyEndTime",applyEndTime);
+
+         LocalDate eventStartDate=board.getEventStart().toLocalDate();
+         model.addAttribute("eventStartDate",eventStartDate);
+         LocalTime eventStartTime=board.getEventStart().toLocalTime();
+         model.addAttribute("eventStartTime",eventStartTime);
+
+         LocalDate eventEndDate=board.getEventEnd().toLocalDate();
+         model.addAttribute("eventEndDate",eventEndDate);
+         LocalTime eventEndTime=board.getEventEnd().toLocalTime();
+         model.addAttribute("eventEndTime",eventEndTime);
+
+
+        return "board/event-modify";
+    }
+
+    @PostMapping("/event-modify/{boardSeq}")
+    public String modifyBoardOk(@PathVariable("boardSeq") int boardSeq,@RequestParam("type") int type, @RequestParam("type2") int type2, @RequestParam("title") String title,@RequestParam("content") String content,
+                          @RequestParam("applyStartDate") LocalDate applyStartDate, @RequestParam("applyStartTime")LocalTime applyStartTime,
+                          @RequestParam("applyEndDate") LocalDate applyEndDate, @RequestParam("applyEndTime")LocalTime applyEndTime,
+                          @RequestParam("eventStartDate") LocalDate eventStartDate, @RequestParam("eventStartTime")LocalTime eventStartTime,
+                          @RequestParam("eventEndDate") LocalDate eventEndDate, @RequestParam("eventEndTime")LocalTime eventEndTime, @RequestParam("filename") MultipartFile multipartFile,
+                          @RequestParam("calendarColor") String calendarColor, @RequestParam("loc") String loc
+    ) throws IOException {
+        int seq=1;//@SessionAtribute("seq") int se 로 받기 전
+
+        Member member= boardService2.findMemberBySeq(seq);
+        // boardService2.uploadFile(multipartFile);
+
+        String filename=null;
+
+        if(!multipartFile.isEmpty()) {
+            filename = multipartFile.getOriginalFilename();
+        }
+        System.out.println(member);
+
+        LocalDateTime applyStartDateTime = LocalDateTime.of(applyStartDate, applyStartTime);
+        LocalDateTime applyEndDateTime = LocalDateTime.of(applyEndDate, applyEndTime);
+        LocalDateTime eventStartDateTime = LocalDateTime.of(eventStartDate, eventStartTime);
+        LocalDateTime eventEndDateTime = LocalDateTime.of(eventEndDate, eventEndTime);
+
+        Board board=boardService2.modifyBoard(boardSeq,type, type2, title,content,applyStartDateTime, applyEndDateTime, eventStartDateTime, eventEndDateTime, filename,calendarColor, member.getDeptSeq(), member.getSeq(), loc, LocalDateTime.now(), multipartFile);
+        System.out.println(board);
+        return "redirect:/board/event-details/"+boardSeq;
+    }
 }

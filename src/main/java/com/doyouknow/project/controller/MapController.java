@@ -2,6 +2,8 @@ package com.doyouknow.project.controller;
 
 import com.doyouknow.project.dto.DeptDTO;
 import com.doyouknow.project.service.MapService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +31,6 @@ public class MapController {
 
         List<DeptDTO> deptInfo = mapService.selectAllDept();
         model.addAttribute("headerDeptInfoList", deptInfo);
-
 
         System.out.println("DeptInfo: " + deptInfo);
 

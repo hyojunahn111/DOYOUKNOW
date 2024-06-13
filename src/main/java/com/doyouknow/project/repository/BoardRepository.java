@@ -3,9 +3,11 @@ package com.doyouknow.project.repository;
 import com.doyouknow.project.entity.Board;
 import com.doyouknow.project.entity.Dept;
 import com.doyouknow.project.entity.Member;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -41,5 +43,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     @Query(value="SELECT * FROM board WHERE seq = ?", nativeQuery = true)
     Board findBoardBySeq(int seq);
 
+    @Modifying
+    @Query(value="DELETE from board where board.seq=:seq",nativeQuery = true)
     void deleteBoardBySeq(int seq);
 }

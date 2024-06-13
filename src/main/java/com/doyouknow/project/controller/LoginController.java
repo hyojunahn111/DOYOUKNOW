@@ -5,6 +5,8 @@ import com.doyouknow.project.entity.Member;
 import com.doyouknow.project.repository.DeptRepository;
 import com.doyouknow.project.service.DeptService;
 import com.doyouknow.project.service.LoginService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@SessionAttributes("seq")
 public class LoginController {
 
     @Autowired
@@ -40,8 +41,8 @@ public class LoginController {
     @PostMapping("/login")
     public String loginOk(@RequestParam("id") String id,
                           @RequestParam("pwd") String pwd,
-                          Model model,
-                          RedirectAttributes rttr){
+                          RedirectAttributes rttr,
+                          HttpSession session){
         Member member=loginService.login(id, pwd);
         if(member==null){
             rttr.addFlashAttribute("message","없는 회원이거나 입력정보가 일치하지 않습니다.");
@@ -50,7 +51,7 @@ public class LoginController {
             rttr.addFlashAttribute("message","아직 회원가입 승인되지 않았거나 거부된 계정입니다.");
             return "redirect:/login";
         }else{
-            model.addAttribute("seq", member.getSeq());
+            session.setAttribute("seq", member.getSeq());
             return "redirect:/map";
         }
     }
@@ -130,8 +131,14 @@ public class LoginController {
         return "redirect:/searchpwd";
     }
     @GetMapping("/logout")
-    public String logout(SessionStatus status) {
-        status.setComplete();
+    public String logout(HttpServletRequest request) {
+
+        HttpSession session = request.getSession(false);
+
+        if (session != null) {
+            // 세션 만료
+            session.invalidate();
+        }
         return "redirect:/login";
     }
 }
