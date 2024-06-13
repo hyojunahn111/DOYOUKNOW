@@ -270,7 +270,8 @@ select option:checked{}
 .card-middle {
     border-radius: 0;
 
-    /*border-bottom: 2px solid #ECECEC;*/
+    border-left: 2px solid #ECECEC;
+    border-right: 2px solid #ECECEC;
 }
 
 .card-bottom {
@@ -308,13 +309,29 @@ select option:checked{}
     background-color: #DCF6F8;
 }
 
+.card-body > .card-middle {
+    border: none;
+}
+
+.card-collapse > .card-body {
+    padding: 8px 16px;
+}
+
+.card-collapse > .card-body.collapsing {
+    padding: 8px 16px 0 16px;
+}
+
 .sideBarFloat > .card > .card-header {
     font-weight: bold;
 }
 
-.card-link:hover {
+.card-external:hover {
     cursor: pointer;
     border: 3px solid #1D4692;
+}
+
+.card-external > .card-header {
+    font-weight: bold;
 }
 
 .dropdown-caption {

@@ -153,23 +153,8 @@ public class BoardController {
     }
 
     // 소개 페이지
-/*    @GetMapping("dept/{boardValue}/intro")
-    public String intro(Model model, @PathVariable int boardValue) {
-
-        DeptDTO deptInfo = deptService.findBySeq(boardValue);
-
-        model.addAttribute("deptInfo", deptInfo);
-        model.addAttribute("boardType", "dept");
-        model.addAttribute("boardValue", boardValue);
-
-        return "board/intro";
-
-    }*/
-
-
-    // 소개 페이지
     @GetMapping("{boardType}/{boardValue}/intro")
-    public String intro2(Model model
+    public String intro(Model model
             , @PathVariable String boardType
             , @PathVariable int boardValue) throws ParseException {
 
@@ -192,7 +177,7 @@ public class BoardController {
         model.addAttribute("boardValue", boardValue);
         model.addAttribute("deptList", deptList);
 
-        return "board/intro3";
+        return "board/intro";
     }
 
 

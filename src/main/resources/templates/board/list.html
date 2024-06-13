@@ -6,8 +6,8 @@
     <!--/* 부트스트랩 라이브러리 fragment로 주입 */-->
     <th:block th:replace="~{fragment/bootstrap::dependency}"></th:block>
     <link rel="stylesheet" href="/css/board/board.css">
-    <link rel="stylesheet" href="/css/footer/footer.css">
     <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
     <script src="https://kit.fontawesome.com/59d34efa84.js" crossorigin="anonymous"></script>
     <script th:inline="javascript">
@@ -140,6 +140,7 @@
 </header>
 <content>
     <div class="contentBody">
+        <!--/* /img/board/main/부서or학과/부서타입(장학, 취업)or학과번호.jpg-->
         <div class="mainImg" th:style="|background-image: url(/img/board/main/${boardType}/${boardValue}.jpg)|">
             <div class="titleBox">
                 <div class="title">
@@ -167,60 +168,55 @@
         <div class="content-wrap">
             <div class="sideBar">
                 <div id="sideBarFloat" class="sideBarFloat">
-                    <div class="card card-top">
-                        <div class="card-header">
-                            학과
-                        </div>
-                        <div class="card-body">
-                            <div class="dropdown dropend">
-                                <div class="dropdown-caption" data-bs-toggle="dropdown">
-                                    미래융합대학
+                    <th:block th:switch="${boardType}">
+                        <!--/* 학과 페이지일 때 */-->
+                        <th:block th:case="dept">
+                            <div class="card card-top">
+                                <div class="card-header fw-bold">
+                                    학과
                                 </div>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-item">test1</li>
-                                    <hr class="divider">
-                                    <li class="dropdown-item">test2</li>
-                                    <hr class="divider">
-                                    <li class="dropdown-item">test3</li>
-                                </ul>
-                            </div>
-                            <hr class="divider">
-
-                            <div class="dropdown dropend">
-                                <div class="dropdown-caption" data-bs-toggle="dropdown">
-                                    미래융합대학
+                                <div class="card-body" id="card-dept">
+                                    <div class="card card-middle card-collapse">
+                                        <!--/* 타임리프 적용 필요 어떻게 해야하지... */-->
+                                        <div class="card-header card-middle card-external"
+                                             data-bs-toggle="collapse" th:href="|#collapse${p}|">
+                                            신학대학
+                                        </div>
+                                        <div th:id="|collapse${p}|" class="card-body collapse" data-bs-parent="#card-dept">
+                                            가나다
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-item">test1</li>
-                                    <hr class="divider">
-                                    <li class="dropdown-item">test2</li>
-                                    <hr class="divider">
-                                    <li class="dropdown-item">test3</li>
-                                </ul>
                             </div>
-                            <hr class="divider">
+                        </th:block>
 
-                            <div class="dropdown dropend">
-                                <div class="dropdown-caption" data-bs-toggle="dropdown">
-                                    미래융합대학
+                        <!--/* 장학, 취업 등 공용페이지일 때 */-->
+                        <th:block th:case="public">
+                            <div class="card card-top card-external">
+                                <div class="card-header">
+                                    공지&nbsp;
+                                    <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
                                 </div>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-item">test1</li>
-                                    <hr class="divider">
-                                    <li class="dropdown-item">test2</li>
-                                    <hr class="divider">
-                                    <li class="dropdown-item">test3</li>
-                                </ul>
                             </div>
-                        </div>
-                    </div>
+                            <div class="card card-middle card-external">
+                                <div class="card-header">
+                                    행사&nbsp;
+                                    <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
+                                </div>
+                            </div>
+                        </th:block>
+                    </th:block>
 
-                    <div class="card card-bottom card-info">
+                    <div class="card card-bottom card-external">
                         <div class="card-header"
                              style="cursor: pointer;"
                              th:with="buttonLink=|/board/${boardType}/${boardValue}/intro|"
                              th:onclick="location.href=[[${buttonLink}]]">
-                            정보&nbsp;
+                            <th:block th:switch="${boardType}">
+                                <th:block th:case="dept">정보</th:block>
+                                <th:block th:case="public">담당기관</th:block>
+                                &nbsp;
+                            </th:block>
                             <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
                         </div>
                     </div>
