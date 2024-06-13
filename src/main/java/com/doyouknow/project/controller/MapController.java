@@ -47,4 +47,9 @@ public class MapController {
             return mapService.selectAllDept();
         }
     }
+
+    @GetMapping("/popup")
+    public String popupPage(){
+        return "/popup/popup";
+    }
 }
