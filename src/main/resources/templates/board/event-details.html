@@ -4,57 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>행사 상세 페이지</title>
-    <link rel="stylesheet" href="/css/event-detail-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/css/event-detail-style.css">
     <link rel="stylesheet" href="/css/header/header.css">
     <link rel="stylesheet" href="/css/footer/footer.css">
 </head>
 <body>
 
-<header th:replace="~{/fragment/header/header :: headerFragment}">
-</header>
+<header th:replace="~{/fragment/header/header :: headerFragment}"></header>
 
 <div class="container">
-    <h1 th:text="${board.title}"></h1>  <!--행사 제목-->
+    <h1 th:text="${board.title}">행사 제목</h1>
 
-    <h3 th:if="${dayUntilEvent}>0" th:text="'D-' + ${dayUntilEvent} + '일'"></h3>
-    <h3 th:if="${dayUntilEvent}<0">마감</h3>
-    <h3 th:if="${dayUntilEvent}==0">D-Day</h3>
-
-    <div class="info">
-        <span th:text="'작성날짜 '+${#temporals.format(board.date,'yyyy-MM-dd HH:mm')}"></span> <!--등록날짜--> |
-        <span th:text="'등록부서 '+${dept.name}">부서/학과</span> |
-        <span th:text="'조회수 '+${board.hit}"></span> <!--조회수-->
-
-        <span class="tags" th:if="${board.type}==0">일반</span>
-        <span class="tags" th:if="${board.type}==1">장학</span>
-        <span class="tags" th:if="${board.type}==2">취업</span>
-
-        <span class="tags" th:if="${board.type2}==0">행사</span>
-        <span class="tags" th:if="${board.type2}==1">공지</span>
+    <div class="date-status">
+        <h3 th:if="${dayUntilEvent > 0}" th:text="'D-' + ${dayUntilEvent} + '일'">D-?일</h3>
+        <h3 th:if="${dayUntilEvent < 0}">마감</h3>
+        <h3 th:if="${dayUntilEvent == 0}">D-Day</h3>
     </div>
+
+    <div class="info-tags-container">
+        <div class="info">
+            <span th:text="'작성날짜 ' + ${#temporals.format(board.date, 'yyyy-MM-dd HH:mm')}">작성날짜</span> |
+            <span th:text="'등록부서 ' + ${dept.name}">부서/학과</span> |
+            <span th:text="'조회수 ' + ${board.hit}">조회수</span>
+        </div>
+
+        <div class="tags">
+            <span th:if="${board.type} == 0">일반</span>
+            <span th:if="${board.type} == 1">장학</span>
+            <span th:if="${board.type} == 2">취업</span>
+            <span th:if="${board.type2} == 0">행사</span>
+            <span th:if="${board.type2} == 1">공지</span>
+        </div>
+    </div>
+
     <hr>
-<!--    <div class="event-details">-->
 
-        <div class="right">
-            <i class="fas fa-share-alt" aria-hidden="true"></i>
-        </div>
+    <div class="right">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>
     </div>
+
     <div class="text-area">
-            <p th:text="'신청기간 : ' +${#temporals.format(board.applyStart,'yyyy-MM-dd HH:mm')}+ ' ~ '+${#temporals.format(board.applyEnd,'yyyy-MM-dd HH:mm')}"></p>   <!--신청 날짜 및 시간-->
-            <p th:text="'행사기간 : ' +${#temporals.format(board.eventStart,'yyyy-MM-dd HH:mm')}+ ' ~ '+${#temporals.format(board.eventEnd,'yyyy-MM-dd HH:mm')}"></p>   <!--행사 날짜 및 시간-->
-            <p th:text="${board.loc}">장소</p>
-        </div>
+        <p th:text="'신청기간 : ' + ${#temporals.format(board.applyStart, 'yyyy-MM-dd HH:mm')} + ' ~ ' + ${#temporals.format(board.applyEnd, 'yyyy-MM-dd HH:mm')}">신청기간</p>
+        <p th:text="'행사기간 : ' + ${#temporals.format(board.eventStart, 'yyyy-MM-dd HH:mm')} + ' ~ ' + ${#temporals.format(board.eventEnd, 'yyyy-MM-dd HH:mm')}">행사기간</p>
+        <p th:text="'장소 : '+${board.loc}">장소</p>
     </div>
+
     <img alt="행사 이미지" th:src="|/img/uploadBoardFile/${board.seq}/${board.filename}|" class="event-image">
+
     <div class="text-area" th:text="${board.content}">
-        <!--상세내용이 여기에 들어갑니다.-->
+        <!-- 상세내용이 여기에 들어갑니다. -->
     </div>
+
     <div class="contact-box">
-        <div th:text="${member.name}"></div> <!--이름: 이수빈 th:text="${member.name}"-->
-        <div th:text="${member.phone}">전화번호: 02-0000-0000</div>
-        <div th:text="${dept.loc}">위치: 에스라관</div>
+        <div th:text="${member.name}">이름</div>
+        <div th:text="${member.phone}">전화번호</div>
+        <div th:text="${dept.loc}">위치</div>
     </div>
+
     <div class="buttons">
         <button class="edit" th:onclick="|location.href='/board/modify/'+${board.seq}|" th:if="${session.seq} != null">수정</button>
         <button class="delete" th:onclick="|location.href='/board/event-delete/'+${board.seq}|" th:if="${session.seq} != null">삭제</button>
@@ -63,7 +70,8 @@
         </div>
     </div>
 </div>
-<footer th:replace="~{/fragment/footer/footer :: footerFragment}">
-</footer>
+
+<footer th:replace="~{/fragment/footer/footer :: footerFragment}"></footer>
+
 </body>
 </html>

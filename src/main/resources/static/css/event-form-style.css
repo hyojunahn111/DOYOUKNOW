@@ -1,98 +1,108 @@
 body {
   font-family: 'Arial', sans-serif;
-  margin: 0 5%;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }
 
 .container {
-  width: 80%;
-  margin: 0 auto;
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
   padding: 20px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 h1 {
-  text-align: left;
+  text-align: center;
   margin-bottom: 30px;
   color: #395D9F;
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 18px;
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .dropdown-section {
-  float: right;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
 .dropdown {
-  margin-right: 10px;
-  font-size: 0.9rem;
+  width: 48%;
   padding: 10px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
 }
 
 input[type="text"], input[type="file"], input[type="color"], textarea {
-  display: block;
   width: 100%;
+  padding: 10px;
   margin-bottom: 20px;
-  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Ensure padding is included in the total width */
 }
 
 .date-section {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-.date-section label {
-  margin: 0 10px;
+.date-section h2, .date-section label {
+  margin: 0;
+  flex: 1 0 100%;
 }
 
 .date-section input[type="date"],
 .date-section input[type="time"] {
-  margin: 0 10px;
-  padding: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  flex: 1 1 calc(50% - 10px);
+  box-sizing: border-box;
 }
 
 textarea {
   height: 150px;
+  resize: none;
+}
+
+input[type="color"] {
+  width: calc(50% - 10px);
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
 }
 
 .submit-btn, .cancel-btn {
-  padding: 15px 25px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 30px;
+  border-radius: 20px;
   font-size: 0.9rem;
   cursor: pointer;
-  margin: 0 5px 20px auto;
+  margin: 0 5px;
 }
 
 .submit-btn {
-  background-color: #C2D9FF;
+  background-color: #395D9F;
+  color: white;
 }
 
 .cancel-btn {
-  background-color: #91E0E7;
+  background-color: #bbb;
+  color: white;
 }
 
 .button-section {
-  text-align: right;
-  margin-bottom: 30px;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="time"],
-input[type="color"],
-textarea {
-  border-radius: 30px;
-}
-
-select.dropdown {
-  border-radius: 15px;
+  display: flex;
+  justify-content: flex-end;
 }
