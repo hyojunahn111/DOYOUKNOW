@@ -10,7 +10,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 @Service
@@ -32,11 +35,18 @@ public class BoardService2 {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = IOException.class)
     public Board createBoard(int type, int type2, String title, String content,
                              LocalDateTime applyStart, LocalDateTime applyEnd, LocalDateTime eventStart, LocalDateTime eventEnd,
-                             String filename, String calendarColor, int writerDeptSeq, int MemberSeq, String loc, LocalDateTime date) {
-    Board board=new Board();
+                             String filename, String calendarColor, int writerDeptSeq, int MemberSeq, String loc, LocalDateTime date,
+                             MultipartFile file) throws IOException {
+        String beforeExpand = filename.substring(0, filename.indexOf("."));
+        String expand = filename.substring(filename.indexOf("."));
+
+        String finalFileName = beforeExpand + "_" + System.currentTimeMillis() + expand;
+
+        Board board=new Board();
+
         board.setType(type);
         board.setType2(type2);
         board.setTitle(title);
@@ -45,13 +55,22 @@ public class BoardService2 {
         board.setApplyEnd(applyEnd);
         board.setEventStart(eventStart);
         board.setEventEnd(eventEnd);
-        board.setFilename(filename);
+        board.setFilename(finalFileName);
         board.setCalendarColor(calendarColor);
         board.setWriterDeptSeq(writerDeptSeq);
         board.setWriterMemberSeq(MemberSeq);
         board.setLoc(loc);
         board.setDate(date);
-    return boardRepository.save(board);
+
+        Board savedBoard = new Board();
+        savedBoard = boardRepository.save(board);
+
+        if (filename != null) {
+            /* throw IOException */
+            uploadFile(file, savedBoard.getSeq(), finalFileName);
+        }
+
+        return savedBoard;
     }
 
 
@@ -70,9 +89,21 @@ public class BoardService2 {
         return memberRepository.findMemberBySeq(seq);
     }
 
-  /*  @Transactional
-    public void setBoard(S){
-        Board board = new Board();
+    public void uploadFile(MultipartFile file, int boardSeq, String fileName) throws IOException {
+        String uploadPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\img\\uploadBoardFile\\" + boardSeq;
 
-    }*/
+        File fileDir = new File(uploadPath);
+        if (!fileDir.exists()) {
+            fileDir.mkdirs();
+        }
+        File newFile = new File(uploadPath + "\\" + fileName);
+
+        file.transferTo(newFile);
+    }
+
+
+    @Transactional
+    public void deleteBoardBySeq(int seq){
+        boardRepository.deleteBoardBySeq(seq);
+    }
 }

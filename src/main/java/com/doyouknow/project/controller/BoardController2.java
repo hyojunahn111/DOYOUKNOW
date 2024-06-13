@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -38,21 +39,26 @@ public class BoardController2 {
                           @RequestParam("applyStartDate") LocalDate applyStartDate, @RequestParam("applyStartTime")LocalTime applyStartTime,
                           @RequestParam("applyEndDate") LocalDate applyEndDate, @RequestParam("applyEndTime")LocalTime applyEndTime,
                           @RequestParam("eventStartDate") LocalDate eventStartDate, @RequestParam("eventStartTime")LocalTime eventStartTime,
-                          @RequestParam("eventEndDate") LocalDate eventEndDate, @RequestParam("eventEndTime")LocalTime eventEndTime, @RequestParam("filename") MultipartFile filename,
+                          @RequestParam("eventEndDate") LocalDate eventEndDate, @RequestParam("eventEndTime")LocalTime eventEndTime, @RequestParam("filename") MultipartFile multipartFile,
                           @RequestParam("calendarColor") String calendarColor, @RequestParam("loc") String loc
-                          ) {
-        int seq=1;
+                          ) throws IOException {
+        int seq=1;//@SessionAtribute("seq") int se 로 받기 전
         Member member= boardService2.findMemberBySeq(seq);
-        System.out.println(member);
+        // boardService2.uploadFile(multipartFile);
 
-        String filenameString = filename.getOriginalFilename();
+        String filename=null;
+
+        if(!multipartFile.isEmpty()) {
+            filename = multipartFile.getOriginalFilename();
+        }
+        System.out.println(member);
 
         LocalDateTime applyStartDateTime = LocalDateTime.of(applyStartDate, applyStartTime);
         LocalDateTime applyEndDateTime = LocalDateTime.of(applyEndDate, applyEndTime);
         LocalDateTime eventStartDateTime = LocalDateTime.of(eventStartDate, eventStartTime);
         LocalDateTime eventEndDateTime = LocalDateTime.of(eventEndDate, eventEndTime);
 
-        Board board=boardService2.createBoard(type, type2, title,content,applyStartDateTime, applyEndDateTime, eventStartDateTime, eventEndDateTime, filenameString,calendarColor, member.getDeptSeq(), member.getSeq(), loc, LocalDateTime.now());
+        Board board=boardService2.createBoard(type, type2, title,content,applyStartDateTime, applyEndDateTime, eventStartDateTime, eventEndDateTime, filename,calendarColor, member.getDeptSeq(), member.getSeq(), loc, LocalDateTime.now(), multipartFile);
         System.out.println(board);
         return "redirect:/board/event-details/"+board.getSeq();
     }
@@ -79,5 +85,18 @@ public class BoardController2 {
         model.addAttribute("member", member);
         model.addAttribute("dept", dept);
         return "board/event-details";
+    }
+
+    @GetMapping("/event-details/{seq}")
+    public String deleteBoardBySeq(@PathVariable("seq")int seq){
+        boardService2.deleteBoardBySeq(seq);
+        return "redirect:/map";
+    }
+
+     @GetMapping()
+    public String modifyBoard( int seq, Model model) {
+        Board board = boardService2.findBoardBySeq(seq);
+        model.addAttribute("board", board);
+        return "board/event-form";
     }
 }

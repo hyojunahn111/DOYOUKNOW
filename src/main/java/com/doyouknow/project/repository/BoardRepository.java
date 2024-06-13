@@ -41,4 +41,5 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     @Query(value="SELECT * FROM board WHERE seq = ?", nativeQuery = true)
     Board findBoardBySeq(int seq);
 
+    void deleteBoardBySeq(int seq);
 }

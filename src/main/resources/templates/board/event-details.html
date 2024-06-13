@@ -46,7 +46,7 @@
             <p th:text="${board.loc}">장소</p>
         </div>
     </div>
-    <img alt="행사 이미지" class="event-image">
+    <img alt="행사 이미지" th:src="|/img/uploadBoardFile/${board.seq}/${board.filename}|" class="event-image">
     <div class="text-area" th:text="${board.content}">
         <!--상세내용이 여기에 들어갑니다.-->
     </div>
@@ -57,7 +57,7 @@
     </div>
     <div class="buttons">
         <button class="edit">수정</button>
-        <button class="delete">삭제</button>
+        <button class="delete" onclick="location.href='deleteBoard'">삭제</button>
         <div class="list-wrapper">
             <button class="list">글목록</button>
         </div>
