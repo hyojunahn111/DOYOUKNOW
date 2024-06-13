@@ -17,7 +17,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     Page<Board> findAllByDept(Pageable pageable, int deptSeq);
 
     /* 학과별 마감순 고정 값 출력 */
-    @Query(value = "select b from Board b where b.writerDeptSeq = :deptSeq")
+    @Query(value = "select b from Board b where b.writerDeptSeq = :deptSeq AND b.applyEnd > now()")
     List<Board> findDeptTop(int deptSeq, Pageable pageable);
 
     /* 부서별 리스트 출력 */
@@ -25,7 +25,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     Page<Board> findAllByType(Pageable pageable, int type);
 
     /* 부서별 마감순 고정 값 출력 */
-    @Query(value = "select b from Board b where b.type = :type")
+    @Query(value = "select b from Board b where b.type = :type AND b.applyEnd > now()")
     List<Board> findPublicTop(int type, Pageable pageable);
 
     /* 학과별 텍스트 검색 기능 */

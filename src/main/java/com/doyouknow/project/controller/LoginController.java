@@ -34,7 +34,7 @@ public class LoginController {
         return null;
     }
 
-    @GetMapping("/login")
+    @GetMapping({"/login","/"})
     public String login(){return "login/login";}
 
     @PostMapping("/login")

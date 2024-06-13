@@ -21,7 +21,7 @@ public class MapController {
         this.mapService = mapService;
     }
 
-    @GetMapping({"/", "/map"})
+    @GetMapping("/map")
     public String mapPage(@RequestParam(value = "locDetail", required = false) String locDetail, Model model) {
         System.out.println("확인용 locDetail: " + locDetail);
 

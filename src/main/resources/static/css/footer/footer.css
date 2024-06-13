@@ -1,14 +1,15 @@
 footer {
     background-color: #063170;
     padding: 20px;
-    position: fixed;
+    /*position: fixed;*/
     bottom: 0;
-    width: 100%;
+    /*width: 100%;*/
+    z-index: 9999;
 }
 
 body {
     margin: 0;
-    padding-bottom: 80px;
+    /*padding-bottom: 80px;*/
 }
 
 .footer-container {

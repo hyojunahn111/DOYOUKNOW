@@ -46,7 +46,7 @@ public class BoardController {
         model.addAttribute("boardValue", deptSeq);
         model.addAttribute("top3", top3);
 
-        return "board/list2";
+        return "board/list";
     }
 
     // 취업, 장학 페이지
@@ -60,12 +60,17 @@ public class BoardController {
 
         /*마감일 고정 목록*/
         List<BoardDTO> top3 = boardService.publicTop(type);
+        System.out.println(top3.size());
+        for(BoardDTO boardDTO : top3) {
+            System.out.println(boardDTO);
+        }
 
         model.addAttribute("board",boardList);
         model.addAttribute("paging",paging);
         model.addAttribute("top3", top3);
         model.addAttribute("boardType", "public");
         model.addAttribute("boardValue", type);
+
         return "board/list";
     }
 

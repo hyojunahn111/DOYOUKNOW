@@ -6,11 +6,11 @@
     <!--/* 부트스트랩 라이브러리 fragment로 주입 */-->
     <th:block th:replace="~{fragment/bootstrap::dependency}"></th:block>
     <link rel="stylesheet" href="/css/board/board.css">
-    <link rel="stylesheet" href="/css/header/header.css">
     <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="/css/header/header.css">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
     <script src="https://kit.fontawesome.com/59d34efa84.js" crossorigin="anonymous"></script>
-    <script>
+    <script th:inline="javascript">
         /* 목록 글자수 제한 */
         function truncateText(selector, maxLength) {
             const elements = document.querySelectorAll(selector);
@@ -21,6 +21,39 @@
                 }
             });
         }
+
+        const boardList = /*[[${board.content}]]*/ [];
+        console.log(boardList);
+        let calendarBoard = [];
+        for(let i = 0; i < boardList.length; i++) {
+            const board = boardList[i];
+
+            if(board.applyStart) {
+                calendarBoard.push(
+                    {
+                        'title' : '[접수]' + board.title,
+                        'start' : board.applyStart,
+                        'end' : board.applyEnd,
+                        'color' : board.calendarColor,
+                        'url' : `${window.location.protocol}//${window.location.host}/board/detail/${board.seq}`
+                    }
+                )
+            }
+            if(board.eventStart) {
+                calendarBoard.push(
+                    {
+                        'title' : board.title,
+                        'start' : board.eventStart,
+                        'end' : board.eventEnd,
+                        'color' : board.calendarColor,
+                        'url' : `${window.location.protocol}//${window.location.host}/board/detail/${board.seq}`
+                    }
+                )
+            }
+
+        }
+
+        console.log(calendarBoard);
 
         window.onload = () => {
             truncateText('.truncate-title', 33);
@@ -50,16 +83,26 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
-                dayCellContent: (e) => {
-                    return e.dayNumberText.replace('일', '');
-                },
-                navLinks: true,
+                // 버튼 출력 텍스트
                 buttonText: {
                     today: '오늘',
                     dayGridMonth: '월간',
                     timeGridWeek: '주간',
                     timeGridDay: '일간'
-                }
+                },
+                // 날짜 후미에 붙는 '일' 제거
+                dayCellContent: (e) => {
+                    return e.dayNumberText.replace('일', '');
+                },
+                navLinks: true,
+                dayMaxEvents: true,
+                // 캘린더에 출력될 이벤트 할당
+                eventSources: [
+                    {
+                        events: calendarBoard
+                    }
+                ],
+
             });
             calendar.render();
 
@@ -157,10 +200,9 @@
                                 <option value="type4">공지</option>
                             </select>
                             <select name="order2">
-                                <option value="" selected>정렬기준</option>
+                                <option value="type7" selected>등록순</option>
                                 <option value="type5">조회순</option>
                                 <option value="type6">마감순</option>
-                                <option value="type7">등록순</option>
                                 <option value="type8">시작순</option>
                             </select>
                             <!-- 학과 페이지 일때 검색창 -->
