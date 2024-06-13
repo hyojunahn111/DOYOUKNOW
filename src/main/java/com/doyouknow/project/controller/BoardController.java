@@ -6,6 +6,8 @@ import com.doyouknow.project.dto.BoardDTO;
 import com.doyouknow.project.dto.DeptDTO;
 import com.doyouknow.project.service.BoardService;
 import com.doyouknow.project.service.DeptService;
+import org.apache.tomcat.util.json.JSONParser;
+import org.apache.tomcat.util.json.ParseException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -143,7 +149,7 @@ public class BoardController {
     }
 
     // 소개 페이지
-    @GetMapping("dept/{boardValue}/intro")
+/*    @GetMapping("dept/{boardValue}/intro")
     public String intro(Model model, @PathVariable int boardValue) {
 
         DeptDTO deptInfo = deptService.findBySeq(boardValue);
@@ -154,24 +160,35 @@ public class BoardController {
 
         return "board/intro";
 
-    }
+    }*/
 
 
     // 소개 페이지
-    @GetMapping("public/{boardValue}/intro")
-    public String intro2(Model model, @PathVariable int boardValue) {
+    @GetMapping("{boardType}/{boardValue}/intro")
+    public String intro2(Model model
+            , @PathVariable String boardType
+            , @PathVariable int boardValue) throws ParseException {
 
-        List<DeptDTO> deptList = deptService.findByBoardType(boardValue);
+        List<DeptDTO> deptList = null;
 
-        for(DeptDTO dept : deptList) {
-            System.out.println(dept);
+        if( boardType.equals("dept") ) {
+            DeptDTO deptInfo = deptService.findBySeq(boardValue);
+
+            deptList = new ArrayList<>();
+            deptList.add(deptInfo);
+
+        }else if( boardType.equals("public") ){
+            deptList = deptService.findByBoardType(boardValue);
+
+        }else {
+            return "redirect:/error";
         }
 
-        model.addAttribute("deptList", deptList);
-        model.addAttribute("boardType", "dept");
+        model.addAttribute("boardType", boardType);
         model.addAttribute("boardValue", boardValue);
+        model.addAttribute("deptList", deptList);
 
-        return "board/intro2";
+        return "board/intro3";
     }
 
     // 게시글 작성 양식 페이지

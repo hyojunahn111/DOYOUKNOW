@@ -254,41 +254,67 @@ select option:checked{}
 
 .card {
     background-color: white;
+
+    border: none;
 }
 
 .card-top {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 
-    border-top: 2px solid #1D4692;
-    border-left: 2px solid #1D4692;
-    border-right: 2px solid #1D4692;
+    border-top: 2px solid #ECECEC;
+    border-left: 2px solid #ECECEC;
+    border-right: 2px solid #ECECEC;
 }
 
 .card-middle {
     border-radius: 0;
 
-    border-left: 2px solid #1D4692;
-    border-right: 2px solid #1D4692;
+    /*border-bottom: 2px solid #ECECEC;*/
 }
 
 .card-bottom {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 
-    border-left: 2px solid #1D4692;
-    border-right: 2px solid #1D4692;
-    border-bottom: 2px solid #1D4692;
+    border-left: 2px solid #ECECEC;
+    border-right: 2px solid #ECECEC;
+    border-bottom: 2px solid #ECECEC;
+}
+
+.card-bottom-radius {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .card-header {
     display: flex;
     background: none;
+    border: none;
+    border-bottom: 2px solid #ECECEC;
+}
+
+.card-header.card-middle {
+    border-radius: 0;
+}
+
+.card-header > a {
+    text-decoration: none;
+    color: black;
 }
 
 .card-body {
     padding: 0;
     background-color: #DCF6F8;
+}
+
+.sideBarFloat > .card > .card-header {
+    font-weight: bold;
+}
+
+.card-link:hover {
+    cursor: pointer;
+    border: 3px solid #1D4692;
 }
 
 .dropdown-caption {

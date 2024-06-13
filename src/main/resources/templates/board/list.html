@@ -215,8 +215,11 @@
                         </div>
                     </div>
 
-                    <div class="card card-bottom">
-                        <div class="card-header">
+                    <div class="card card-bottom card-info">
+                        <div class="card-header"
+                             style="cursor: pointer;"
+                             th:with="buttonLink=|/board/${boardType}/${boardValue}/intro|"
+                             th:onclick="location.href=[[${buttonLink}]]">
                             정보&nbsp;
                             <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
                         </div>
