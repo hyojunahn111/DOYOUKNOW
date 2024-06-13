@@ -18,9 +18,10 @@ public class DeptDTO {
     private String locDetail;
     private String intro;
     private int boardType;
+    private int isDivision;
 
     /* AllArgsConstructor */
-    public DeptDTO(int seq, String name, String phone, String loc, String locDetail, String intro, int boardType) {
+    public DeptDTO(int seq, String name, String phone, String loc, String locDetail, String intro, int boardType, int isDisvision) {
         this.seq = seq;
         this.name = name;
         this.phone = phone;
@@ -28,5 +29,6 @@ public class DeptDTO {
         this.locDetail = locDetail;
         this.intro = intro;
         this.boardType = boardType;
+        this.isDivision = isDisvision;
     }
 }
