@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         {name: "시온관", latlng: new kakao.maps.LatLng(37.64415260359344, 127.10423183320293),deptNames: "", deptItmes: "기구1"},
         {name: "음악관", latlng: new kakao.maps.LatLng(37.64366565158367, 127.10470704225811),deptNames: "음악학과", deptItmes: "기구1"},
         {name: "70주년기념관", latlng: new kakao.maps.LatLng(37.64397572316407, 127.10556861437944),deptNames: "", deptItmes: "기구1"},
-        {name: "제1실습관", latlng: new kakao.maps.LatLng(37.64437225175103, 127.10546153287211),deptNames: "유아교육학과,\n컴퓨터학부,\nIT융합공학과", deptItmes: "기구1", imgSrc:"img/academyimg/one.png"},
+        {name: "제1실습관", latlng: new kakao.maps.LatLng(37.64437225175103, 127.10546153287211),deptNames: "유아교육학과,\n컴퓨터학부,\nIT융합공학과", deptItmes: "창업일자리센터", imgSrc:"img/academyimg/one.png"},
         {name: "디자인관", latlng: new kakao.maps.LatLng(37.644488754493906, 127.10615854340683),deptNames: "아트앤디자인학과", deptItmes: "기구1"},
         {name: "실험동물실", latlng: new kakao.maps.LatLng(37.64476348784382, 127.1062325850367),deptNames: "", deptItmes: "기구1"},
         {name: "목공실습실", latlng: new kakao.maps.LatLng(37.64477220132507, 127.10656119265859),deptNames: "", deptItmes: "기구1"},
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             '           </div>' +
             '            <div class="desc">' +
             '                <div>' + "소속과 : " + '<br>' + '<p>' + locations[i].deptNames + '</p>' + '</div>' +
-            '                <div>' + "소속기구 : " + '<br>' + '<p>' + locations[i].deptItmes + '</p>' +'</div>' +
+            '                <div>' + "소속부서 : " + '<br>' + '<p>' + locations[i].deptItmes + '</p>' +'</div>' +
             '            </div>' +
             '        </div>' +
             '    </div>' +
@@ -224,10 +224,9 @@ $(document).ready(function() {
                 filteredData.forEach(function(dept) {
                     placesList.append(
                         '<li>' + '<h3>' + dept.name + '</h3>' +
-                        '<p class="deptphone">' + dept.phone + '</p>' +
-                        '<p class="locdetail">' + dept.loc + '</p>' +
-                        '<p class="locdetail">' + dept.locDetail + '</p>' +
                         '<p class="intro">' + dept.intro + '</p>' +
+                        '<p class="locdetail">' + "학과사무실 : " + dept.loc + " " + dept.locDetail + '</p>' +
+                        '<p class="deptphone">' + "전화번호 : " + dept.phone + '</p>' +
                         '<button class="link">' + '<a href="http://localhost:8080/board/dept/' + dept.seq + '">홈페이지로 이동</a>' + '</button>' +
                         '</li>' +
                         '<hr>'

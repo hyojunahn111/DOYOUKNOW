@@ -217,6 +217,7 @@
 #placesList p {
     margin: 1px;
     font-size: 15px;
+    margin-bottom: 15px;
 }
 
 #placesList button {
