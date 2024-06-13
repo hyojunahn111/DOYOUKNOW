@@ -29,8 +29,7 @@ public class BoardController2 {
 
     // 게시글 작성 양식 페이지
     @GetMapping("/write")
-    public String write(@RequestParam(defaultValue = "0", required = false) int type,
-                        @RequestParam(defaultValue = "0", required = false) int type2) {
+    public String write() {
         return "board/event-form";
     }
 

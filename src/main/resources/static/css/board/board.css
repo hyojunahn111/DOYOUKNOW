@@ -52,11 +52,6 @@ content {
     margin-right: 20px;
 }
 
-.calendar-wrap {
-    width: 100%;
-    max-width: 90%;
-}
-
 /* 카드 리스트 시작 */
 .card-list {
     width: 100%;
@@ -317,12 +312,17 @@ select option:checked{}
 }
 
 .card-collapse > .card-body {
-    padding: 8px 16px;
 }
 
-.card-collapse > .card-body.collapsing {
-    padding: 8px 16px 0 16px;
+.card-collapse > .card-body > .card-dept {
+    margin: 0 16px;
+    padding: 8px 0;
+    cursor: pointer;
 }
+
+.card-collapse > .card-body > .card-dept:hover {
+     text-decoration: underline;
+ }
 
 .sideBarFloat > .card > .card-header {
     font-weight: bold;
@@ -355,7 +355,7 @@ select option:checked{}
 }
 
 .divider {
-    margin: 0 10px;
+    margin: 0;
     background: none;
 }
 
@@ -443,7 +443,9 @@ select option:checked{}
 
 .calendar-wrap{
     border-radius: 10px;
-    border: 4px solid #C2D9FF;
+    border: 4px solid #2C3E50;
+    width: 100%;
+    max-width: 90%;
 }
 
 .fc-toolbar-title {
@@ -463,3 +465,10 @@ select option:checked{}
     cursor: pointer;
 }
 
+.fc-button {
+    background-color: #8fb7ff;
+}
+
+.fc-button-active {
+    background-color: #4D90FF;
+}

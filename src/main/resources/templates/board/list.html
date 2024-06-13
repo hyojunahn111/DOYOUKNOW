@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>DoYouKnow</title>
+    <!--/* 부트스트랩 CSS */-->
+    <link href="/css/bs/bootstrap.min.css" rel="stylesheet">
+    <!--/* 부트스트랩 JS */-->
+    <script src="/js/bs/bootstrap.bundle.min.js"></script>
     <!--/* 부트스트랩 라이브러리 fragment로 주입 */-->
-    <th:block th:replace="~{fragment/bootstrap::dependency}"></th:block>
+<!--    <th:block th:replace="~{fragment/bootstrap::dependency}"></th:block>-->
     <link rel="stylesheet" href="/css/board/board.css">
     <link rel="stylesheet" href="/css/header/header.css">
     <link rel="stylesheet" href="/css/footer/footer.css">
@@ -89,9 +93,9 @@
                 // 버튼 출력 텍스트
                 buttonText: {
                     today: '오늘',
-                    dayGridMonth: '월간',
-                    timeGridWeek: '주간',
-                    timeGridDay: '일간'
+                    dayGridMonth: '월',
+                    timeGridWeek: '주',
+                    timeGridDay: '일'
                 },
                 // 날짜 후미에 붙는 '일' 제거
                 dayCellContent: (e) => {
@@ -168,115 +172,161 @@
         <div class="content-wrap">
             <div class="sideBar">
                 <div id="sideBarFloat" class="sideBarFloat">
-                    <th:block th:switch="${boardType}">
-                        <!--/* 학과 페이지일 때 */-->
-                        <th:block th:case="dept">
-                            <div class="card card-top">
-                                <div class="card-header fw-bold">
-                                    학과
+                    <div class="card card-top" id="card-dept">
+                        <div class="card-header fw-bold">
+                            학과
+                        </div>
+                        <div class="card-body">
+                            <div class="card card-middle card-collapse">
+                                <div class="card-header card-middle card-external"
+                                     data-bs-toggle="collapse" th:href="|#collapse0|">
+                                    신학대학
                                 </div>
-                                <div class="card-body">
-                                    <div class="card card-middle card-collapse">
-                                        <!--/* 타임리프 적용 필요 어떻게 해야하지... */-->
-                                        <div class="card-header card-middle card-external"
-                                             data-bs-toggle="collapse" th:href="|#collapse${p}|">
-                                            신학대학
-                                        </div>
-                                        <div th:id="|collapse${p}|" class="card-body collapse" data-bs-parent="#card-dept">
-                                            <div class="card-dept">
-                                                신학과
-                                            </div>
-                                        </div>
+                                <div th:id="|collapse0|" class="card-body collapse" data-bs-parent="#card-dept">
+                                    <div class="card-dept">
+                                        신학과
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="card card-middle card-collapse">
-                                        <!--/* 타임리프 적용 필요 어떻게 해야하지... */-->
-                                        <div class="card-header card-middle card-external"
-                                             data-bs-toggle="collapse" th:href="|#collapse${p}|">
-                                            간호대학
-                                        </div>
-                                        <div th:id="|collapse${p}|" class="card-body collapse" data-bs-parent="#card-dept">
-                                            <div class="card-dept">
-                                                간호학과
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="card card-middle card-collapse">
-                                        <!--/* 타임리프 적용 필요 어떻게 해야하지... */-->
-                                        <div class="card-header card-middle card-external"
-                                             data-bs-toggle="collapse" th:href="|#collapse${p}|">
-                                            약학대학
-                                        </div>
-                                        <div th:id="|collapse${p}|" class="card-body collapse" data-bs-parent="#card-dept">
-                                            <div class="card-dept">
-                                                약학과
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="card card-middle card-collapse">
-                                        <!--/* 타임리프 적용 필요 어떻게 해야하지... */-->
-                                        <div class="card-header card-middle card-external"
-                                             data-bs-toggle="collapse" th:href="|#collapse${p}|">
-                                            창의융합대학
-                                        </div>
-                                        <div th:id="|collapse${p}|" class="card-body collapse" data-bs-parent="#card-dept">
-                                            <div class="card-dept">
-                                                유아교육과
-                                            </div>
-                                            <div class="card-dept">
-                                                음악학과
-                                            </div>
-                                            <div class="card-dept">
-                                                아트앤디자인학과
-                                            </div>
-                                            <div class="card-dept">
-                                                체육학과
-                                            </div>
-                                            <div class="card-dept">
-                                                사회복지학과
-                                            </div>
-                                            <div class="card-dept">
-                                                상담심리학과
-                                            </div>
-                                            <div class="card-dept">
-                                                영어영문학과
-                                            </div>
-                                            <div class="card-dept">
-                                                항공관광외국어학부
-                                            </div>
-                                            <div class="card-dept">
-                                                글로벌한국학과
-                                            </div>
-                                            <div class="card-dept">
-                                                경영학과
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <hr class="divider">
                                 </div>
                             </div>
-                        </th:block>
-
-                        <!--/* 장학, 취업 등 공용페이지일 때 */-->
-                        <th:block th:case="public">
-                            <div class="card card-top card-external">
-                                <div class="card-header">
-                                    공지&nbsp;
-                                    <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
+                        </div>
+                        <div class="card-body">
+                            <div class="card card-middle card-collapse">
+                                <div class="card-header card-middle card-external"
+                                     data-bs-toggle="collapse" th:href="|#collapse1|">
+                                    간호대학
+                                </div>
+                                <div th:id="|collapse1|" class="card-body collapse" data-bs-parent="#card-dept">
+                                    <div class="card-dept">
+                                        간호학과
+                                    </div>
+                                    <hr class="divider">
                                 </div>
                             </div>
-                            <div class="card card-middle card-external">
-                                <div class="card-header">
-                                    행사&nbsp;
-                                    <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
+                        </div>
+                        <div class="card-body">
+                            <div class="card card-middle card-collapse">
+                                <div class="card-header card-middle card-external"
+                                     data-bs-toggle="collapse" th:href="|#collapse2|">
+                                    약학대학
+                                </div>
+                                <div th:id="|collapse2|" class="card-body collapse" data-bs-parent="#card-dept">
+                                    <div class="card-dept">
+                                        약학과
+                                    </div>
+                                    <hr class="divider">
                                 </div>
                             </div>
-                        </th:block>
-                    </th:block>
+                        </div>
+                        <div class="card-body">
+                            <div class="card card-middle card-collapse">
+                                <div class="card-header card-middle card-external"
+                                     data-bs-toggle="collapse" th:href="|#collapse3|">
+                                    창의융합대학
+                                </div>
+                                <div th:id="|collapse3|" class="card-body collapse" data-bs-parent="#card-dept">
+                                    <div class="card-dept">
+                                        유아교육과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        음악학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        아트앤디자인학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        체육학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        사회복지학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        상담심리학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        영어영문학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        항공관광외국어학부
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        글로벌한국학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        경영학과
+                                    </div>
+                                    <hr class="divider">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card card-middle card-collapse">
+                                <div class="card-header card-middle card-external"
+                                     data-bs-toggle="collapse" th:href="|#collapse4|">
+                                    미래융합대학
+                                </div>
+                                <div th:id="|collapse4|" class="card-body collapse" data-bs-parent="#card-dept">
+                                    <div class="card-dept">
+                                        컴퓨터공학부
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        인공지능융합학부
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        식품영양학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        보건관리학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        환경디자인원예학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        동물자원과학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        화학생명과학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        바이오융합공학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        건축학과(4년제)
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        건축학과(5년제)
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        물리치료학과
+                                    </div>
+                                    <hr class="divider">
+                                    <div class="card-dept">
+                                        빅데이터클라우드공학과
+                                    </div>
+                                    <hr class="divider">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="card card-bottom card-external">
                         <div class="card-header"
@@ -300,7 +350,7 @@
                 <!-- 목록 -->
                 <div class="card-list">
                     <div class="listSearch">
-                        <button type="submit" class="pagingBtn writeBtn" th:if="${session.seq} != null">글쓰기</button>
+                        <button class="pagingBtn writeBtn" th:if="${session.seq} != null" th:onclick="location.href='/board/write'">글쓰기</button>
                         <div class="flex2">
                             <!--학과 페이지일때만 기능-->
                             <th:block th:if="${boardType == 'dept'}">
