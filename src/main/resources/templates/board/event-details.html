@@ -56,10 +56,10 @@
         <div th:text="${dept.loc}">위치: 에스라관</div>
     </div>
     <div class="buttons">
-        <button class="edit" th:onclick="|location.href='/board/event-modify/'+${board.seq}|">수정</button>
-        <button class="delete" th:onclick="|location.href='/board/event-delete/'+${board.seq}|">삭제</button>
+        <button class="edit" th:onclick="|location.href='/board/modify/'+${board.seq}|" th:if="${session.seq} != null">수정</button>
+        <button class="delete" th:onclick="|location.href='/board/event-delete/'+${board.seq}|" th:if="${session.seq} != null">삭제</button>
         <div class="list-wrapper">
-            <button class="list" onclick="location.href='/board/event-out'">글목록</button>
+            <button class="list" th:if="${board.seq}" th:onclick="location.href='/board/' + [[${param.boardType}]] + '/' + [[${board.type}]]">글목록</button>
         </div>
     </div>
 </div>

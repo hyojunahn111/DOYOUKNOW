@@ -140,7 +140,7 @@
 </header>
 <content>
     <div class="contentBody">
-        <!--/* /img/board/main/부서or학과/부서타입(장학, 취업)or학과번호.jpg-->
+        <!--/* /img/board/main/부서or학과/부서타입(장학, 취업)or학과번호.jpg*/-->
         <div class="mainImg" th:style="|background-image: url(/img/board/main/${boardType}/${boardValue}.jpg)|">
             <div class="titleBox">
                 <div class="title">
@@ -229,7 +229,7 @@
                 <!-- 목록 -->
                 <div class="card-list">
                     <div class="listSearch">
-                        <button type="submit" class="writeBtn">글쓰기</button>
+                        <button type="submit" class="pagingBtn writeBtn" th:if="${session.seq} != null">글쓰기</button>
                         <div class="flex2">
                             <!--학과 페이지일때만 기능-->
                             <th:block th:if="${boardType == 'dept'}">
@@ -250,7 +250,7 @@
                                 <form method="get" th:action="@{/board/dept/{deptSeq}(deptSeq=${deptSeq})}">
                                     <input type="text" name="search" placeholder="텍스트 검색"
                                            th:value="${#strings.isEmpty(param.search) ? '' : param.search}">
-                                    <button type="submit">검색</button>
+                                    <button class="pagingBtn" type="submit">검색</button>
                                 </form>
                             </th:block>
 
@@ -259,7 +259,7 @@
                                 <form method="get" th:action="@{/board/public/{type}(type=${type})}">
                                     <input type="text" name="search" placeholder="텍스트 검색"
                                            th:value="${#strings.isEmpty(param.search) ? '' : param.search}">
-                                    <button type="submit">검색</button>
+                                    <button class="pagingBtn" type="submit">검색</button>
                                 </form>
                             </th:block>
                         </div>
@@ -267,7 +267,7 @@
 
                     <!-- 마감일 고정 목록 -->
                     <div class="listItems">
-                        <div class="listItem" th:each="board : ${top3}">
+                        <div class="listItem" th:each="board : ${top3}" th:onclick="location.href='http://localhost:8080/board/detail/' + [[${board.seq}]] + '?boardType=' + [[${boardType}]]">
                         <div class="fix" th:text="'D-' + ${board.dday}"></div>
                             <div class="imgflex">
                                 <img th:src="@{/img/board/img.jpg}" alt="행사 이미지" class="listImg"/>
@@ -276,14 +276,16 @@
                             <p th:text="${board.content}" class="truncate-content maginX">간단한 설명</p>
                             <div class="flex">
                                 <h1 class="maginX dday" th:text="'D-' + ${board.dday}"></h1>
-                                <h3 th:text="${board.writerDeptSeq}" id="typeContent" class="maginX">부서이름</h3>
-                            </div>
+                                <th:block th:each="deptInfo:${session.headerDeptInfoList}">
+                                    <h3 th:if="${deptInfo.seq} == ${board.writerDeptSeq}" th:text="${deptInfo.name}" id="typeContent" class="maginX">부서이름</h3>
+                                </th:block>
+                                </div>
                         </div>
                     </div>
 
                     <!-- 전체 목록 -->
                     <div class="listItems">
-                        <div class="listItem" th:each="board : ${board}">
+                        <div class="listItem" th:each="board : ${board}" th:onclick="location.href='http://localhost:8080/board/detail/' + [[${board.seq}]] + '?boardType=' + [[${boardType}]]">
                             <div class="imgflex">
                                 <img th:src="@{/img/board/img.jpg}" alt="행사 이미지" class="listImg"/>
                             </div>
@@ -291,7 +293,9 @@
                             <p th:text="${board.content}" class="truncate-content maginX">간단한 설명</p>
                             <div class="flex">
                                 <h1 th:classappend="${board.seconds < 0} ? 'closed' : 'dday'" th:text="${board.seconds < 0} ? '마감' : 'D-' + ${board.dday}" class="maginX"></h1>
-                                <h3 th:text="${board.writerDeptSeq}" id="typeContent1" class="maginX">부서이름</h3>
+                                <th:block th:each="deptInfo:${session.headerDeptInfoList}">
+                                    <h3 th:if="${deptInfo.seq} == ${board.writerDeptSeq}" th:text="${deptInfo.name}" id="typeContent" class="maginX">부서이름</h3>
+                                </th:block>
                             </div>
                         </div>
                     </div>
@@ -300,11 +304,11 @@
                     <!-- 부서면 부서페이지로, 학과면 학과 페이지로 생성 -->
                     <div id="paging">
                         <!-- 맨앞 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+([[${param.sortOrder}]] ? '?sortOrder='+[[${param.sortOrder}]] : '')">
+                        <button class="pagingBtn" th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+([[${param.sortOrder}]] ? '?sortOrder='+[[${param.sortOrder}]] : '')">
                             <img th:src="@{/img/board/왼쪽화살표.png}" class="arrow">
                         </button>
                         <!-- 이전 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+ [[${ paging.currentPage - 1 }]]"
+                        <button class="pagingBtn" th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+ [[${ paging.currentPage - 1 }]]"
                                 th:disabled="${ board.first }">
                             <i class="fa-solid fa-chevron-left"></i>
                         </button>
@@ -314,17 +318,17 @@
                             <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+[[${ page }]]"
                                     th:text="${ page }"
                                     th:disabled="${ paging.currentPage eq page }"
-                                    class="numSize">
+                                    class="pagingBtn numSize">
                             </button>
                         </th:block>
                         <!-- 다음 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+[[${ paging.currentPage + 1 }]]"
+                        <button class="pagingBtn" th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+[[${ paging.currentPage + 1 }]]"
                                 th:disabled="${ board.last }">
                             <i class="fa-solid fa-chevron-right"></i>
                         </button>
 
                         <!-- 맨뒤 페이지로 이동 -->
-                        <button th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+[[${ paging.endPage }]]">
+                        <button class="pagingBtn" th:onclick="location.href='http://localhost:8080/board/' + [[${boardType}]] + '/' + [[${boardValue}]]+'?'+([[${param.sortOrder}]] ? 'sortOrder='+[[${param.sortOrder}]]+'&' : '') + 'page='+[[${ paging.endPage }]]">
                             <img th:src="@{/img/board/오른쪽화살표.png}" class="arrow">
                         </button>
                     </div>

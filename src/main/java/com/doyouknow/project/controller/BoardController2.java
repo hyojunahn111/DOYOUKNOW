@@ -35,14 +35,13 @@ public class BoardController2 {
     }
 
     @PostMapping("/event-form")
-    public String writeOk(@RequestParam("type") int type, @RequestParam("type2") int type2, @RequestParam("title") String title,@RequestParam("content") String content,
+    public String writeOk(@SessionAttribute("seq")int seq, @RequestParam("type") int type, @RequestParam("type2") int type2, @RequestParam("title") String title,@RequestParam("content") String content,
                           @RequestParam("applyStartDate") LocalDate applyStartDate, @RequestParam("applyStartTime")LocalTime applyStartTime,
                           @RequestParam("applyEndDate") LocalDate applyEndDate, @RequestParam("applyEndTime")LocalTime applyEndTime,
                           @RequestParam("eventStartDate") LocalDate eventStartDate, @RequestParam("eventStartTime")LocalTime eventStartTime,
                           @RequestParam("eventEndDate") LocalDate eventEndDate, @RequestParam("eventEndTime")LocalTime eventEndTime, @RequestParam("filename") MultipartFile multipartFile,
                           @RequestParam("calendarColor") String calendarColor, @RequestParam("loc") String loc
                           ) throws IOException {
-        int seq=1;//@SessionAtribute("seq") int se 로 받기 전
         Member member= boardService2.findMemberBySeq(seq);
         // boardService2.uploadFile(multipartFile);
 
@@ -70,7 +69,7 @@ public class BoardController2 {
     }
 
     // 게시글 상세 페이지 - seq 기준
-    @GetMapping("/event-details/{seq}")
+    @GetMapping("/detail/{seq}")
     public String showEventDetails(@PathVariable("seq") int seq, Model model) {
         Board board = boardService2.findBoardBySeq(seq);
         Member member = boardService2.findMemberBySeq(board.getWriterMemberSeq());
@@ -98,7 +97,7 @@ public class BoardController2 {
         return "redirect:/map";
     }
 
-     @GetMapping("/event-modify/{seq}")
+     @GetMapping("/modify/{seq}")
     public String modifyBoard(@PathVariable("seq") int seq, Model model) {
         Board board = boardService2.findBoardBySeq(seq);
         model.addAttribute("board", board);
@@ -128,14 +127,13 @@ public class BoardController2 {
     }
 
     @PostMapping("/event-modify/{boardSeq}")
-    public String modifyBoardOk(@PathVariable("boardSeq") int boardSeq,@RequestParam("type") int type, @RequestParam("type2") int type2, @RequestParam("title") String title,@RequestParam("content") String content,
+    public String modifyBoardOk(@SessionAttribute("seq")int seq, @PathVariable("boardSeq") int boardSeq,@RequestParam("type") int type, @RequestParam("type2") int type2, @RequestParam("title") String title,@RequestParam("content") String content,
                           @RequestParam("applyStartDate") LocalDate applyStartDate, @RequestParam("applyStartTime")LocalTime applyStartTime,
                           @RequestParam("applyEndDate") LocalDate applyEndDate, @RequestParam("applyEndTime")LocalTime applyEndTime,
                           @RequestParam("eventStartDate") LocalDate eventStartDate, @RequestParam("eventStartTime")LocalTime eventStartTime,
                           @RequestParam("eventEndDate") LocalDate eventEndDate, @RequestParam("eventEndTime")LocalTime eventEndTime, @RequestParam("filename") MultipartFile multipartFile,
                           @RequestParam("calendarColor") String calendarColor, @RequestParam("loc") String loc
     ) throws IOException {
-        int seq=1;//@SessionAtribute("seq") int se 로 받기 전
 
         Member member= boardService2.findMemberBySeq(seq);
         // boardService2.uploadFile(multipartFile);
