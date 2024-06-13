@@ -1,6 +1,8 @@
 package com.doyouknow.project.repository;
 
 import com.doyouknow.project.entity.Board;
+import com.doyouknow.project.entity.Dept;
+import com.doyouknow.project.entity.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -36,4 +38,8 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     @Query(value = "SELECT b FROM Board b where b.type = :type AND (b.title LIKE %:search% OR b.content LIKE %:search%)")
     Page<Board> findAllByPublicSearch(Pageable pageable, int type, String search);
 
+    @Query(value="SELECT * FROM board WHERE seq = ?", nativeQuery = true)
+    Board findBoardBySeq(int seq);
+
+    void deleteBoardBySeq(int seq);
 }

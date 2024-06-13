@@ -106,23 +106,7 @@ public class BoardController {
         return "board/intro2";
     }
 
-    // 게시글 작성 양식 페이지
-    @GetMapping("write")
-    public String write(@RequestParam(defaultValue = "0", required = false) int type,
-                        @RequestParam(defaultValue = "0", required = false) int type2) {
 
-        return "board/event-form";
-    }
-
-    // 게시글 작성 처리
-    @PostMapping("write")
-    public String writeOk(BoardDTO newBoard) {
-        System.out.println(newBoard);
-
-        boardService.registerBoard(newBoard);
-
-        return "redirect:/board/write";
-    }
 
     @GetMapping("detail")
     public String detail(@RequestParam(defaultValue = "0", required = false) int type,
