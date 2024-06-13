@@ -2,6 +2,8 @@ package com.doyouknow.project.controller;
 
 import com.doyouknow.project.dto.DeptDTO;
 import com.doyouknow.project.service.MapService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,9 @@ public class HeaderController {
 
 
     @GetMapping("/header")
-    public String header(@SessionAttribute("seq") int seq, Model model) {
+    public String header(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Integer seq= (Integer) session.getAttribute("seq");
         System.out.println("넘어오는 세션 값 : " + seq);
 
         List<DeptDTO> deptInfo = mapService.selectAllDept();

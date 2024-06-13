@@ -73,6 +73,44 @@ public class BoardService2 {
         return savedBoard;
     }
 
+    @Transactional(rollbackFor = IOException.class)
+    public Board modifyBoard(int seq, int type, int type2, String title, String content,
+                             LocalDateTime applyStart, LocalDateTime applyEnd, LocalDateTime eventStart, LocalDateTime eventEnd,
+                             String filename, String calendarColor, int writerDeptSeq, int MemberSeq, String loc, LocalDateTime date,
+                             MultipartFile file) throws IOException {
+        String beforeExpand = filename.substring(0, filename.indexOf("."));
+        String expand = filename.substring(filename.indexOf("."));
+
+        String finalFileName = beforeExpand + "_" + System.currentTimeMillis() + expand;
+
+        Board board=new Board();
+        board.setSeq(seq);
+        board.setType(type);
+        board.setType2(type2);
+        board.setTitle(title);
+        board.setContent(content);
+        board.setApplyStart(applyStart);
+        board.setApplyEnd(applyEnd);
+        board.setEventStart(eventStart);
+        board.setEventEnd(eventEnd);
+        board.setFilename(finalFileName);
+        board.setCalendarColor(calendarColor);
+        board.setWriterDeptSeq(writerDeptSeq);
+        board.setWriterMemberSeq(MemberSeq);
+        board.setLoc(loc);
+        board.setDate(date);
+
+        Board savedBoard = new Board();
+        savedBoard = boardRepository.save(board);
+
+        if (filename != null) {
+            /* throw IOException */
+            uploadFile(file, savedBoard.getSeq(), finalFileName);
+        }
+
+        return savedBoard;
+    }
+
 
     @Transactional
     public Board findBoardBySeq(int seq) {

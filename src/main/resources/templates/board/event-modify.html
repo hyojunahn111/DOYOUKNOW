@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지/행사 신청 양식</title>
+    <link rel="stylesheet" href="/css/event-form-style.css">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+</head>
+
+<body>
+
+<header th:replace="~{/fragment/header/header :: headerFragment}">
+</header>
+
+<form th:action="|/board/event-modify/${board.seq}|" method="post" enctype="multipart/form-data">
+<div class="container">
+    <h1>공지 / 행사 신청 양식</h1>
+    <div class="dropdown-section">
+        <select class="dropdown" id="eventType" name="type" >
+            <option value="" disabled selected hidden>분류</option>
+            <option value="0" th:selected="${board.type == 0}">일반</option>
+            <option value="1" th:selected="${board.type == 1}">장학</option>
+            <option value="2" th:selected="${board.type == 2}">취업</option>
+        </select>
+        <select class="dropdown" id="categoryType" name="type2">
+            <option value="" disabled selected hidden>분류</option>
+            <option value="0" th:selected="${board.type2 == 0}">행사</option>
+            <option value="1" th:selected="${board.type2 == 1}">공지</option>
+        </select>
+        </select>
+    </div>
+
+        <h2>제목</h2>
+        <input type="text" id="title" name="title" th:value="${board.title}" placeholder="제목">
+        <div class="date-section">
+            <h2><label for="applyStartDate">신청일:</label></h2>
+            <input type="date" id="applyStartDate" name="applyStartDate" th:value="${applyStartDate}">
+
+            <h2><label for="applyStartTime"></label></h2>
+            <input type="time" id="applyStartTime" name="applyStartTime" th:value="${applyStartTime}">
+
+            <h2><label for="applyEndDate"> ~ </label></h2>
+            <input type="date" id="applyEndDate" name="applyEndDate" th:value="${applyEndDate}">
+
+            <h2><label for="applyEndTime"></label></h2>
+            <input type="time" id="applyEndTime" name="applyEndTime" th:value="${applyEndTime}">
+        </div>
+
+        <div class="date-section">
+            <h2><label for="eventStartDate">행사일:</label></h2>
+            <input type="date" id="eventStartDate" name="eventStartDate" th:value="${eventStartDate}">
+
+            <h2><label for="eventStartTime"></label></h2>
+            <input type="time" id="eventStartTime" name="eventStartTime" th:value="${eventStartTime}">
+
+            <h2><label for="eventEndDate"> ~ </label></h2>
+            <input type="date" id="eventEndDate" name="eventEndDate" th:value="${eventEndDate}">
+
+            <h2><label for="eventEndTime"></label></h2>
+            <input type="time" id="eventEndTime" name="eventEndTime" th:value="${eventEndTime}">
+        </div>
+
+        <h2>장소</h2>
+        <input type="text" id="loc" name="loc" placeholder="장소" th:value="${board.loc}">
+        <h2>상세설명</h2>
+        <textarea id="content" name="content" placeholder="상세설명" th:text="${board.content}"></textarea>
+        <h2>첨부파일</h2>
+        <input type="file" id="filename" name="filename" th:value="${board.filename}">
+
+        <h2 class="calender-title">달력 색 선택</h2>
+        <input type="color" id="calendarColor" class="color-input" name="calendarColor" th:value="${board.calendarColor}">
+
+        <div class="button-section">
+            <button type="submit" class="submit-btn">수정</button>
+            <button class="cancel-btn">취소</button>
+        </div>
+    </div>
+</form>
+
+<footer th:replace="~{/fragment/footer/footer :: footerFragment}">
+</footer>
+
+</body>
+</html>
