@@ -33,4 +33,8 @@ public class DeptService {
 
         return deptList.stream().map(dept -> modelMapper.map(dept, DeptDTO.class)).toList();
     }
+
+    public List<Dept> findAll(){
+        return deptRepository.findAll();
+    }
 }
