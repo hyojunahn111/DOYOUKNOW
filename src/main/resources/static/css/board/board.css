@@ -89,7 +89,7 @@ input {
     border: solid 0.5px gray;
 }
 
-button {
+.pagingBtn {
     width: 70px;
     border-radius: 30px;
     border: 0px;
@@ -217,7 +217,10 @@ button {
 .arrow {
     height: 20px;
 }
-.flex2{display: flex;}
+.flex2{
+    display: flex;
+    margin-left: auto;
+}
 .closed{
     font-size: 33px;
     color: #7d7e81;
