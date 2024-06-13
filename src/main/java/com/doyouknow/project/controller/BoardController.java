@@ -6,6 +6,7 @@ import com.doyouknow.project.dto.BoardDTO;
 import com.doyouknow.project.dto.DeptDTO;
 import com.doyouknow.project.service.BoardService;
 import com.doyouknow.project.service.DeptService;
+import com.doyouknow.project.service.MapService;
 import org.apache.tomcat.util.json.JSONParser;
 import org.apache.tomcat.util.json.ParseException;
 import org.springframework.data.domain.Page;
@@ -31,10 +32,12 @@ public class BoardController {
 
     private BoardService boardService;
     private DeptService deptService;
+    private final MapService mapService;
 
-    public BoardController(BoardService boardService, DeptService deptService) {
+    public BoardController(BoardService boardService, DeptService deptService, MapService mapService) {
         this.boardService = boardService;
         this.deptService = deptService;
+        this.mapService = mapService;
     }
 
     // 장학 게시글 목록 페이지
@@ -43,6 +46,7 @@ public class BoardController {
                        @RequestParam(required = false) String search,
                        @RequestParam(required = false, defaultValue = "1") int sortOrder,
                        @RequestParam(required = false, defaultValue = "0") int sortPublicType) {
+
 
         /* 일반 정렬 */
         String strSortOrder = "seq";
