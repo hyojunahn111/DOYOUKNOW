@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         {name: "국제교육관", latlng: new kakao.maps.LatLng(37.64322349388041, 127.10546557413087),deptNames: "상담심리학과", deptItmes: "기구1"},
         {name: "신학관", latlng: new kakao.maps.LatLng(37.6423008811867, 127.10445868842582),deptNames: "신학과", deptItmes: "기구1"},
         {name: "스미스관", latlng: new kakao.maps.LatLng(37.64256461908935, 127.10423244703988),deptNames: "", deptItmes: "기구1"},
-        {name: "사무엘관", latlng: new kakao.maps.LatLng(37.64322954325419, 127.10372349751437),deptNames: "사회복지학과", deptItmes: "기구1"},
+        {name: "사무엘관", latlng: new kakao.maps.LatLng(37.64322954325419, 127.10372349751437),deptNames: "영어영문학부", deptItmes: "기구1"},
         {name: "에덴관", latlng: new kakao.maps.LatLng(37.64305922646987, 127.10272899971714),deptNames: "", deptItmes: "기구1"},
         {name: "로뎀관", latlng: new kakao.maps.LatLng(37.643176909928926, 127.10208898132788),deptNames: "", deptItmes: "기구1"},
         {name: "브니엘관", latlng: new kakao.maps.LatLng(37.64360029089598, 127.10218303894692),deptNames: "", deptItmes: "기구1"},
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         {name: "시온관", latlng: new kakao.maps.LatLng(37.64415260359344, 127.10423183320293),deptNames: "", deptItmes: "기구1"},
         {name: "음악관", latlng: new kakao.maps.LatLng(37.64366565158367, 127.10470704225811),deptNames: "음악학과", deptItmes: "기구1"},
         {name: "70주년기념관", latlng: new kakao.maps.LatLng(37.64397572316407, 127.10556861437944),deptNames: "", deptItmes: "기구1"},
-        {name: "1실습관/창업보육센터", latlng: new kakao.maps.LatLng(37.64437225175103, 127.10546153287211),deptNames: "유아교육학과,\n컴퓨터학부,\nIT융합공학과", deptItmes: "기구1", imgSrc:"img/academyimg/one.png"},
+        {name: "제1실습관", latlng: new kakao.maps.LatLng(37.64437225175103, 127.10546153287211),deptNames: "유아교육학과,\n컴퓨터학부,\nIT융합공학과", deptItmes: "기구1", imgSrc:"img/academyimg/one.png"},
         {name: "디자인관", latlng: new kakao.maps.LatLng(37.644488754493906, 127.10615854340683),deptNames: "아트앤디자인학과", deptItmes: "기구1"},
         {name: "실험동물실", latlng: new kakao.maps.LatLng(37.64476348784382, 127.1062325850367),deptNames: "", deptItmes: "기구1"},
         {name: "목공실습실", latlng: new kakao.maps.LatLng(37.64477220132507, 127.10656119265859),deptNames: "", deptItmes: "기구1"},
@@ -140,9 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (!found) {
-            alert('일치하는 장소가 없습니다.');
-            for (var j = 0; j < overlays.length; j++) {
-                markers[j].setMap(map);
+            // alert('일치하는 장소가 없습니다.');
+            for (var i = 0; i < overlays.length; i++) {
+                markers[i].setMap(map);
             }
         }
     }
@@ -201,20 +201,31 @@ document.addEventListener("DOMContentLoaded", function () {
 $(document).ready(function() {
     var allData = [];  // 전역 변수로 데이터 저장
 
-    function fetchDeptData(locDetail) {
+    function fetchDeptData(query = '') {
         $.ajax({
             url: '/mapData',
             type: 'GET',
-            data: { locDetail: locDetail },
+            data: { query: query },
             success: function(data) {
                 console.log('DeptInfo:', data);
                 allData = data;  // 전역 변수에 데이터 저장
+                console.log('Alldata : ', allData);
+                console.log('Keyword : ', query);
+
                 var placesList = $('#placesList');
                 placesList.empty();
-                data.forEach(function(dept) {
+
+                // query 값이 있을 경우 필터링
+                var filteredData = query ? data.filter(function(dept) {
+                    return dept.loc.includes(query) || dept.name.includes(query);
+                }) : data;
+
+                // 필터링된 데이터를 리스트에 추가
+                filteredData.forEach(function(dept) {
                     placesList.append(
                         '<li>' + '<h3>' + dept.name + '</h3>' +
                         '<p class="deptphone">' + dept.phone + '</p>' +
+                        '<p class="locdetail">' + dept.loc + '</p>' +
                         '<p class="locdetail">' + dept.locDetail + '</p>' +
                         '<p class="intro">' + dept.intro + '</p>' +
                         '<button class="link">' + '<a href="http://localhost:8080/board/dept/' + dept.seq + '">홈페이지로 이동</a>' + '</button>' +
@@ -228,6 +239,9 @@ $(document).ready(function() {
             }
         });
     }
+
+
+
 
     $('#locDetailForm').on('submit', function(event) {
         event.preventDefault();
@@ -244,31 +258,33 @@ $(document).ready(function() {
     const keyword = document.querySelector("#keyword");
 
     keyword.addEventListener("keyup", function () {
-        if (!this.value.trim()) {
+        const searchValue = this.value.trim();
+        if (!searchValue) {
             myContent.innerHTML = "";
             myContent.style.display = "none";
             return;
         }
-        console.log("확인:", this.value);
+
         myContent.innerHTML = "";
         myContent.style.display = "none";
 
-        let findArr = allData.filter(dept => dept.name.includes(this.value));
-        let findlocArr = allData.filter(dept => dept.loc.includes(this.value));
-        console.log("이것은 건물이름", findlocArr);
-        console.log("이것은 학과이름", findArr);
-
-        if (!findArr.length || !findlocArr.length) {
-            // return;
+        let findArr = allData.filter(dept => dept.name.includes(searchValue));
+        let findlocArr = allData.filter(dept => dept.loc.includes(searchValue));
 
         let combinedArr = [...new Set([...findArr, ...findlocArr])];
-        console.log("야 이거 뭐냐", combinedArr)
+        console.log("검색 결과:", combinedArr);
 
-        combinedArr.forEach(item => {
-            myContent.innerHTML += '<div>' + item.name + ' - '+ '<br>' + item.loc + '</div>';
-        });
-        myContent.style.display = "block";
+        if (combinedArr.length) {
+            combinedArr.forEach(item => {
+                myContent.innerHTML += '<div>' + item.name + ' - '+ '<br>' + item.loc + '</div>';
+            });
+            myContent.style.display = "block";
+        } else {
+            myContent.innerHTML = "<div>검색 결과가 없습니다.</div>";
+            myContent.style.display = "block";
         }
     });
+
     fetchDeptData();
 });
+
