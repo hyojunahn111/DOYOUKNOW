@@ -15,39 +15,39 @@ document.addEventListener("DOMContentLoaded", function () {
     var infowindow = new kakao.maps.InfoWindow({zIndex: 1});
 
     var locations = [
-        {name: "100주년기념관", latlng: new kakao.maps.LatLng(37.642833983307035, 127.10528090160582),deptNames: "교무처"},
-        {name: "국제교육관", latlng: new kakao.maps.LatLng(37.64322349388041, 127.10546557413087),deptNames: "상담심리학과"},
-        {name: "신학관", latlng: new kakao.maps.LatLng(37.6423008811867, 127.10445868842582),deptNames: "신학과"},
-        {name: "스미스관", latlng: new kakao.maps.LatLng(37.64256461908935, 127.10423244703988),deptNames: ""},
-        {name: "사무엘관", latlng: new kakao.maps.LatLng(37.64322954325419, 127.10372349751437),deptNames: "사회복지학과"},
-        {name: "에덴관", latlng: new kakao.maps.LatLng(37.64305922646987, 127.10272899971714),deptNames: ""},
-        {name: "로뎀관", latlng: new kakao.maps.LatLng(37.643176909928926, 127.10208898132788),deptNames: ""},
-        {name: "브니엘관", latlng: new kakao.maps.LatLng(37.64360029089598, 127.10218303894692),deptNames: ""},
-        {name: "다목적관", latlng: new kakao.maps.LatLng(37.64366943237049, 127.10297061746341),deptNames: ""},
-        {name: "살렘관", latlng: new kakao.maps.LatLng(37.64440602274736, 127.10292914369208),deptNames: ""},
-        {name: "시온관", latlng: new kakao.maps.LatLng(37.64415260359344, 127.10423183320293),deptNames: ""},
-        {name: "음악관", latlng: new kakao.maps.LatLng(37.64366565158367, 127.10470704225811),deptNames: "음악학과"},
-        {name: "70주년기념관", latlng: new kakao.maps.LatLng(37.64397572316407, 127.10556861437944),deptNames: ""},
-        {name: "1실습관/창업보육센터", latlng: new kakao.maps.LatLng(37.64437225175103, 127.10546153287211),deptNames: "유아교육학과,\n컴퓨터학부,\nIT융합공학과"},
-        {name: "디자인관", latlng: new kakao.maps.LatLng(37.644488754493906, 127.10615854340683),deptNames: "아트앤디자인학과"},
-        {name: "실험동물실", latlng: new kakao.maps.LatLng(37.64476348784382, 127.1062325850367),deptNames: ""},
-        {name: "목공실습실", latlng: new kakao.maps.LatLng(37.64477220132507, 127.10656119265859),deptNames: ""},
-        {name: "온실", latlng: new kakao.maps.LatLng(37.64445220917211, 127.10671936702681),deptNames: ""},
-        {name: "아트엔디자인관", latlng: new kakao.maps.LatLng(37.64419146085434, 127.10612412797529),deptNames: ""},
-        {name: "중앙도서관", latlng: new kakao.maps.LatLng(37.6431459048178, 127.1065843633995),deptNames: ""},
-        {name: "에스라관", latlng: new kakao.maps.LatLng(37.643618510363694, 127.10703826642198),deptNames: "글로벌한국학과,\n 한국기업"},
-        {name: "제1과학관", latlng: new kakao.maps.LatLng(37.64406006374351, 127.10695958468133),deptNames: "화학생명과학과,\n 화학과,\n 생명과학과"},
-        {name: "제2과학관", latlng: new kakao.maps.LatLng(37.643590950020915, 127.10762175740494),deptNames: "동물생명자원학과,\n 동물과학부"},
-        {name: "식품영약학과 실습실", latlng: new kakao.maps.LatLng(37.64377981985591, 127.10799027824285),deptNames: ""},
-        {name: "학생생활상담센터", latlng: new kakao.maps.LatLng(37.643770597185814, 127.10822254459205),deptNames: ""},
-        {name: "평생교육원/유치원", latlng: new kakao.maps.LatLng(37.6431218793443, 127.10823293408282),deptNames: ""},
-        {name: "제3과학관", latlng: new kakao.maps.LatLng(37.642842168511066, 127.10867442072474),deptNames: "간호학과,\n 물리치료학과,\n 약학과"},
-        {name: "뉴스타트센터", latlng: new kakao.maps.LatLng(37.64182838536834, 127.10886556107491),deptNames: ""},
-        {name: "다니엘관", latlng: new kakao.maps.LatLng(37.642563695355015, 127.1077675723511),deptNames: "스미스교양대학"},
-        {name: "요한관", latlng: new kakao.maps.LatLng(37.642270673938604, 127.10798809359333),deptNames: ""},
-        {name: "박물관", latlng: new kakao.maps.LatLng(37.642171881642135, 127.10764237112055),deptNames: ""},
-        {name: "바울관", latlng: new kakao.maps.LatLng(37.64273097304791, 127.10711347420661),deptNames: "중국어학과, 일본어학과, 경영학과, 교목처, 교직"},
-        {name: "대학일자리본부/학생회관", latlng: new kakao.maps.LatLng(37.641361866714746, 127.1066837876751),deptNames: "대학일자리본부"}
+        {name: "100주년기념관", latlng: new kakao.maps.LatLng(37.642833983307035, 127.10528090160582),deptNames: "교무처", deptItmes: "기구1"},
+        {name: "국제교육관", latlng: new kakao.maps.LatLng(37.64322349388041, 127.10546557413087),deptNames: "상담심리학과", deptItmes: "기구1"},
+        {name: "신학관", latlng: new kakao.maps.LatLng(37.6423008811867, 127.10445868842582),deptNames: "신학과", deptItmes: "기구1"},
+        {name: "스미스관", latlng: new kakao.maps.LatLng(37.64256461908935, 127.10423244703988),deptNames: "", deptItmes: "기구1"},
+        {name: "사무엘관", latlng: new kakao.maps.LatLng(37.64322954325419, 127.10372349751437),deptNames: "사회복지학과", deptItmes: "기구1"},
+        {name: "에덴관", latlng: new kakao.maps.LatLng(37.64305922646987, 127.10272899971714),deptNames: "", deptItmes: "기구1"},
+        {name: "로뎀관", latlng: new kakao.maps.LatLng(37.643176909928926, 127.10208898132788),deptNames: "", deptItmes: "기구1"},
+        {name: "브니엘관", latlng: new kakao.maps.LatLng(37.64360029089598, 127.10218303894692),deptNames: "", deptItmes: "기구1"},
+        {name: "다목적관", latlng: new kakao.maps.LatLng(37.64366943237049, 127.10297061746341),deptNames: "", deptItmes: "기구1"},
+        {name: "살렘관", latlng: new kakao.maps.LatLng(37.64440602274736, 127.10292914369208),deptNames: "", deptItmes: "기구1"},
+        {name: "시온관", latlng: new kakao.maps.LatLng(37.64415260359344, 127.10423183320293),deptNames: "", deptItmes: "기구1"},
+        {name: "음악관", latlng: new kakao.maps.LatLng(37.64366565158367, 127.10470704225811),deptNames: "음악학과", deptItmes: "기구1"},
+        {name: "70주년기념관", latlng: new kakao.maps.LatLng(37.64397572316407, 127.10556861437944),deptNames: "", deptItmes: "기구1"},
+        {name: "1실습관/창업보육센터", latlng: new kakao.maps.LatLng(37.64437225175103, 127.10546153287211),deptNames: "유아교육학과,\n컴퓨터학부,\nIT융합공학과", deptItmes: "기구1", imgSrc:"img/academyimg/one.png"},
+        {name: "디자인관", latlng: new kakao.maps.LatLng(37.644488754493906, 127.10615854340683),deptNames: "아트앤디자인학과", deptItmes: "기구1"},
+        {name: "실험동물실", latlng: new kakao.maps.LatLng(37.64476348784382, 127.1062325850367),deptNames: "", deptItmes: "기구1"},
+        {name: "목공실습실", latlng: new kakao.maps.LatLng(37.64477220132507, 127.10656119265859),deptNames: "", deptItmes: "기구1"},
+        {name: "온실", latlng: new kakao.maps.LatLng(37.64445220917211, 127.10671936702681),deptNames: "", deptItmes: "기구1"},
+        {name: "아트엔디자인관", latlng: new kakao.maps.LatLng(37.64419146085434, 127.10612412797529),deptNames: "", deptItmes: "기구1", imgSrc:"img/academyimg/art.png"},
+        {name: "중앙도서관", latlng: new kakao.maps.LatLng(37.6431459048178, 127.1065843633995),deptNames: "", deptItmes: "기구1", imgSrc:"img/academyimg/middle.png"},
+        {name: "에스라관", latlng: new kakao.maps.LatLng(37.643618510363694, 127.10703826642198),deptNames: "글로벌한국학과,\n 한국기업", deptItmes: "기구1"},
+        {name: "제1과학관", latlng: new kakao.maps.LatLng(37.64406006374351, 127.10695958468133),deptNames: "화학생명과학과,\n 화학과,\n 생명과학과", deptItmes: "기구1", imgSrc:"img/academyimg/onesc.png"},
+        {name: "제2과학관", latlng: new kakao.maps.LatLng(37.643590950020915, 127.10762175740494),deptNames: "동물생명자원학과,\n 동물과학부", deptItmes: "기구1", imgSrc:"img/academyimg/twosc.png"},
+        {name: "식품영약학과 실습실", latlng: new kakao.maps.LatLng(37.64377981985591, 127.10799027824285),deptNames: "", deptItmes: "기구1"},
+        {name: "학생생활상담센터", latlng: new kakao.maps.LatLng(37.643770597185814, 127.10822254459205),deptNames: "", deptItmes: "기구1"},
+        {name: "평생교육원/유치원", latlng: new kakao.maps.LatLng(37.6431218793443, 127.10823293408282),deptNames: "", deptItmes: "기구1"},
+        {name: "제3과학관", latlng: new kakao.maps.LatLng(37.642842168511066, 127.10867442072474),deptNames: "간호학과,\n 물리치료학과,\n 약학과", deptItmes: "기구1"},
+        {name: "뉴스타트센터", latlng: new kakao.maps.LatLng(37.64182838536834, 127.10886556107491),deptNames: "", deptItmes: "기구1"},
+        {name: "다니엘관", latlng: new kakao.maps.LatLng(37.642563695355015, 127.1077675723511),deptNames: "스미스교양대학", deptItmes: "기구1"},
+        {name: "요한관", latlng: new kakao.maps.LatLng(37.642270673938604, 127.10798809359333),deptNames: "", deptItmes: "기구1"},
+        {name: "박물관", latlng: new kakao.maps.LatLng(37.642171881642135, 127.10764237112055),deptNames: "", deptItmes: "기구1"},
+        {name: "바울관", latlng: new kakao.maps.LatLng(37.64273097304791, 127.10711347420661),deptNames: "중국어학과, 일본어학과, 경영학과, 교목처, 교직", deptItmes: "기구1"},
+        {name: "대학일자리본부/학생회관", latlng: new kakao.maps.LatLng(37.641361866714746, 127.1066837876751),deptNames: "대학일자리본부", deptItmes: "기구1", imgSrc:"img/academyimg/job.png"}
     ];
 
 
@@ -72,10 +72,11 @@ document.addEventListener("DOMContentLoaded", function () {
             '        </div>' +
             '        <div class="body">' +
             '            <div class="img">' +
-            '                <img src="' + (locations[i].imgSrc || 'img/default.png') + '" width="73" height="70">' +
+            '                <img src="' + (locations[i].imgSrc || 'img/default.png') + '" width="110" height="90">' +
             '           </div>' +
             '            <div class="desc">' +
-            '                <div>' + "소속과 : " + '<br>' + locations[i].deptNames + '</div>' +
+            '                <div>' + "소속과 : " + '<br>' + '<p>' + locations[i].deptNames + '</p>' + '</div>' +
+            '                <div>' + "소속기구 : " + '<br>' + '<p>' + locations[i].deptItmes + '</p>' +'</div>' +
             '            </div>' +
             '        </div>' +
             '    </div>' +

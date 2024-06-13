@@ -86,17 +86,4 @@ public class BoardController2 {
         model.addAttribute("dept", dept);
         return "board/event-details";
     }
-
-    @GetMapping("/event-details/{seq}")
-    public String deleteBoardBySeq(@PathVariable("seq")int seq){
-        boardService2.deleteBoardBySeq(seq);
-        return "redirect:/map";
-    }
-
-     @GetMapping()
-    public String modifyBoard( int seq, Model model) {
-        Board board = boardService2.findBoardBySeq(seq);
-        model.addAttribute("board", board);
-        return "board/event-form";
-    }
 }
