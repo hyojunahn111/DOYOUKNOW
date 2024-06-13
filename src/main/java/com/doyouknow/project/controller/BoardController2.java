@@ -87,11 +87,11 @@ public class BoardController2 {
         return "board/event-details";
     }
 
-    @GetMapping("/event-details/{seq}")
+/*    @GetMapping("/event-details/{seq}")
     public String deleteBoardBySeq(@PathVariable("seq")int seq){
         boardService2.deleteBoardBySeq(seq);
         return "redirect:/map";
-    }
+    }*/
 
      @GetMapping()
     public String modifyBoard( int seq, Model model) {

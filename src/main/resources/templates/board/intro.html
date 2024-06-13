@@ -28,6 +28,9 @@
 
             // 페이지 로드 시 한 번 실행
             updateSidebarPosition();
+
+            const deptData = JSON.parse(JSON.stringify('/json/dept-info.json'));
+            console.log(deptData);
         }
     </script>
 </head>
@@ -39,96 +42,84 @@
             <div class="mainImg">
                 <div class="titleBox">
                     <div class="title">
-                        삼육대학교
-                        <span class="title-dept" th:text="${deptInfo.name}">컴퓨터공학부</span>
+                        <th:block th:switch="${boardType}">
+                            <th:block th:case="dept" th:with="deptInfo=${deptList.get(0)}">
+                                삼육대학교
+                                <span class="title-dept" th:text="${deptInfo.name}">학과명</span>
+                            </th:block>
+                            <th:block th:case="public">
+                                <div class="d-flex flex-column text-center">
+                                <span class="title-dept-sub">
+                                    <th:block th:if="${boardValue} == 1" th:text="Scholarship"/>
+                                    <th:block th:if="${boardValue} == 2" th:text="Employment"/>
+                                </span>
+                                    <span class="title-dept">
+                                    <th:block th:if="${boardValue} == 1" th:text="장학"/>
+                                    <th:block th:if="${boardValue} == 2" th:text="취업"/>
+                                </span>
+                                </div>
+                            </th:block>
+                        </th:block>
                     </div>
                 </div>
             </div>
             <div class="content-wrap">
                 <div class="sideBar">
                     <div id="sideBarFloat" class="sideBarFloat">
-                        <div class="card card-top">
-                            <div class="card-header">
-                                학과
-                            </div>
-                            <div class="card-body">
-                                <div class="dropdown dropend">
-                                    <div class="dropdown-caption" data-bs-toggle="dropdown">
-                                        미래융합대학
+                        <th:block th:switch="${boardType}">
+                            <!--/* 학과 페이지일 때 */-->
+                            <th:block th:case="dept">
+                                <div class="card card-top">
+                                    <div class="card-header fw-bold">
+                                        학과
                                     </div>
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown-item">test1</li>
-                                        <hr class="divider">
-                                        <li class="dropdown-item">test2</li>
-                                        <hr class="divider">
-                                        <li class="dropdown-item">test3</li>
-                                    </ul>
-                                </div>
-                                <hr class="divider">
-
-                                <div class="dropdown dropend">
-                                    <div class="dropdown-caption" data-bs-toggle="dropdown">
-                                        미래융합대학
+                                    <div class="card-body" id="card-dept">
+                                        <div class="card card-middle card-collapse">
+                                            <div class="card-header card-middle card-external"
+                                                 data-bs-toggle="collapse" th:href="|#collapse${p}|">
+                                                신학대학
+                                            </div>
+                                            <div th:id="|collapse${p}|" class="card-body collapse" data-bs-parent="#card-dept">
+                                                가나다
+                                            </div>
+                                        </div>
                                     </div>
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown-item">test1</li>
-                                        <hr class="divider">
-                                        <li class="dropdown-item">test2</li>
-                                        <hr class="divider">
-                                        <li class="dropdown-item">test3</li>
-                                    </ul>
                                 </div>
-                                <hr class="divider">
+                            </th:block>
 
-                                <div class="dropdown dropend">
-                                    <div class="dropdown-caption" data-bs-toggle="dropdown">
-                                        미래융합대학
+                            <!--/* 장학, 취업 등 공용페이지일 때 */-->
+                            <th:block th:case="public">
+                                <div class="card card-top card-external">
+                                    <div class="card-header">
+                                        공지&nbsp;
+                                        <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
                                     </div>
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown-item">test1</li>
-                                        <hr class="divider">
-                                        <li class="dropdown-item">test2</li>
-                                        <hr class="divider">
-                                        <li class="dropdown-item">test3</li>
-                                    </ul>
                                 </div>
-                            </div>
-                        </div>
+                                <div class="card card-middle card-external">
+                                    <div class="card-header">
+                                        행사&nbsp;
+                                        <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
+                                    </div>
+                                </div>
+                            </th:block>
+                        </th:block>
 
-                        <div class="card card-bottom">
-                            <div class="card-header">
-                                정보&nbsp;
+                        <div class="card card-bottom card-external">
+                            <div class="card-header"
+                                 style="cursor: pointer;"
+                                 th:with="buttonLink=|/board/${boardType}/${boardValue}/intro|"
+                                 th:onclick="location.href=[[${buttonLink}]]">
+                                <th:block th:switch="${boardType}">
+                                    <th:block th:case="dept">정보</th:block>
+                                    <th:block th:case="public">담당기관</th:block>
+                                    &nbsp;
+                                </th:block>
                                 <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="mainContent">
-                    <!--<div class="calendar-wrap">
-                        캘린더 영역
-                    </div>
-                    <div class="card-list">
-                        카드 리스트 영역
-                    </div>-->
-                    <!--<div class="dept-card">
-                        <div class="dept-thumb">
-                            <img src="/img/board/dept-computer-intro.jpg" alt="dept-computer-intro">
-                        </div>
-                        <div class="dept-content">
-                            <div class="dept-title" th:text="${deptInfo.name}">학과명</div>
-                            <div class="dept-text" th:text="${deptInfo.intro}">컴퓨터공학부(컴퓨터공학전공, 소프트웨어전공)는 소프트웨어 개발 및 융합 역량 강화를 위한 체계적인 교육과 함께 4차 산업혁명의 핵심 기술인 인공지능, 사물인터넷, 빅 데이터 및 모바일 컴퓨팅 기술 등 최신 기술에 대한 수요 지향 교육을 진행하고 있으며, 산업체와 연계된 프로젝트 중심 교육을 통해 이론과 현장 실무 능력을 겸비한 ICT 인재를 양성하고 있습니다.</div>
-                            <div class="dept-info">
-                                <dl>
-                                    <dt>위치</dt>
-                                    <dd th:text="|${deptInfo.loc} ${deptInfo.locDetail}|">제1실습관 401호</dd>
-                                </dl>
-                                <dl>
-                                    <dt>전화번호</dt>
-                                    <dd th:text="${deptInfo.phone}">02-3399-1790</dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>-->
                     <div class="dept-card-wrap">
                         <div class="dept-card part" th:each="dept:${deptList}">
                             <div class="dept-thumb">
