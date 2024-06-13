@@ -15,6 +15,7 @@
 </header>
 
 <form action="/board/event-form" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="boardType" th:value="${param.boardType}">
 <div class="container">
     <h1>공지 / 행사 신청 양식</h1>
     <div class="dropdown-section">

@@ -29,8 +29,7 @@ public class BoardController2 {
 
     // 게시글 작성 양식 페이지
     @GetMapping("/write")
-    public String write(@RequestParam(defaultValue = "0", required = false) int type,
-                        @RequestParam(defaultValue = "0", required = false) int type2) {
+    public String write(@RequestParam String boardType) {
         return "board/event-form";
     }
 
@@ -40,7 +39,7 @@ public class BoardController2 {
                           @RequestParam("applyEndDate") LocalDate applyEndDate, @RequestParam("applyEndTime")LocalTime applyEndTime,
                           @RequestParam("eventStartDate") LocalDate eventStartDate, @RequestParam("eventStartTime")LocalTime eventStartTime,
                           @RequestParam("eventEndDate") LocalDate eventEndDate, @RequestParam("eventEndTime")LocalTime eventEndTime, @RequestParam("filename") MultipartFile multipartFile,
-                          @RequestParam("calendarColor") String calendarColor, @RequestParam("loc") String loc
+                          @RequestParam("calendarColor") String calendarColor, @RequestParam("loc") String loc, @RequestParam String boardType
                           ) throws IOException {
         Member member= boardService2.findMemberBySeq(seq);
         // boardService2.uploadFile(multipartFile);
@@ -59,7 +58,7 @@ public class BoardController2 {
 
         Board board=boardService2.createBoard(type, type2, title,content,applyStartDateTime, applyEndDateTime, eventStartDateTime, eventEndDateTime, filename,calendarColor, member.getDeptSeq(), member.getSeq(), loc, LocalDateTime.now(), multipartFile);
         System.out.println(board);
-        return "redirect:/board/event-details/"+board.getSeq();
+        return "redirect:/board/detail/"+board.getSeq()+"?boardType="+boardType;
     }
 
     // 이벤트 폼 페이지
@@ -152,6 +151,6 @@ public class BoardController2 {
 
         Board board=boardService2.modifyBoard(boardSeq,type, type2, title,content,applyStartDateTime, applyEndDateTime, eventStartDateTime, eventEndDateTime, filename,calendarColor, member.getDeptSeq(), member.getSeq(), loc, LocalDateTime.now(), multipartFile);
         System.out.println(board);
-        return "redirect:/board/event-details/"+boardSeq;
+        return "redirect:/board/detail/"+boardSeq;
     }
 }
