@@ -39,7 +39,24 @@
             <div class="mainImg">
                 <div class="titleBox">
                     <div class="title">
-                        <span class="title-dept">장학 or 취업</span>
+                        <th:block th:switch="${boardType}">
+                            <th:block th:case="dept" th:with="deptInfo=${deptList.get(0)}">
+                                삼육대학교
+                                <span class="title-dept" th:text="${deptInfo.name}">학과명</span>
+                            </th:block>
+                            <th:block th:case="public">
+                                <div class="d-flex flex-column text-center">
+                                <span class="title-dept-sub">
+                                    <th:block th:if="${boardValue} == 1" th:text="Scholarship"/>
+                                    <th:block th:if="${boardValue} == 2" th:text="Employment"/>
+                                </span>
+                                    <span class="title-dept">
+                                    <th:block th:if="${boardValue} == 1" th:text="장학"/>
+                                    <th:block th:if="${boardValue} == 2" th:text="취업"/>
+                                </span>
+                                </div>
+                            </th:block>
+                        </th:block>
                     </div>
                 </div>
             </div>
@@ -94,8 +111,11 @@
                             </div>
                         </div>
 
-                        <div class="card card-bottom">
-                            <div class="card-header">
+                        <div class="card card-bottom card-info">
+                            <div class="card-header"
+                                 style="cursor: pointer;"
+                                 th:with="buttonLink=|/board/${boardType}/${boardValue}/intro|"
+                                 th:onclick="location.href=[[${buttonLink}]]">
                                 정보&nbsp;
                                 <img src="/img/common/external-link-black.png" width="16" class="external-link a-center">
                             </div>

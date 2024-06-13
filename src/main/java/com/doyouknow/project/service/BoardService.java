@@ -35,17 +35,14 @@ public class BoardService {
     }
 
     /* 학과별 페이지 */
-    public Page<BoardDTO> deptBoard(Pageable pageable, int deptSeq, String search) {
-        pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1,
-                pageable.getPageSize(),
-                Sort.by("seq").descending());
+    public Page<BoardDTO> deptBoard(Pageable pageable, int deptSeq, String search, int sortPublicType) {
 
         /*검색어가 입력되면 검색한 결과 보여주기 없으면 결과 보여주지 않기 */
         Page<Board> boardList;
         if(search !=null && !search.isEmpty()){
             boardList = boardRepository.findAllByDeptSearch(pageable, deptSeq, search);
         }else {
-            boardList = boardRepository.findAllByDept(pageable, deptSeq);
+            boardList = boardRepository.findAllByDept(pageable, deptSeq, sortPublicType);
         }
         return boardList.map(board -> modelMapper.map(board, BoardDTO.class));
     }
@@ -68,9 +65,6 @@ public class BoardService {
 
     /* 부서별 페이지 */
     public Page<BoardDTO> publicBoard(Pageable pageable, int type, String search) {
-        pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber()-1,
-                pageable.getPageSize(),
-                Sort.by("seq").descending());
 
         /*검색어가 입력되면 검색한 결과 보여주기 없으면 결과 보여주지 않기 */
         Page<Board> boardList;

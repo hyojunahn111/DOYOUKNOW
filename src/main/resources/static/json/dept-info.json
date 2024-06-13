@@ -1,0 +1,137 @@
+[
+    {
+        "name": "신학대학",
+		"engName": "theological",
+        "list": [
+            {
+                "name": "신학과",
+				"engName": "theology",
+                "loc": "신학관",
+                "phone": "02-3399-1513",
+                "fax": "02-3399-3018",
+                "email": "syutheology@syu.ac.kr"
+            }
+        ]
+    },
+	{
+		"name": "간호대학",
+		"engName": "nursing",
+		"list": [
+			{
+				"name": "간호학과",
+				"engName": "nursing",
+				"loc": "제3과학관",
+				"locDetail": "201호",
+				"phone": "02-3399-1593",
+				"fax": "02-3399-3527",
+				"email": "nursing@syu.ac.kr"
+			}
+		]
+	},
+	{
+		"name": "약학대학",
+		"engName": "pharmacy",
+		"list": [
+			{
+				"name": "약학과",
+				"engName": "pharmacy",
+				"loc": "제3과학관",
+				"locDetail": "315호",
+				"phone": "02-3399-1616",
+				"fax": "02-3399-1617",
+				"email": "pharmacy@syu.ac.kr"
+			}
+		]
+	},
+	{
+		"name": "창의융합대학",
+		"engName": "creativity",
+		"list":  [
+			{
+				"name": "유아교육과",
+				"engName": "ece",
+				"loc": "제1실습관",
+				"locDetail": "305호",
+				"phone": "02-3399-1576",
+				"fax": "02-3399-1577",
+				"email": "ced@syu.ac.kr"
+			},
+			{
+				"name": "음악학과",
+				"engName": "music",
+				"loc": "음악관",
+				"phone": "02-3399-1818, 1819",
+				"fax": "02-3399-1820",
+				"email": "music@syu.ac.kr"
+			},
+			{
+				"name": "아트앤디자인",
+				"engName": "arts",
+				"loc": "디자인관",
+				"locDetail": "101호",
+				"phone": "02-3399-1835",
+				"email": "alstn8462@syu.ac.kr"
+			},
+			{
+				"name": "체육학과",
+				"engName": "hhp",
+				"loc": "체육관",
+				"locDetail": "306호",
+				"phone": "02-3399-1691",
+				"fax": "02-3399-1692",
+				"email": "hhp@syu.ac.kr"
+			},
+			{
+				"name": "사회복지학과",
+				"engName": "sw",
+				"loc": "사무엘관",
+				"locDetail": "106호",
+				"phone": "02-3399-1671",
+				"fax": "02-3399-1672",
+				"email": "social@syu.ac.kr"
+			},
+			{
+				"name": "상담심리학과",
+				"engName": "couns",
+				"loc": "국제교육관",
+				"locDetail": "122호",
+				"phone": "02-3399-1679",
+				"fax": "02-3399-1680",
+				"email": "sucoun@syu.ac.kr"
+			},
+			{
+				"name": "영어영문학과",
+				"engName": "english",
+				"loc": "사무엘관",
+				"locDetail": "306호",
+				"phone": "02-3399-1533~4",
+				"fax": "02-3399-1534",
+				"email": "english@syu.ac.kr"
+			},
+			{
+				"name": "항공관광외국어학부",
+				"engName": "atfl",
+				"loc": "바울관",
+				"locDetail": "406호",
+				"phone": "02-3399-1546",
+				"fax": "02-3399-1547"
+			},
+			{
+				"name": "글로벌한국학과",
+				"engName": "gks",
+				"loc": "에스라관",
+				"locDetail": "110호",
+				"phone": "02-3399-1663"
+			},
+			{
+				"name": "경영학과",
+				"engName": "doba",
+				"loc": "바울관",
+				"locDetail": "201호",
+				"phone": "02-3399-1566",
+				"fax": "02-3399-1567",
+				"email": "adm_doba@syu.ac.kr"
+			}
+		]
+	}
+]
