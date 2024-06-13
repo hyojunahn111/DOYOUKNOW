@@ -17,10 +17,6 @@ public class MapService {
         this.mapper = mapper;
     }
 
-    public List<DeptDTO> selectdept(String locDetail) {
-        return mapper.selectByLocDetail(locDetail);
-    }
-
     public List<DeptDTO> selectAllDept(){
         return mapper.selectAll();
     }

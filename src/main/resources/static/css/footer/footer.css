@@ -15,8 +15,11 @@ body {
 .footer-container {
     display: flex;
     align-items: center;
-    margin: 0 auto;
-    max-width: 1400px;
+    /* margin: 0 auto; */
+    /* max-width: 1400px; */
+    justify-content: space-between;
+    width: 100%;
+    margin: 0px 40px 0px 20px;
 }
 
 .group1 {
@@ -85,3 +88,16 @@ body {
     border-top: 1px solid #FFFFFF;
     margin: 20px 0;
 }
+.footerContent{width: 100%;
+    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    justify-content: center;}
+.footerContent1{    display: flex;
+    align-items: center;
+    /* margin: 0 auto; */
+    max-width: 1400px;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;}
+.footerContent2{display: flex;}

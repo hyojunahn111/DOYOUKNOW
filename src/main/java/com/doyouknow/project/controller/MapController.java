@@ -10,11 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
 @Controller
+@SessionAttributes("headerDeptInfoList")
 public class MapController {
 
     private final MapService mapService;
@@ -25,19 +26,13 @@ public class MapController {
     }
 
     @GetMapping("/map")
-    public String mapPage(HttpServletRequest request, @RequestParam(value = "locDetail", required = false) String locDetail, Model model) {
+    public String mapPage(@RequestParam(value = "locDetail", required = false) String locDetail, Model model) {
         System.out.println("확인용 locDetail: " + locDetail);
-        HttpSession session = request.getSession();
-        System.out.println(session.getAttribute("member"));
-        List<DeptDTO> deptInfo;
-        if (locDetail != null && !locDetail.isEmpty()) {
-            deptInfo = mapService.selectdept(locDetail);
-        } else {
-            deptInfo = mapService.selectAllDept();
-        }
+
+        List<DeptDTO> deptInfo = mapService.selectAllDept();
+        model.addAttribute("headerDeptInfoList", deptInfo);
 
         System.out.println("DeptInfo: " + deptInfo);
-        model.addAttribute("deptInfo", deptInfo);
 
         return "map/map";
     }
@@ -45,15 +40,6 @@ public class MapController {
     @GetMapping("/mapData")
     @ResponseBody
     public List<DeptDTO> getMapData(@RequestParam(value = "locDetail", required = false) String locDetail) {
-        if (locDetail != null && !locDetail.isEmpty()) {
-            return mapService.selectdept(locDetail);
-        } else {
             return mapService.selectAllDept();
-        }
-    }
-
-    @GetMapping("/popup")
-    public String popupPage(){
-        return "/popup/popup";
     }
 }

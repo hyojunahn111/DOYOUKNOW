@@ -11,18 +11,18 @@
         <h1>DOYOUKNOW</h1>
     </div>
     <div class="header-right">
-        <p onclick="location.href='http://localhost:8080/board/public/0'">취업</p>
+        <p onclick="location.href='http://localhost:8080/board/public/2'">취업</p>
         <p onclick="location.href='http://localhost:8080/board/public/1'">장학</p>
         <div class="dropdown">
             <p>학과</p>
             <div class="dropdown-content">
-                <a th:each="dept : ${deptInfo}" th:if="${dept.isDivision == 1}" th:href="@{'/board/dept/' + ${dept.seq}}" th:text="${dept.name}" style="color: white;"></a>
+                <a th:each="dept : ${session.headerDeptInfoList}" th:if="${dept.isDivision == 1}" th:href="@{'/board/dept/' + ${dept.seq}}" th:text="${dept.name}" style="color: white;"></a>
             </div>
         </div>
         <div class="dropdown">
             <p>기관</p>
             <div class="dropdown-content">
-                <a th:each="dept : ${deptInfo}" th:if="${dept.isDivision == 0}" th:href="@{'/board/dept/' + ${dept.seq}}" th:text="${dept.name}" style="color: white;"></a>
+                <a th:each="dept : ${session.headerDeptInfoList}" th:if="${dept.isDivision == 0}" th:href="@{'/board/dept/' + ${dept.seq}}" th:text="${dept.name}" style="color: white;"></a>
             </div>
         </div>
         <div class="loginBtDiv">
