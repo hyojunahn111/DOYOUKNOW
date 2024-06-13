@@ -123,8 +123,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         for (var i = 0; i < locations.length; i++) {
             var buildingMatch = locations[i].name.toLowerCase().includes(keyword);
+            var buildingDeptMatch = locations[i].deptNames.toLowerCase().includes(keyword);
 
-            if (buildingMatch) {
+            if (buildingMatch || buildingDeptMatch) {
                 overlays[i].setMap(map);
                 markers[i].setMap(map);
                 map.setCenter(locations[i].latlng);
