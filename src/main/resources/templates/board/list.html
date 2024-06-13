@@ -267,7 +267,7 @@
 
                     <!-- 마감일 고정 목록 -->
                     <div class="listItems">
-                        <div class="listItem" th:each="board : ${top3}" th:onclick="|location.href='http://localhost:8080/board/detail/${board.seq}'|">
+                        <div class="listItem" th:each="board : ${top3}" th:onclick="location.href='http://localhost:8080/board/detail/' + [[${board.seq}]] + '?boardType=' + [[${boardType}]]">
                         <div class="fix" th:text="'D-' + ${board.dday}"></div>
                             <div class="imgflex">
                                 <img th:src="@{/img/board/img.jpg}" alt="행사 이미지" class="listImg"/>
@@ -285,7 +285,7 @@
 
                     <!-- 전체 목록 -->
                     <div class="listItems">
-                        <div class="listItem" th:each="board : ${board}" th:onclick="|location.href='http://localhost:8080/board/detail/${board.seq}'|">
+                        <div class="listItem" th:each="board : ${board}" th:onclick="location.href='http://localhost:8080/board/detail/' + [[${board.seq}]] + '?boardType=' + [[${boardType}]]">
                             <div class="imgflex">
                                 <img th:src="@{/img/board/img.jpg}" alt="행사 이미지" class="listImg"/>
                             </div>

@@ -179,12 +179,4 @@ public class BoardController {
 
         return "board/intro";
     }
-
-
-
-    @GetMapping("detail")
-    public String detail(@RequestParam(defaultValue = "0", required = false) int type,
-                         @RequestParam(defaultValue = "0", required = false) int type2){
-        return "board/event-details";
-    }
 }

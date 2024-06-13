@@ -26,6 +26,9 @@
             </div>
         </div>
         <div class="loginBtDiv">
+            <button th:if="${session.seq} == 1" class="loginBt" onclick="location.href='http://localhost:8080/newMemberList'">회원승인</button>
+            <button th:if="${session.seq} == 1" class="loginBt" onclick="location.href='http://localhost:8080/oldMemberList'">회원관리</button>
+
             <button th:if="${session.seq} == null" class="loginBt" onclick="location.href='http://localhost:8080/login'">로그인</button>
             <button th:if="${session.seq} != null" class="loginBt" onclick="location.href='http://localhost:8080/logout'">로그아웃</button>
         </div>
